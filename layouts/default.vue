@@ -66,7 +66,7 @@ export default {
         }
         if (state === authn.STATE_EXPIRED) {
           // Need to refresh the token
-          authn.refresh().catch(e => {
+          authn.refresh().catch((e) => {
             console.log(e.message())
           })
         }

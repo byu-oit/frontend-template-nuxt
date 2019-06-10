@@ -42,6 +42,9 @@ export default {
       {
         src: 'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.js',
         async: ''
+      },
+      {
+        src: './implicit-head-script.js'
       }
     ]
   },
