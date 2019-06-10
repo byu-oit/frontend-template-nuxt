@@ -74,6 +74,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    // eslint-disable-next-line
     extend(config, ctx) {}
   }
 }
