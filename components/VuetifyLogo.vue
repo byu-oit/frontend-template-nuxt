@@ -6,7 +6,7 @@
   >
 </template>
 
-<style>
+<style lang="scss">
 .VuetifyLogo {
   width: 180px;
   transform: rotateY(560deg);

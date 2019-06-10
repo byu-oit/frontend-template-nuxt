@@ -33,7 +33,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/assets/style/app.scss'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -45,7 +47,8 @@ export default {
     '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
   /*
    ** Axios module configuration
@@ -58,13 +61,13 @@ export default {
    */
   vuetify: {
     theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
+      primary: '#002E5D',
+      secondary: '#666666',
+      accent: '#0062B8',
+      error: '#A3082A',
+      info: '#006073',
+      success: '#10A170',
+      warning: '#FFB700'
     }
   },
   /*
