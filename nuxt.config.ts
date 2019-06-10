@@ -45,7 +45,8 @@ export default {
         async: ''
       },
       {
-        src: './implicit-head-script.js'
+        src: './implicit-head-script.js',
+        type: 'module'
       }
     ]
   },
