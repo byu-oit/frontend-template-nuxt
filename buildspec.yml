@@ -1,0 +1,25 @@
+---
+version: 0.2
+
+env:
+  parameter-store:
+    OAUTH_CLIENT_ID: APPLICATION.oauth_client_id
+    OAUTH_CALLBACK_URL: APPLICATION.callback_url
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  pre_build:
+    commands:
+      - npm install --unsafe-perm
+  build:
+    commands:
+      - 'echo "{\"clientId\": \"${OAUTH_CLIENT_ID}\", \"callbackUrl\": \"${OAUTH_CALLBACK_URL}\"}" > public/config.json'
+      - npm run build
+  post_build:
+    commands:
+      - echo post_build
+artifacts:
+  files:
+    - ./**/*

@@ -1,0 +1,32 @@
+---
+version: 1
+name: APPLICATION-NAME
+
+tags:
+  app: APPLICATION-NAME
+  data-sensitivity: internal
+  team: BYU Custom Apps
+
+environments:
+  dev:
+    site:
+      type: s3staticsite
+      path_to_code: ./dist/
+      index_document: index.html
+      cloudfront:
+        price_class: 100
+        https_certificate: DEV CERT ID
+        dns_names:
+          - DEV URL
+        default_ttl: 1 minute
+  prd:
+    site:
+      type: s3staticsite
+      path_to_code: ./dist/
+      index_document: index.html
+      cloudfront:
+        price_class: 100
+        https_certificate: PRD CERT ID
+        dns_names:
+          - PRD URL
+        default_ttl: 1 minute
