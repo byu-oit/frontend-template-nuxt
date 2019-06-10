@@ -2,6 +2,10 @@
 
 > BYU Apps Custom frontend Nuxt project template.
 
+## Project Setups
+
+
+
 ## Build Setup
 
 ``` bash
