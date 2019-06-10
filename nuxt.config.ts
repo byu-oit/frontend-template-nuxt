@@ -1,5 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   mode: 'spa',
   /*
@@ -23,13 +21,34 @@ export default {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.css'
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.byu.edu/theme-fonts/1.x.x/ringside/fonts.css'
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.byu.edu/theme-fonts/1.x.x/public-sans/fonts.css'
+      }
+    ],
+    script: [
+      {
+        src: 'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.js',
+        async: ''
       }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#002E5D' },
   /*
    ** Global CSS
    */

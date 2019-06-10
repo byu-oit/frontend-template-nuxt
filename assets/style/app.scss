@@ -1,7 +1,13 @@
-body {
+body .application {
   font-family: 'Public Sans', Arial, sans-serif !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.application h1,
+.application h2,
+.application h3,
+.application h4,
+.application h5,
+.application h6,
+div.headline {
   font-family: 'HCo Ringside Narrow SSm', Arial, sans-serif !important;
 }
