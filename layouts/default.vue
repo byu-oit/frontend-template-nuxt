@@ -54,12 +54,12 @@
           Re-authentication Required
         </v-card-title>
         <v-card-text>
-          CAS Authentication has expired.<br />
-          <br />
+          CAS Authentication has expired.<br>
+          <br>
           Click this "Re-authenticate" button. You will log in through a
           separate tab and then immediately return to this page.
           <div v-if="$store.state.refreshBecausePostFailed">
-            <br />
+            <br>
             If you were in the middle of saving data, you may have to click
             "Save" again.
           </div>
@@ -73,10 +73,10 @@
     </v-dialog>
     <v-content>
       <v-container>
-        <nuxt/>
+        <nuxt />
       </v-container>
     </v-content>
-    <byu-footer/>
+    <byu-footer />
   </v-app>
 </template>
 

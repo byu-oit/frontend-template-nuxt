@@ -52,7 +52,7 @@ let store = Object.freeze({ state: STATE_INDETERMINATE })
  *
  * @param {ImplicitConfig} cfg
  */
-function configure(cfg) {
+function configure (cfg) {
   console.log('config', cfg)
   if (!cfg) {
     throw new Error('cfg must be defined')
@@ -77,7 +77,7 @@ function configure(cfg) {
   maybeHandleAuthenticationCallback()
 }
 
-function maybeHandleAuthenticationCallback() {
+function maybeHandleAuthenticationCallback () {
   if (!isAuthenticationCallback()) {
     console.log('Not an auth callback')
     state(STATE_UNAUTHENTICATED)
@@ -124,10 +124,10 @@ function maybeHandleAuthenticationCallback() {
     }),
     mode: 'cors'
   })
-    .then(function(resp) {
+    .then(function (resp) {
       return resp.json()
     })
-    .then(function(json) {
+    .then(function (json) {
       console.log('got user info', json)
 
       const roClaims = getClaims(json, CLAIMS_PREFIX_RESOURCE_OWNER)
@@ -175,7 +175,7 @@ function maybeHandleAuthenticationCallback() {
       // If we're inside the "refresh" iframe,
       // then delete now that authentication
       // is complete
-      let iframe = parent.document.getElementById(
+      const iframe = parent.document.getElementById(
         'byu-oauth-implicit-grant-refresh-iframe'
       )
       if (iframe) {
@@ -188,7 +188,7 @@ const CLAIMS_PREFIX_RESOURCE_OWNER = 'http://byu.edu/claims/resourceowner_'
 const CLAIMS_PREFIX_CLIENT = 'http://byu.edu/claims/client_'
 const CLAIMS_PREFIX_WSO2 = 'http://wso2.org/claims/'
 
-function getClaims(userInfo, prefix) {
+function getClaims (userInfo, prefix) {
   return Object.keys(userInfo)
     .filter(k => k.startsWith(prefix))
     .reduce((agg, key) => {
@@ -197,7 +197,7 @@ function getClaims(userInfo, prefix) {
     }, {})
 }
 
-function isAuthenticationCallback() {
+function isAuthenticationCallback () {
   const isCallbackUrl = window.location.href.indexOf(config.callbackUrl) === 0
   console.log(
     window.location.href,
@@ -221,12 +221,12 @@ function isAuthenticationCallback() {
   return false
 }
 
-function state(state, token, user, error) {
+function state (state, token, user, error) {
   store = Object.freeze({ state, token, user, error })
   dispatch(EVENT_STATE_CHANGE, store)
 }
 
-function startLogin() {
+function startLogin () {
   console.log('startLogin', config)
 
   const csrf = saveLoginToken(randomString(), {})
@@ -235,7 +235,7 @@ function startLogin() {
 
   const loginUrl = `https://api.byu.edu/authorize?response_type=token&client_id=${
     config.clientId
-    }&redirect_uri=${encodeURIComponent(
+  }&redirect_uri=${encodeURIComponent(
     config.callbackUrl
   )}&scope=openid&state=${csrf}`
 
@@ -243,13 +243,13 @@ function startLogin() {
   window.location = loginUrl
 }
 
-function startLogout() {
+function startLogout () {
   console.log('startLogout')
 
   window.location = 'https://api.byu.edu/logout'
-  //https://api.byu.edu/revoke
+  // https://api.byu.edu/revoke
 
-  //TODO: WSO2 Identity Server 5.1 allows us to revoke implicit tokens.  Once that's done, we'll need to do this.
+  // TODO: WSO2 Identity Server 5.1 allows us to revoke implicit tokens.  Once that's done, we'll need to do this.
   // const url = `https://api.byu.edu/revoke`;
 
   // const form = new URLSearchParams();
@@ -270,7 +270,7 @@ function startLogout() {
   // });
 }
 
-function saveLoginToken(token, pageState) {
+function saveLoginToken (token, pageState) {
   const name = getStorageName(config.clientId)
   const value = `${token}.${btoa(JSON.stringify(pageState))}`
 
@@ -285,14 +285,14 @@ function saveLoginToken(token, pageState) {
   return type + '.' + token
 }
 
-function getStorageName(clientId) {
+function getStorageName (clientId) {
   return `oauth-state-${encodeURIComponent(clientId)}`
 }
 
 const TOKEN_STORE_TYPE_SESSION = 's'
 const TOKEN_STORE_TYPE_COOKIE = 'c'
 
-function validateCsrfAndGetPageData(csrf) {
+function validateCsrfAndGetPageData (csrf) {
   const [type, token] = csrf.split('.')
   const possibleValues = getSavedStateFor(type)
 
@@ -320,7 +320,7 @@ function validateCsrfAndGetPageData(csrf) {
   return JSON.parse(atob(pageData))
 }
 
-function getSavedStateFor(type) {
+function getSavedStateFor (type) {
   const name = getStorageName(config.clientId)
   switch (type) {
     case TOKEN_STORE_TYPE_SESSION:
@@ -330,7 +330,7 @@ function getSavedStateFor(type) {
       ;(document.cookie || '')
         .split(';')
         .map(c => c.trim())
-        .forEach(cookie => {
+        .forEach((cookie) => {
           if (cookie.indexOf(name + '=') === 0) {
             values.push(cookie.split('=', 2)[1])
           }
@@ -340,7 +340,7 @@ function getSavedStateFor(type) {
   }
 }
 
-function clearSavedStateFor(type) {
+function clearSavedStateFor (type) {
   const name = getStorageName(config.clientId)
   switch (type) {
     case TOKEN_STORE_TYPE_SESSION:
@@ -352,11 +352,11 @@ function clearSavedStateFor(type) {
   }
 }
 
-function startRefresh(asPopup) {
+function startRefresh (asPopup) {
   const csrf = saveLoginToken('REFRESH-' + randomString(), {})
   const loginUrl = `https://api.byu.edu/authorize?response_type=token&client_id=${
     config.clientId
-    }&redirect_uri=${encodeURIComponent(
+  }&redirect_uri=${encodeURIComponent(
     config.callbackUrl
   )}&scope=openid&state=${csrf}`
 
@@ -377,7 +377,7 @@ function startRefresh(asPopup) {
     try {
       html = iframe.contentWindow.document.body.innerHTML
     } catch (err) {
-      //intentional do-nothing
+      // intentional do-nothing
     }
     if (html === null) {
       // Hidden-frame refresh failed. Remove frame and
@@ -392,14 +392,14 @@ function startRefresh(asPopup) {
   document.body.appendChild(iframe)
 }
 
-function handleCurrentInfoRequest({ callback }) {
+function handleCurrentInfoRequest ({ callback }) {
   callback(store)
 }
 
-function storageAvailable(type) {
+function storageAvailable (type) {
+  const storage = window[type]
   try {
-    var storage = window[type],
-      x = '__storage_test__'
+    const x = '__storage_test__'
     storage.setItem(x, x)
     storage.removeItem(x)
     return true
@@ -421,26 +421,26 @@ function storageAvailable(type) {
   }
 }
 
-function randomString() {
-  let idArray = new Uint32Array(3)
+function randomString () {
+  const idArray = new Uint32Array(3)
   const crypto = window.crypto || window.msCrypto
   crypto.getRandomValues(idArray)
 
   return idArray.reduce((str, cur) => str + cur.toString(16), '')
 }
 
-function listen(event, listener) {
+function listen (event, listener) {
   console.log('listening to', event)
   if (observers.hasOwnProperty(event)) {
     throw new Error('A listener is already registered for ' + event)
   }
-  const obs = (observers[event] = function(e) {
+  const obs = (observers[event] = function (e) {
     listener(e.detail)
   })
   document.addEventListener(event, obs, false)
 }
 
-function dispatch(name, detail) {
+function dispatch (name, detail) {
   let event
   if (typeof window.CustomEvent === 'function') {
     event = new CustomEvent(name, { detail })

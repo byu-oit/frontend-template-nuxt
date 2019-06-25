@@ -1,4 +1,4 @@
-import { RootState, User } from './index'
+import { User } from './index'
 
 export interface RootState {
   token: string
