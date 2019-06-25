@@ -13,5 +13,6 @@ export default function (context) {
       context.store.commit('needManualRefresh', error.config.method !== 'get')
       return false
     }
+    context.store.commit('addNetworkError', error)
   })
 }

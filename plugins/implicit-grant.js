@@ -1,5 +1,5 @@
-import * as implicit from '~/assets/js/implicit-grant'
 import * as authn from '@byuweb/browser-oauth/byu-browser-oauth.mjs'
+import * as implicit from '~/assets/js/implicit-grant'
 
 const authnInfo = require('~/static/config.json')
 
@@ -35,8 +35,8 @@ export default (context) => {
         context.$axios.setToken(token.authorizationHeader)
         context.store.commit('setToken', token.bearer)
         context.store.dispatch('authenticate', user)
-        const prePath = window.sessionStorage.getItem('studentVotingAdminPreauthPath')
-        window.sessionStorage.removeItem('studentVotingAdminPreauthPath')
+        const prePath = window.sessionStorage.getItem('frontendAdminPreauthPath')
+        window.sessionStorage.removeItem('frontendAdminPreauthPath')
         if (prePath) {
           context.redirect(prePath)
         }

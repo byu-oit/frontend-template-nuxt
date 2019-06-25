@@ -1,5 +1,6 @@
-import { RootState, User } from '~/types'
 import { ActionTree, MutationTree } from 'vuex'
+import { get } from 'lodash'
+import { RootState, User } from '~/types'
 
 export const state = (): RootState => ({
   token: '',
@@ -7,7 +8,8 @@ export const state = (): RootState => ({
   manualRefreshRequired: false,
   refreshBecausePostFailed: false,
   authenticated: false,
-  user: { emailSearched: false }
+  user: {},
+  networkErrors: []
 })
 
 export const mutations: MutationTree<RootState> = {
@@ -24,6 +26,25 @@ export const mutations: MutationTree<RootState> = {
     if (user.name !== undefined) {
       state.username = user.name.displayName
     }
+  },
+  addNetworkError (state, error: any) {
+    error = error || {}
+    const message: string =
+      get(error, 'response.data.readable_message') ||
+      get(error, 'response.data.metadata.validation_response.message') ||
+      get(error, 'response.data.ResolveIdentityService.errors.0.message') ||
+      error.message ||
+      'Unknown Error'
+    if (state.networkErrors.indexOf(message) === -1) {
+      // Do not duplicate error messages
+      state.networkErrors.push(message)
+    }
+  },
+  clearNetworkErrors (state) {
+    state.networkErrors = []
+  },
+  clearManualRefresh (state) {
+    state.manualRefreshRequired = false
   }
 }
 

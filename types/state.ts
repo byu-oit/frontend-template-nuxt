@@ -7,4 +7,5 @@ export interface RootState {
   refreshBecausePostFailed: boolean
   authenticated: boolean
   user: User
+  networkErrors: string[]
 }

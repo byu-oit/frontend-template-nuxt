@@ -1,7 +1,6 @@
 export * from './state'
 
 export interface User {
-  emailSearched?: boolean
   email?: string
   byuId?: string
   name?: UserNameObject
