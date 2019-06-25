@@ -66,11 +66,13 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default {
+@Component({
   components: {
     Logo,
     VuetifyLogo
   }
-}
+})
+export default class IndexPage extends Vue {}
 </script>

@@ -18,7 +18,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/vuetify": "0.5.5",
     "nuxt": "^2.0.0",
-    "ts-node": "^8.2.0"
+    "ts-node": "^8.2.0",
+    "vue-property-decorator": "^8.2.1"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.8.1",
