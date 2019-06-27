@@ -73,11 +73,13 @@
     </v-dialog>
     <v-content>
       <v-container>
-        <nuxt v-if="$store.state.authenticated"/>
+        <nuxt v-if="$store.state.authenticated" />
         <v-layout v-else justify-center align-center>
           <v-flex>
             <v-card class="text-xs-center">
-              <v-card-text class="headline">Login required. Redirecting to CAS</v-card-text>
+              <v-card-text class="headline">
+                Login required. Redirecting to CAS
+              </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
