@@ -14,7 +14,7 @@ export default (context) => {
     switch (state) {
       case 'unauthenticated':
         window.sessionStorage.setItem(
-          'studentVotingAdminPreauthPath',
+          'sitePreauthPath',
           context.route.path
         )
         authn.login()
@@ -35,8 +35,8 @@ export default (context) => {
         context.$axios.setToken(token.authorizationHeader)
         context.store.commit('setToken', token.bearer)
         context.store.dispatch('authenticate', user)
-        const prePath = window.sessionStorage.getItem('frontendAdminPreauthPath')
-        window.sessionStorage.removeItem('frontendAdminPreauthPath')
+        const prePath = window.sessionStorage.getItem('sitePreauthPath')
+        window.sessionStorage.removeItem('sitePreauthPath')
         if (prePath) {
           context.redirect(prePath)
         }
