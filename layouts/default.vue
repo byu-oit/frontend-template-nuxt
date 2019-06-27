@@ -14,7 +14,7 @@
       @input="v => v || $store.commit('clearNetworkErrors')"
     >
       <v-card>
-        <v-card-title class="headline red darken-2 white--text">
+        <v-card-title class="headline error white--text">
           Error<span v-if="$store.state.networkErrors.length > 1">s</span>
         </v-card-title>
         <v-card-text>
@@ -50,7 +50,7 @@
       @input="v => v || $store.commit('clearManualRefresh')"
     >
       <v-card>
-        <v-card-title class="headline yellow darken-2">
+        <v-card-title class="headline warning white--text">
           Re-authentication Required
         </v-card-title>
         <v-card-text>
