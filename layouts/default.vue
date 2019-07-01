@@ -93,7 +93,8 @@
 import 'vuetify/dist/vuetify.min.css'
 import { Component, Vue } from 'vue-property-decorator'
 import { Mutation } from 'vuex-class'
-import * as implicit from '../assets/js/implicit-grant'
+// @ts-ignore - 3rd party library, currently doesn't have declaration file
+import * as authn from '@byuweb/browser-oauth/byu-browser-oauth.mjs'
 
 @Component
 export default class DefaultLayout extends Vue {
@@ -104,7 +105,7 @@ export default class DefaultLayout extends Vue {
   }
 
   popupAuth () {
-    implicit.startRefresh(true)
+    authn.refresh('popup')
     this.clearManualRefresh()
   }
 }
