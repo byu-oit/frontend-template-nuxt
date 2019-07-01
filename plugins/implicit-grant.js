@@ -7,7 +7,7 @@ export default (context) => {
     switch (state) {
       case 'unauthenticated':
         window.sessionStorage.setItem(
-          'lockerAdminPreauthPath',
+          'sitePreauthPath',
           context.route.path
         )
         authn.login()
@@ -18,8 +18,8 @@ export default (context) => {
       case 'authenticated': {
         context.$axios.setToken(token.authorizationHeader)
         context.store.dispatch('authenticate', user)
-        const prePath = window.sessionStorage.getItem('lockerAdminPreauthPath')
-        window.sessionStorage.removeItem('lockerAdminPreauthPath')
+        const prePath = window.sessionStorage.getItem('sitePreauthPath')
+        window.sessionStorage.removeItem('sitePreauthPath')
         if (prePath) {
           context.redirect(prePath)
         }
