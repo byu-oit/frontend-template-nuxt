@@ -93,8 +93,7 @@
 import 'vuetify/dist/vuetify.min.css'
 import { Component, Vue } from 'vue-property-decorator'
 import { Mutation } from 'vuex-class'
-// @ts-ignore - 3rd party library, currently doesn't have declaration file
-import * as authn from '@byuweb/browser-oauth/byu-browser-oauth.mjs'
+import * as authn from '@byuweb/browser-oauth'
 
 @Component
 export default class DefaultLayout extends Vue {

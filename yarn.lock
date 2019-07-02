@@ -685,10 +685,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@byuweb/browser-oauth@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@byuweb/browser-oauth/-/browser-oauth-0.3.2.tgz#f838339345107ee0a04e2b4cc386038ee1dec5e0"
-  integrity sha512-fQ1by6q0b6gm9EEGh2+5alG8ZbG4LUfgqYg8aXMt0GtIMfuGSxSNpxYQb4mrnd105sSZlWMzPBB7tCd5lGfLUQ==
+"@byuweb/browser-oauth@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@byuweb/browser-oauth/-/browser-oauth-0.4.0.tgz#f8d8a00d79820cd23b7391d48f2de26ee6d53a80"
+  integrity sha512-4U1D382qLLc69RqkrJzBiivcdZVZ5NpVjxY4+/UV6wSb5hPRRnF+/ilPXmlQXV55RKcWnGXriYavAXPgOjg3ZQ==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
