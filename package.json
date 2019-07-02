@@ -22,8 +22,7 @@
     "nuxt": "^2.0.0",
     "ts-node": "^8.2.0",
     "vue-property-decorator": "^8.2.1",
-    "vuex-class": "^0.3.2",
-    "vuex-mock-store": "^0.0.7"
+    "vuex-class": "^0.3.2"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.8.1",
@@ -59,6 +58,7 @@
     "sass-loader": "^7.1.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.1",
-    "vue-jest": "^3.0.3"
+    "vue-jest": "^3.0.3",
+    "vuex-mock-store": "^0.0.7"
   }
 }
