@@ -51,5 +51,8 @@ export const mutations: MutationTree<RootState> = {
 export const actions: ActionTree<RootState, RootState> = {
   authenticate ({ commit }, user: User) {
     commit('authenticate', user)
+  },
+  clearNetworkErrors ({ commit }) {
+    commit('clearNetworkErrors')
   }
 }

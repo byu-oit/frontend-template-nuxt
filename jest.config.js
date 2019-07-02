@@ -1,5 +1,6 @@
 module.exports = {
   moduleNameMapper: {
+    '^@byuweb/browser-oauth/byu-browser-oauth.mjs$': '<rootDir>/__mocks__/@byuweb/browser-oauth.js',
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js'
@@ -17,7 +18,7 @@ module.exports = {
     'jest-serializer-vue'
   ],
   testMatch: [
-    '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
+    '**/test/unit/**/*.spec.(js|jsx|ts|tsx)|**/__test__/*.(js|jsx|ts|tsx)'
   ],
   transform: {
     '^.+\\.m?js$': 'babel-jest',
@@ -26,12 +27,14 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest'
   },
   transformIgnorePatterns: [
-    '/node_modules/'
+    '/node_modules/',
+    '/node_modules/(?!@byuweb/browser-oauth)'
   ],
-  collectCoverage: false,
+  collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
+    '<rootDir>/pages/**/*.vue',
+    '<rootDir>/store/**/*.ts'
   ],
   testURL: 'http://localhost/',
   watchPlugins: [
@@ -42,5 +45,8 @@ module.exports = {
     'ts-jest': {
       babelConfig: true
     }
-  }
+  },
+  setupFiles: [
+    '<rootDir>/test/setup.js'
+  ]
 }
