@@ -1,6 +1,5 @@
 module.exports = {
   moduleNameMapper: {
-    '^@byuweb/browser-oauth/byu-browser-oauth.mjs$': '<rootDir>/__mocks__/@byuweb/browser-oauth.js',
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js'
@@ -26,10 +25,6 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^.+\\.tsx?$': 'ts-jest'
   },
-  transformIgnorePatterns: [
-    '/node_modules/',
-    '/node_modules/(?!@byuweb/browser-oauth)'
-  ],
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
