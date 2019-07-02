@@ -14,7 +14,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@byuweb/browser-oauth": "^0.3.2",
+    "@byuweb/browser-oauth": "^0.4.0",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/vuetify": "0.5.5",
     "lodash": "^4.17.11",
