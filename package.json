@@ -17,6 +17,7 @@
     "@byuweb/browser-oauth": "^0.4.0",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/vuetify": "0.5.5",
+    "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.11",
     "nuxt": "^2.0.0",
     "ts-node": "^8.2.0",
@@ -57,6 +58,7 @@
     "sass-loader": "^7.1.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.1",
-    "vue-jest": "^3.0.3"
+    "vue-jest": "^3.0.3",
+    "vuex-mock-store": "^0.0.7"
   }
 }
