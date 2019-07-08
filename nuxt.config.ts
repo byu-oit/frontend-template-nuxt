@@ -45,7 +45,7 @@ export default {
         async: ''
       },
       {
-        src: '../implicit-grant-config.js',
+        src: '/implicit-grant-config.js',
         type: 'module'
       }
     ]
