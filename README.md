@@ -33,7 +33,8 @@ This templates includes the initial setup and scaffolding you need to create a f
 8) Update the build badge URL in the README (when you have a CodeBuild project created).
 9) Update the page title in `nuxt.config.ts`
 10) Update the site title in `layouts/default.vue`
-11) Create `static/config.json` with the following format:
+11) Create a branch named `dev` in your project.
+12) Create `static/config.json` with the following format:
 
 ```json
 {
