@@ -3,8 +3,8 @@ version: 0.2
 
 env:
   parameter-store:
-    OAUTH_CLIENT_ID: APPLICATION.oauth_client_id
-    OAUTH_CALLBACK_URL: APPLICATION.callback_url
+    OAUTH_CLIENT_ID: /APPLICATION/oauth_client_id
+    OAUTH_CALLBACK_URL: /APPLICATION/callback_url
 
 phases:
   install:
