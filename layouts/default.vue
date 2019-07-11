@@ -5,7 +5,7 @@
   <div v-else class="containing-element">
     <v-app>
       <byu-header home-url="https://vote.byu.edu">
-        <span slot="site-title">Student Voting Admin</span>
+        <span slot="site-title">Frontend Tempalte</span>
         <byu-user-info slot="user">
           <a slot="login" href="#login">Sign In</a>
           <a slot="logout" href="//api.byu.edu/logout">Sign Out</a>

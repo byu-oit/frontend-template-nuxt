@@ -4,17 +4,36 @@
 
 > For the BYU Apps Custom Code team.
 
-## Project Setups
+## What this contains
+
+This templates includes the initial setup and scaffolding you need to create a frontend application in our custom stack. It includes the following:
+
+- [BYU Browser OAuth Implicit](https://github.com/byuweb/byu-browser-oauth-implicit) package preconfigured. There is also a custom Nuxt plugin that adds the bearer token to `$axios` for use throughout your project.
+- Graceful error handling including network errors and authentication errors. A `v-dialog` is created presenting the error to the user.
+- Vuetify customized with BYU brand compliant colors.
+- The BYU theme components
+- BYU fronts (Ringside and Public Sans).
+- Skeleton/Example pages converted to TypeScript.
+- Tests for functionality already included in the template.
+- A functioning Vuex store.
+- Type definitions for the initial project.
+- Proper linting and code style setup.
+- CI/CD files (for Handel, Handel CodePipeline, and CodeBuild).
+- Browser support.
+
+## Project Setup
 
 1) Click the Green *Use this template* button at the top of the repository.
 2) Customize the README.
 3) Change the Name, Description, and Author in package.json.
-5) Update the `homne-url` attribute in `layouts/default.vue`.
-6) Change the parameter store param names in `buildspec.yml`.
-7) Change the application name and repository name in `handel-codepipeline.yml`.
-8) Change the application name, cert id's, and url's in `handel.yml`.
-9) Update the build badge URL in the README.
-10) Create `static/config.json` with the following format:
+4) Update the `homne-url` attribute in `layouts/default.vue`.
+5) Change the parameter store param names in `buildspec.yml`.
+6) Change the application name and repository name in `handel-codepipeline.yml`.
+7) Change the application name, cert id's, and url's in `handel.yml`.
+8) Update the build badge URL in the README (when you have a CodeBuild project created).
+9) Update the page title in `nuxt.config.ts`
+10) Update the site title in `layouts/default.vue`
+11) Create `static/config.json` with the following format:
 
 ```json
 {
@@ -41,4 +60,3 @@ $ yarn start
 $ yarn run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
