@@ -6,7 +6,7 @@
 
 ## What this contains
 
-This templates includes the initial setup and scaffolding you need to create a frontend application in our custom stack. It includes the following:
+This template includes the initial setup and scaffolding you need to create a frontend application in our custom stack. It includes the following:
 
 - [BYU Browser OAuth Implicit](https://github.com/byuweb/byu-browser-oauth-implicit) package preconfigured. There is also a custom Nuxt plugin that adds the bearer token to `$axios` for use throughout your project.
 - Graceful error handling including network errors and authentication errors. A `v-dialog` is created presenting the error to the user.
