@@ -9,7 +9,7 @@ pipelines:
         name: Github
         owner: byu-oit
         repo: REPO-NAME
-        branch: int
+        branch: dev
       - type: codebuild
         name: Build
         build_image: aws/codebuild/standard:2.0
