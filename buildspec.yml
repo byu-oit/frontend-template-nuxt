@@ -15,7 +15,7 @@ phases:
       - npm install --unsafe-perm
   build:
     commands:
-      - 'echo "{\"clientId\": \"${OAUTH_CLIENT_ID}\", \"callbackUrl\": \"${OAUTH_CALLBACK_URL}\"}" > static/config.json'
+      - 'echo "{\"autoRefreshOnTimeout\": true, \"clientId\": \"${OAUTH_CLIENT_ID}\", \"callbackUrl\": \"${OAUTH_CALLBACK_URL}\"}" > static/config.json'
       - npm run build
   post_build:
     commands:

@@ -38,6 +38,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 
 ```json
 {
+  "autoRefreshOnTimeout": true,
   "clientId": "CLIENT_ID_GOES_HERE",
   "callbackUrl": "CALLBACK_URL_GOES_HERE"
 }
