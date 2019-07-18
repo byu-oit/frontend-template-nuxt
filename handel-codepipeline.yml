@@ -1,6 +1,6 @@
 ---
 version: 1
-name: fischer-nuxt
+name: APPLICATION-NAME
 
 pipelines:
   dev:
@@ -8,7 +8,7 @@ pipelines:
       - type: github
         name: Github
         owner: byu-oit
-        repo: fischer-nuxt
+        repo: REPO-NAME
         branch: dev
       - type: codebuild
         name: Build
@@ -18,3 +18,18 @@ pipelines:
         name: DevDeploy
         environments_to_deploy:
           - dev
+  prd:
+    phases:
+      - type: github
+        name: Github
+        owner: byu-oit
+        repo: REPO-NAME
+        branch: master
+      - type: codebuild
+        name: Build
+        build_image: aws/codebuild/standard:2.0
+        cache: s3
+      - type: handel
+        name: PrdDeploy
+        environments_to_deploy:
+          - prd

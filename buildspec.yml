@@ -3,8 +3,8 @@ version: 0.2
 
 env:
   parameter-store:
-    OAUTH_CLIENT_ID: /fischer-nuxt/oauth_client_id
-    OAUTH_CALLBACK_URL: /fischer-nuxt/callback_url
+    OAUTH_CLIENT_ID: /APPLICATION-NAME/oauth_client_id
+    OAUTH_CALLBACK_URL: /APPLICATION-NAME/callback_url
 
 phases:
   install:
