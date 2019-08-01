@@ -71,7 +71,6 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
@@ -86,6 +85,9 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+  devModules: [
+    '@nuxtjs/vuetify'
+  ],
   vuetify: {
     theme: {
       primary: '#002E5D',
@@ -105,6 +107,6 @@ export default {
      ** You can extend webpack config here
      */
     // eslint-disable-next-line
-    extend(config, ctx) {}
+    extend (config, ctx) {}
   }
 }
