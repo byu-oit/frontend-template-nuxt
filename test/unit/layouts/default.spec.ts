@@ -1,6 +1,5 @@
 import { createLocalVue, createWrapper, mount } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
-// @ts-ignore - 3rd party library, currently doesn't have declaration file
 import * as authn from '@byuweb/browser-oauth'
 import { state as indexState } from '~/store/index'
 import layout from '~/layouts/default.vue'
@@ -13,7 +12,6 @@ const stubs = [
   'nuxt',
   'byu-footer'
 ]
-
 const localVue = createLocalVue()
 const state = indexState()
 state.authenticated = true

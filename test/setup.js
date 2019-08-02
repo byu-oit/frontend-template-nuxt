@@ -1,8 +1,10 @@
 import 'babel-polyfill'
 import Vue from 'vue'
-import Vuetify from 'vuetify'
 
-Vue.use(Vuetify) // Need to add Vuetify to *global* Vue, not localVue, or we get annoying warnings in test output
+// Ignore all Vuetify elements.
+Vue.config.ignoredElements = [
+  /v-.*/
+]
 
 const app = document.createElement('div')
 app.setAttribute('data-app', true)

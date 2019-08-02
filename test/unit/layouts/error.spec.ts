@@ -1,10 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import layout from '~/layouts/error.vue'
 
+const localVue = createLocalVue()
+
 describe('layouts/error', () => {
   test('exists', () => {
     const wrapper = mount(layout, {
-      localVue: createLocalVue(),
+      localVue,
       propsData: { error: { message: 'An error occurred' } },
       stubs: ['nuxt-link']
     })
