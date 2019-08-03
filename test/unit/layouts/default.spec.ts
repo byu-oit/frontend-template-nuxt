@@ -1,6 +1,8 @@
-import { createLocalVue, createWrapper, mount } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
 import * as authn from '@byuweb/browser-oauth'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
 import { state as indexState } from '~/store/index'
 import layout from '~/layouts/default.vue'
 
@@ -12,8 +14,11 @@ const stubs = [
   'nuxt',
   'byu-footer'
 ]
+
 const localVue = createLocalVue()
+Vue.use(Vuetify)
 const state = indexState()
+const vuetify = new Vuetify({})
 state.authenticated = true
 const $store = new Store({ state })
 const mocks = { $store, $nuxt: { $route: { path: '/' } } }
@@ -24,6 +29,7 @@ const wrap = () => mount(layout, {
   mocks,
   stubs,
   localVue,
+  vuetify,
   computed: {
     username () { return 'Dummy User' }
   }
@@ -45,15 +51,12 @@ describe('layouts/default', () => {
   })
 
   test('re-auth popup', async () => {
-    const dialog = createWrapper(document.body).find('div.v-dialog')
+    const dialog = wrapper.find('.authentication-dialog')
 
-    expect(dialog.html()).toContain('Re-authentication Required')
-    expect(dialog.isVisible()).toBe(false)
-
+    expect(dialog.html()).toContain('display: none')
     $store.state.manualRefreshRequired = true
-    await wrapper.vm.$nextTick()
-
-    expect(dialog.isVisible()).toBe(true)
+    await dialog.vm.$nextTick()
+    expect(dialog.html()).not.toContain('display: none')
 
     const vm: any = wrapper.vm
     vm.popupAuth()
@@ -63,8 +66,11 @@ describe('layouts/default', () => {
   })
 
   test('network error', () => {
+    const dialog = wrapper.find('.network-errors-dialog')
+
+    expect(dialog.html()).toContain('display: none')
     $store.state.networkErrors.push('Network error occurred!')
-    expect(wrapper.find('#single-network-error').isVisible()).toBe(true)
+    expect(dialog.html()).not.toContain('display: none')
   })
 
   test('username displayed', () => {

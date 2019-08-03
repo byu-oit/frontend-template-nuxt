@@ -1,10 +1,4 @@
 import 'babel-polyfill'
-import Vue from 'vue'
-
-// Ignore all Vuetify elements.
-Vue.config.ignoredElements = [
-  /v-.*/
-]
 
 const app = document.createElement('div')
 app.setAttribute('data-app', true)
