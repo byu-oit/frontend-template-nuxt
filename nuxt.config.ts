@@ -26,7 +26,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.css'
+          'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css'
       },
       {
         rel: 'stylesheet',
@@ -41,7 +41,7 @@ export default {
     ],
     script: [
       {
-        src: 'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.js',
+        src: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js',
         async: ''
       },
       {
