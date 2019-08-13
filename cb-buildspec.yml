@@ -14,6 +14,8 @@ phases:
       - npm run test
       - echo Running linter
       - npm run lint
+      - echo Attempting build
+      - npm run build
   post_build:
     commands:
       - echo Build completed
