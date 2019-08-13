@@ -15,6 +15,7 @@
       <v-dialog
         :value="$store.state.networkErrors.length"
         content-class="dialog-auto-width"
+        class="network-errors-dialog"
         @input="v => v || $store.dispatch('clearNetworkErrors')"
       >
         <v-card>
@@ -51,6 +52,7 @@
         :value="$store.state.manualRefreshRequired"
         content-class="dialog-auto-width"
         persistent
+        class="authentication-dialog"
         @input="v => v || $store.commit('clearManualRefresh')"
       >
         <v-card>
