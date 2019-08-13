@@ -26,7 +26,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.css'
+          'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css'
       },
       {
         rel: 'stylesheet',
@@ -41,7 +41,7 @@ export default {
     ],
     script: [
       {
-        src: 'https://cdn.byu.edu/byu-theme-components/1.x.x/byu-theme-components.min.js',
+        src: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js',
         async: ''
       },
       {
@@ -71,7 +71,6 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
@@ -86,6 +85,9 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+  devModules: [
+    '@nuxtjs/vuetify'
+  ],
   vuetify: {
     theme: {
       primary: '#002E5D',
@@ -105,6 +107,6 @@ export default {
      ** You can extend webpack config here
      */
     // eslint-disable-next-line
-    extend(config, ctx) {}
+    extend (config, ctx) {}
   }
 }
