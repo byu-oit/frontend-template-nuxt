@@ -18,7 +18,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.11",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.9.0",
     "ts-node": "^8.2.0",
     "vue-property-decorator": "^8.2.1",
     "vuex-class": "^0.3.2"
