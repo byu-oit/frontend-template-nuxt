@@ -108,5 +108,6 @@ export default {
      */
     // eslint-disable-next-line
     extend (config, ctx) {}
-  }
+  },
+  buildModules: ['@nuxt/typescript-build']
 }

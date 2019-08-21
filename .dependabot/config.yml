@@ -5,8 +5,3 @@ update_configs:
     update_schedule: "live"
     default_reviewers:
       - blakemorgan
-    ignored_updates:
-    # The following is required until nuxt 2.9.x is released
-    - match:
-        dependency_name: 'css-loader'
-        version_requirement: '^3.0.0'

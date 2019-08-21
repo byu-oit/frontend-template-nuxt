@@ -35,7 +35,7 @@ export const mutations: MutationTree<RootState> = {
       get(error, 'response.data.ResolveIdentityService.errors.0.message') ||
       error.message ||
       'Unknown Error'
-    if (state.networkErrors.indexOf(message) === -1) {
+    if (!state.networkErrors.includes(message)) {
       // Do not duplicate error messages
       state.networkErrors.push(message)
     }
