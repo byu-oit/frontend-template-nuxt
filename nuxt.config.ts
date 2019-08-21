@@ -85,9 +85,6 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
-  devModules: [
-    '@nuxtjs/vuetify'
-  ],
   vuetify: {
     theme: {
       primary: '#002E5D',
@@ -109,5 +106,8 @@ export default {
     // eslint-disable-next-line
     extend (config, ctx) {}
   },
-  buildModules: ['@nuxt/typescript-build']
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/vuetify'
+  ]
 }
