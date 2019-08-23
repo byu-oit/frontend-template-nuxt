@@ -34,8 +34,9 @@ This template includes the initial setup and scaffolding you need to create a fr
 9) Update the page title in `nuxt.config.ts`
 10) Update the site title in `layouts/default.vue`
 11) Update the reviewer in the Dependabot config.
-12) Create a branch named `dev` in your project.
-13) Create `static/config.json` with the following format:
+12) Uncomment the target branch line in the Dependabot config.
+13) Create a branch named `dev` in your project.
+14) Create `static/config.json` with the following format:
 
 ```json
 {
