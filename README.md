@@ -21,6 +21,14 @@ This template includes the initial setup and scaffolding you need to create a fr
 - CI/CD files (for Handel, Handel CodePipeline, and CodeBuild).
 - Browser support.
 
+## Pipeline Setup (do this before the next section)
+
+1) Decide on an application name. You will use this in setting up the pipeline and project.
+2) Create a new application in WSO2. The application name should be what you decided and the callback URL should follow this format: *https://APPLICATION-NAME.AWS-ACCOUNT-NAME.amazon.byu.edu/* (be sure to include the protocol and trailing slash).
+3) Subscribe the application you just made to the OpenID-Userinfo - v1 API.
+4) Generate sandbox keys (you can generate production keys later).
+5) Create the following parameters in parameter store: `/APPLICATION-NAME/oauth_client_id` and `/APPLICATION-NAME/callback_url`. The `oauth_client_id` is the client ID of the application you just made in WSO2 and the `callback_url` is the callback URL you created with that WSO2 application. Make sure the values are type String, not StringList or SecureString.
+
 ## Project Setup
 
 1) Click the Green *Use this template* button at the top of the repository.
