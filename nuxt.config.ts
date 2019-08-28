@@ -87,13 +87,17 @@ export default {
    */
   vuetify: {
     theme: {
-      primary: '#002E5D',
-      secondary: '#666666',
-      accent: '#0062B8',
-      error: '#A3082A',
-      info: '#006073',
-      success: '#10A170',
-      warning: '#FFB700'
+      themes: {
+        light: {
+          primary: '#002E5D',
+          secondary: '#666666',
+          accent: '#0062B8',
+          error: '#A3082A',
+          info: '#006073',
+          success: '#10A170',
+          warning: '#FFB700'
+        }
+      }
     }
   },
   /*
