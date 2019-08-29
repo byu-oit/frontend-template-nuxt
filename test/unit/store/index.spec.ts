@@ -1,15 +1,20 @@
 import { createLocalVue } from '@vue/test-utils'
 import Vuex, { Store } from 'vuex'
 import { cloneDeep } from 'lodash'
-import { RootState } from '~/types'
+import { RootState, User } from '~/types'
 import * as index from '~/store/index'
 
-const dummyUser = {
+const dummyUser: User = {
   email: 'test@test.com',
   byuId: '123-456-7890',
   name: {
     displayName: 'Dummy User'
   }
+}
+
+const namelessUser: User = {
+  email: 'noname@test.com',
+  byuId: '999-999-9999'
 }
 
 const localVue = createLocalVue()
@@ -47,7 +52,14 @@ describe('store/index', () => {
     store.commit('authenticate', dummyUser)
 
     expect(store.state.user).toEqual(dummyUser)
-    expect(store.state.username).toEqual(dummyUser.name.displayName)
+    expect(store.state.username).toEqual(dummyUser.name!.displayName)
+  })
+
+  test('mutations/authenticate without username', () => {
+    store.commit('authenticate', namelessUser)
+
+    expect(store.state.user).toEqual(namelessUser)
+    expect(store.state.username).toEqual('')
   })
 
   test('mutations/addNetworkError', () => {
@@ -88,7 +100,7 @@ describe('store/index', () => {
 
     expect(store.state.authenticated).toBe(true)
     expect(store.state.user).toEqual(dummyUser)
-    expect(store.state.username).toEqual(dummyUser.name.displayName)
+    expect(store.state.username).toEqual(dummyUser.name!.displayName)
   })
 
   test('actions/clearNetworkErrors', async () => {
