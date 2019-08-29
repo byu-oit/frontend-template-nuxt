@@ -12,7 +12,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Graceful error handling including network errors and authentication errors. A `v-dialog` is created presenting the error to the user.
 - Vuetify customized with BYU brand compliant colors.
 - The BYU theme components
-- BYU fronts (Ringside and Public Sans).
+- BYU fonts (Ringside and Public Sans).
 - Skeleton/Example pages converted to TypeScript.
 - Tests for functionality already included in the template.
 - A functioning Vuex store.
@@ -20,6 +20,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Proper linting and code style setup.
 - CI/CD files (for Handel, Handel CodePipeline, and CodeBuild).
 - Browser support.
+- Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
 
 ## Pipeline Setup (do this before the next section)
 

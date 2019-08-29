@@ -5,6 +5,7 @@
   "author": "BYU Apps Custom",
   "private": true,
   "scripts": {
+    "generate:ts": "node ts-gen.js",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "test": "jest",
@@ -17,9 +18,11 @@
     "@byuweb/browser-oauth": "^0.4.0",
     "@nuxt/typescript-runtime": "^0.1.3",
     "@nuxtjs/axios": "^5.6.0",
+    "@types/superagent": "^4.1.3",
     "babel-polyfill": "^6.26.0",
     "lodash": "^4.17.11",
     "nuxt": "^2.9.2",
+    "swagger-typescript-codegen": "^2.0.1",
     "ts-node": "^8.2.0",
     "vue-property-decorator": "^8.2.2",
     "vuex-class": "^0.3.2"
