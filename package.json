@@ -60,7 +60,7 @@
     "nodemon": "^1.18.9",
     "prettier": "^1.16.4",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.1",
+    "typescript": "^3.6.2",
     "vue-jest": "^3.0.3",
     "vuex-mock-store": "^0.0.7"
   }
