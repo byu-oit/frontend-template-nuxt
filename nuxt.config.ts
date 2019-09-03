@@ -63,10 +63,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/axios',
-    { src: '~/plugins/implicit-grant', ssr: false }
-  ],
+  plugins: ['~/plugins/axios', { src: '~/plugins/implicit-grant', ssr: false }, '~/plugins/byucomponents'],
   /*
    ** Nuxt.js modules
    */
