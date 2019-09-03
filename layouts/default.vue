@@ -28,20 +28,14 @@
             </div>
             <div v-else>
               <ul>
-                <li
-                  v-for="(msg, index) in $store.state.networkErrors"
-                  :key="index"
-                >
+                <li v-for="(msg, index) in $store.state.networkErrors" :key="index">
                   {{ msg }}
                 </li>
               </ul>
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              color="primary"
-              @click.stop="$store.dispatch('clearNetworkErrors')"
-            >
+            <v-btn color="primary" @click.stop="$store.dispatch('clearNetworkErrors')">
               Close
             </v-btn>
           </v-card-actions>
@@ -60,14 +54,13 @@
             Re-authentication Required
           </v-card-title>
           <v-card-text>
-            CAS Authentication has expired.<br>
-            <br>
-            Click this "Re-authenticate" button. You will log in through a
-            separate tab and then immediately return to this page.
+            CAS Authentication has expired.<br />
+            <br />
+            Click this "Re-authenticate" button. You will log in through a separate tab and then immediately return to
+            this page.
             <div v-if="$store.state.refreshBecausePostFailed">
-              <br>
-              If you were in the middle of saving data, you may have to click
-              "Save" again.
+              <br />
+              If you were in the middle of saving data, you may have to click "Save" again.
             </div>
           </v-card-text>
           <v-card-actions>
@@ -96,11 +89,11 @@ import * as authn from '@byuweb/browser-oauth'
 export default class DefaultLayout extends Vue {
   @Mutation clearManualRefresh!: () => void
 
-  get username () {
+  get username() {
     return this.$store.state.username
   }
 
-  popupAuth () {
+  popupAuth() {
     authn.refresh('popup')
     this.clearManualRefresh()
   }
