@@ -3,6 +3,9 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     # target_branch: dev
-    update_schedule: "live"
+    update_schedule: daily
     default_reviewers:
       - blakemorgan
+    automerged_updates:
+      - match:
+          update_type: "semver:patch"
