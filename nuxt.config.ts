@@ -20,23 +20,19 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       },
       {
         rel: 'stylesheet',
-        href:
-          'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css'
+        href: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css'
       },
       {
         rel: 'stylesheet',
-        href:
-          'https://cdn.byu.edu/theme-fonts/1.x.x/ringside/fonts.css'
+        href: 'https://cdn.byu.edu/theme-fonts/1.x.x/ringside/fonts.css'
       },
       {
         rel: 'stylesheet',
-        href:
-          'https://cdn.byu.edu/theme-fonts/1.x.x/public-sans/fonts.css'
+        href: 'https://cdn.byu.edu/theme-fonts/1.x.x/public-sans/fonts.css'
       }
     ],
     script: [
@@ -57,16 +53,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    '@/assets/style/app.scss'
-  ],
+  css: ['@/assets/style/app.sass'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/axios',
-    { src: '~/plugins/implicit-grant', ssr: false }
-  ],
+  plugins: ['~/plugins/axios', { src: '~/plugins/implicit-grant', ssr: false }, '~/plugins/byucomponents'],
   /*
    ** Nuxt.js modules
    */
@@ -110,8 +101,5 @@ export default {
     // eslint-disable-next-line
     extend (config, ctx) {}
   },
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/vuetify'
-  ]
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify']
 }

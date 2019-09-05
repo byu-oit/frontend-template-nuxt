@@ -6,10 +6,10 @@ document.body.appendChild(app)
 
 // Temp workaround for Vuetify/Vue-test-utils bug that's being fixed
 const { getComputedStyle } = window
-window.getComputedStyle = function getComputedStyleStub (el) {
+window.getComputedStyle = function getComputedStyleStub(el) {
   return {
     ...getComputedStyle(el),
-    getPropertyValue () {},
+    getPropertyValue() {},
     transitionDelay: '',
     transitionDuration: '',
     animationDelay: '',

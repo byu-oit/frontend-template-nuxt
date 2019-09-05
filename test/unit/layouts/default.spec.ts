@@ -6,14 +6,7 @@ import Vuetify from 'vuetify'
 import { state as indexState } from '~/store/index'
 import layout from '~/layouts/default.vue'
 
-const stubs = [
-  'byu-header',
-  'byu-user-info',
-  'byu-menu',
-  'nuxt-link',
-  'nuxt',
-  'byu-footer'
-]
+const stubs = ['byu-header', 'byu-user-info', 'byu-menu', 'nuxt-link', 'nuxt', 'byu-footer']
 
 const localVue = createLocalVue()
 Vue.use(Vuetify)
@@ -25,15 +18,18 @@ const mocks = { $store, $nuxt: { $route: { path: '/' } } }
 
 // Need to test different initial conditions in some tests, so
 // expose "wrap" as its own function
-const wrap = () => mount(layout, {
-  mocks,
-  stubs,
-  localVue,
-  vuetify,
-  computed: {
-    username () { return 'Dummy User' }
-  }
-})
+const wrap = () =>
+  mount(layout, {
+    mocks,
+    stubs,
+    localVue,
+    vuetify,
+    computed: {
+      username() {
+        return 'Dummy User'
+      }
+    }
+  })
 const wrapper = wrap()
 
 afterEach(() => $store.reset())

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export default function (context) {
-  context.$axios.onResponseError((error) => {
+export default function(context) {
+  context.$axios.onResponseError(error => {
     if (axios.isCancel(error)) {
       // Explicit cancellation, so do not show "error" message
       return

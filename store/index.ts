@@ -13,21 +13,21 @@ export const state = (): RootState => ({
 })
 
 export const mutations: MutationTree<RootState> = {
-  setToken (state: RootState, token: string) {
+  setToken(state: RootState, token: string) {
     state.token = token
   },
-  needManualRefresh (state, postFailed: boolean) {
+  needManualRefresh(state, postFailed: boolean) {
     state.manualRefreshRequired = true
     state.refreshBecausePostFailed = postFailed
   },
-  authenticate (state, user: User) {
+  authenticate(state, user: User) {
     state.authenticated = true
     state.user = user
     if (user.name !== undefined) {
       state.username = user.name.displayName
     }
   },
-  addNetworkError (state, error: any) {
+  addNetworkError(state, error: any) {
     error = error || {}
     const message: string =
       get(error, 'response.data.readable_message') ||
@@ -40,19 +40,19 @@ export const mutations: MutationTree<RootState> = {
       state.networkErrors.push(message)
     }
   },
-  clearNetworkErrors (state) {
+  clearNetworkErrors(state) {
     state.networkErrors = []
   },
-  clearManualRefresh (state) {
+  clearManualRefresh(state) {
     state.manualRefreshRequired = false
   }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  authenticate ({ commit }, user: User) {
+  authenticate({ commit }, user: User) {
     commit('authenticate', user)
   },
-  clearNetworkErrors ({ commit }) {
+  clearNetworkErrors({ commit }) {
     commit('clearNetworkErrors')
   }
 }
