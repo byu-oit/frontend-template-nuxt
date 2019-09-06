@@ -59,7 +59,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "eslint-plugin-vuetify": "^1.0.0-beta.3",
     "jest": "^24.9.0",
-    "nodemon": "^1.18.9",
+    "nodemon": "^1.19.2",
     "prettier": "^1.16.4",
     "swagger-typescript-codegen": "^2.0.1",
     "ts-jest": "^24.0.2",
