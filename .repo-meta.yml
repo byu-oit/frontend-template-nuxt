@@ -2,16 +2,13 @@ $schemaver: 2.1
 repo_url: # TODO: Update with GitHub repo URL
 software:
   - name: # TODO: Update with software name (in ke-bab case)
-    deploy_to_cmdb: false
     type: Web App
     assignment_group: gro:OIT-BYU-APPS-CUSTOM
-    notes:
     maintained_by:
       - # TODO: Update with NetID of maintainers
     developed_by_byu: true
     data_sensitivity: internal
     standard_change_template: # TODO: Update with standard change template alias
-    microservice: false
     technologies_used:
       - HTML
       - JavaScript
