@@ -21,6 +21,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - CI/CD files (for Handel, Handel CodePipeline, and CodeBuild).
 - Browser support.
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
+- Default `.repo-meta.yml` template
 
 ## Pipeline Setup (do this before the next section)
 
@@ -29,6 +30,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 3) Subscribe the application you just made to the OpenID-Userinfo - v1 API.
 4) Generate sandbox keys (you can generate production keys later).
 5) Create the following parameters in parameter store: `/APPLICATION-NAME/oauth_client_id` and `/APPLICATION-NAME/callback_url`. The `oauth_client_id` is the client ID of the application you just made in WSO2 and the `callback_url` is the callback URL you created with that WSO2 application. Make sure the values are type String, not StringList or SecureString.
+6) In ServiceNow, create a new standard change template and be sure to give it an alias.
 
 ## Project Setup
 
@@ -45,7 +47,8 @@ This template includes the initial setup and scaffolding you need to create a fr
 11) Update the reviewer in the Dependabot config.
 12) Uncomment the target branch line in the Dependabot config.
 13) Create a branch named `dev` in your project.
-14) Create `static/config.json` with the following format:
+14) Update the `.repo-meta.yml` file.
+15) Create `static/config.json` with the following format:
 
 ```json
 {
