@@ -3,7 +3,7 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     # target_branch: dev
-    update_schedule: daily
+    update_schedule: weekly
     default_reviewers:
       - blakemorgan
     automerged_updates:
