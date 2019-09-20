@@ -1,15 +1,9 @@
 version: 0.2
 
-env:
-  variables:
-    CODECOV_TOKEN: "" # TODO: Add Codecov repo token
-
 phases:
   install:
     runtime-versions:
       nodejs: 10
-    commands:
-      - npm i -g codecov
   pre_build:
     commands:
       - echo Running npm install.
@@ -17,7 +11,7 @@ phases:
   build:
     commands:
       - echo Running tests
-      - npm run test && codecov
+      - npm run test
       - echo Running linter
       - npm run lint
       - echo Attempting build

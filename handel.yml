@@ -13,7 +13,6 @@ environments:
       type: s3staticsite
       path_to_code: ./dist/
       index_document: index.html
-      error_document: index.html
       cloudfront:
         price_class: 100
         https_certificate: DEV CERT ID
@@ -25,7 +24,6 @@ environments:
       type: s3staticsite
       path_to_code: ./dist/
       index_document: index.html
-      error_document: index.html
       cloudfront:
         price_class: 100
         https_certificate: PRD CERT ID
