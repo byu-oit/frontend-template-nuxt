@@ -22,6 +22,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Browser support.
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
 - Default `.repo-meta.yml` template
+- Integration with Codecov
 
 ## Pipeline Setup (do this before the next section)
 
@@ -48,6 +49,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 12) Uncomment the target branch line in the Dependabot config.
 13) Create a branch named `dev` in your project.
 14) Update the `.repo-meta.yml` file.
+15) Add the repo key from Codecov into `cb-buildspec.yml` and then run `cbsetup` locally to create a CodeBuild project.
 15) Create `static/config.json` with the following format:
 
 ```json
