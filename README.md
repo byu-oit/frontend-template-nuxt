@@ -30,7 +30,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 2) Create a new application in WSO2. The application name should be what you decided and the callback URL should follow this format: *https://APPLICATION-NAME.AWS-ACCOUNT-NAME.amazon.byu.edu/* (be sure to include the protocol and trailing slash).
 3) Subscribe the application you just made to the OpenID-Userinfo - v1 API.
 4) Generate sandbox keys (you can generate production keys later).
-5) Create the following parameters in parameter store: `/APPLICATION-NAME/oauth_client_id` and `/APPLICATION-NAME/callback_url`. The `oauth_client_id` is the client ID of the application you just made in WSO2 and the `callback_url` is the callback URL you created with that WSO2 application. Make sure the values are type String, not StringList or SecureString.
+5) Create the following parameters in parameter store: `/APPLICATION-NAME/oauth_client_id`, `/APPLICATION-NAME/callback_url`, and `/byu-apps-custom/APPLICATION-NAME/codecov_token`. The `oauth_client_id` is the client ID of the application you just made in WSO2, the `callback_url` is the callback URL you created with that WSO2 application, the the `codecov_token` is your Codecov repo token. Make sure the values are type String, not StringList or SecureString.
 6) In ServiceNow, create a new standard change template and be sure to give it an alias.
 
 ## Project Setup

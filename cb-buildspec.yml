@@ -1,8 +1,8 @@
 version: 0.2
 
 env:
-  variables:
-    CODECOV_TOKEN: "" # TODO: Add Codecov repo token
+  parameter-store:
+    CODECOV_TOKEN: /byu-apps-custom/APPLICATION-NAME/codecov_token # TODO: Add Codecov repo token
 
 phases:
   install:
