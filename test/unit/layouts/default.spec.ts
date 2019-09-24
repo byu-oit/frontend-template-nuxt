@@ -23,12 +23,7 @@ const wrap = () =>
     mocks,
     stubs,
     localVue,
-    vuetify,
-    computed: {
-      username() {
-        return 'Dummy User'
-      }
-    }
+    vuetify
   })
 const wrapper = wrap()
 
@@ -70,6 +65,7 @@ describe('layouts/default', () => {
   })
 
   test('username displayed', () => {
+    $store.state.username = 'Dummy User'
     expect(wrapper.html()).toContain('Dummy User')
   })
 })

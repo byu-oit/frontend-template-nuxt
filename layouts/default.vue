@@ -81,8 +81,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { Mutation } from 'vuex-class'
+import { Component, Vue, Mutation } from 'nuxt-property-decorator'
 import * as authn from '@byuweb/browser-oauth'
 
 @Component
