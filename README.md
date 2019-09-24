@@ -78,3 +78,6 @@ $ yarn start
 $ yarn run generate
 ```
 
+## Linting
+
+This template include some pretty intense linting. It will be in your favor to be sure your IDE is set to use the JavaScript Standard Style as well as be sure children of the `<script>` tag are not indented.

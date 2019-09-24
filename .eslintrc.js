@@ -17,13 +17,11 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-useless-constructor': 'off',
-    '@typescript-eslint/no-useless-constructor': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
-    'no-trailing-spaces': 'error',
-    'prettier/prettier': ['error', { 'semi': false, 'singleQuote': true }],
-    'vuetify/no-deprecated-classes': 'error',
-    // 'vuetify/grid-unknown-attributes': 'error',
-    // 'vuetify/no-legacy-grid': 'error'
+    '@typescript-eslint/no-useless-constructor': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'no-trailing-spaces': 'warn',
+    'prettier/prettier': ['warn', { 'semi': false, 'singleQuote': true }],
+    'vuetify/no-deprecated-classes': 'warn',
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'
