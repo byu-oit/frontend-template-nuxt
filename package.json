@@ -32,7 +32,7 @@
     "@nuxtjs/vuetify": "^1.8.5",
     "@types/jest": "^24.0.18",
     "@types/js-beautify": "^1.8.1",
-    "@types/lodash": "^4.14.138",
+    "@types/lodash": "^4.14.141",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@vue/cli-plugin-typescript": "^3.11.0",
     "@vue/cli-plugin-unit-jest": "^3.11.0",
