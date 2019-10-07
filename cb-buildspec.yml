@@ -8,18 +8,23 @@ phases:
   install:
     runtime-versions:
       nodejs: 10
-    commands:
-      - npm i -g codecov
   pre_build:
     commands:
       - echo Running npm install.
       - npm install
   build:
     commands:
+      # Run tests
       - echo Running tests
-      - npm run test && codecov
+      - npm run test
+      # Run codecov
+      - curl -s https://codecov.io/bash > .codecov
+      - chmod +x .codecov
+      - ./.codecov
+      # Run linter
       - echo Running linter
       - npm run lint
+      # Attempt build
       - echo Attempting build
       - npm run build
   post_build:
