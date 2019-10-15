@@ -99,7 +99,11 @@ export default {
      ** You can extend webpack config here
      */
     // eslint-disable-next-line
-    extend (config, ctx) {}
+    extend (config, { isDev, isClient }) {
+      if (isDev) {
+        config.devtool = isClient ? 'source-map' : 'inline-source-map'
+      }
+    }
   },
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify']
 }
