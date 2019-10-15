@@ -34,7 +34,7 @@
     "@types/js-beautify": "^1.8.1",
     "@types/lodash": "^4.14.141",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
-    "@vue/cli-plugin-typescript": "^3.11.0",
+    "@vue/cli-plugin-typescript": "^3.12.0",
     "@vue/cli-plugin-unit-jest": "^3.11.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
