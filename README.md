@@ -93,7 +93,7 @@ $ yarn run generate
 
 Using a custom URL will require a bit of one-time configuration in the AWS console.
 
-### Using an exisitng domain name.
+### Using an exisiting domain name.
 
 If you're using an existing domain name, follow the steps outlined below, but after step 2 in the process outlined below, you'll need to manually copy the CNAME record for the new ACM certificate into the old Route 53 hosted zone. Then ACM can validate against that. Once the new certificate in ACM is validated, you should skip step 3 and do it last (as not to have any downtime in transitioning from one hosted zone to another).
 
