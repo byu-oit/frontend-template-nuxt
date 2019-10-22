@@ -88,3 +88,6 @@ sw.*
 
 # OAuth creds
 static/config.json
+
+# Terraform
+/terraform/**/.terraform/
