@@ -1764,13 +1764,13 @@
     "@vue/babel-plugin-transform-vue-jsx" "^1.0.0"
     camelcase "^5.0.0"
 
-"@vue/cli-plugin-typescript@^3.12.0":
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.12.0.tgz#24f1147dcc7e66be611351c376ad7ca80d6d1ec6"
-  integrity sha512-DNQyvIZoMWkbmbKFfYNN7BHry5a0WSeTQSE4Acd0LlUrYw1xia29IusIGdWqvsB3zTkihg99LYUfAK5xCRGtrw==
+"@vue/cli-plugin-typescript@^3.12.1":
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-3.12.1.tgz#71b306983de37a03c43860ac035bd0a15eb29d27"
+  integrity sha512-sh+WKbpsDw6wOrpM4FSD1xKXpyp8mVcl+yyEk+WvJuuSdfwueRubAM7uYbrOGtNSOegpZqBwbNxEO4FIUBeLKQ==
   dependencies:
     "@types/webpack-env" "^1.13.9"
-    "@vue/cli-shared-utils" "^3.12.0"
+    "@vue/cli-shared-utils" "^3.12.1"
     fork-ts-checker-webpack-plugin "^0.5.2"
     globby "^9.2.0"
     ts-loader "^5.3.3"
@@ -1792,7 +1792,7 @@
     jest-watch-typeahead "0.2.1"
     vue-jest "^3.0.4"
 
-"@vue/cli-shared-utils@^3.12.0", "@vue/cli-shared-utils@^3.12.1":
+"@vue/cli-shared-utils@^3.12.1":
   version "3.12.1"
   resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-3.12.1.tgz#bcf076287ddadeebbb97c6a748dfe9ff50ec8df0"
   integrity sha512-jFblzRFjutGwu5utOKdVlPlsbA1lBUNNQlAThzNqej+JtTKJjnvjlhjKX0Gq0oOny5FjKWhoyfQ74p9h1qE6JQ==
