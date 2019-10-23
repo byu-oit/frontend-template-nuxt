@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "static-website" {
-  bucket = "${var.app-name}-s3staticsite"
+  bucket = "${var.app-name}-${var.branch}-s3staticsite"
 
   website {
     index_document = var.index-doc

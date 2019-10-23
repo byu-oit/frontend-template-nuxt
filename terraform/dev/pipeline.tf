@@ -116,7 +116,7 @@ resource "aws_codepipeline" "pipeline" {
 }
 
 resource "aws_s3_bucket" "codebuild-bucket" {
-  bucket = "${var.app-name}-codebuild-cache"
+  bucket = "${var.app-name}-${var.branch}-codebuild-cache"
 }
 
 resource "aws_codebuild_project" "build-project" {
