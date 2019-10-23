@@ -72,6 +72,8 @@ Run the following steps in the `terraform/dev` or `terraform/prd` folder dependi
 4) Run `terraform init` so initialize Terraform (you only need ot do this once).
 5) Run `terraform apply` to create the resources in AWS.
 
+**Sometimes `terraform apply` fails. It gives good error messages, but before trying to fix the error, just try running `terraform apply` again. That usually fixes the problem.**
+
 ### Infinite CloudFront Distribution Deploy
 
 There is a known issue where Terraform may get stuck deploying CloudFront distributions for the first time (see [this issue](https://github.com/terraform-providers/terraform-provider-aws/issues/10039)). You will know this happened if you check the AWS Console and see the CloudFront distribution has status of "Deployed", but `terraform apply` is still trying to deploy the distribution. If this happens to you, stop the `terraform apply` command with Ctrl+C (if it doesn't stop, press Ctrl+C again). Then run the following command:
