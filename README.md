@@ -18,7 +18,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - A functioning Vuex store.
 - Type definitions for the initial project.
 - Proper linting and code style setup.
-- CI/CD files (for Handel, Handel CodePipeline, and CodeBuild).
+- CI/CD files.
 - Browser support.
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
 - Default `.repo-meta.yml` template
@@ -105,9 +105,20 @@ $ yarn run generate
 
 Using a custom URL will require a bit of one-time configuration in the AWS console.
 
+**Note**: If you get WSO2 errors after following either set of steps below, be sure to invalidate your CloudFront distribution's cache.
+
 ### Using an exisiting domain name.
 
-If you're using an existing domain name, follow the steps outlined below, but after step 2 in the process outlined below, you'll need to manually copy the CNAME record for the new ACM certificate into the old Route 53 hosted zone. Then ACM can validate against that. Once the new certificate in ACM is validated, you should skip step 3 and do it last (as not to have any downtime in transitioning from one hosted zone to another).
+**Transfering an old, existing URL to our new accounts and pipelines will cause ~20 minutes of downtime.** The total amount of downtime will depend on how long it takes you to complete steps 5-7.
+
+1) Set the `url` variable in the `terraform.tfvars` file.
+2) Run `terraform apply`. This will create the Route 53 hosted zone, a certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
+3) Create a new Engineering Task in ServiceNow using the "Route 53 Domain Redirect" template. Go to your newly created Route 53 hosted zone in the AWS Console, copy the name servers, and paste them in the request.
+4) In the AWS Console, go to ACM and copy the validation CNAME record for the certificate. Put that in the old Route 53 hosted zone so the certificate can be validated (it can take 30 minutes for more for ACM to validate your certificate).
+5) Once that new certificate is validated, go to the old CloudFront distribution and remove the CNAME associated with it.
+6) Work with the network team to complete the ENG task you created.
+7) Run `terraform apply` again. This will finish setting up CloudFront and your other resources.
+8) Trigger your CodePipeline so it builds your project, then you should be good to go.
 
 ### Using a new domain name.
 
