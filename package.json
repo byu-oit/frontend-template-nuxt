@@ -59,7 +59,7 @@
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "nuxt-property-decorator": "^2.5.0",
-    "prettier": "^1.16.4",
+    "prettier": "^1.19.1",
     "swagger-typescript-codegen": "^3.0.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2",
