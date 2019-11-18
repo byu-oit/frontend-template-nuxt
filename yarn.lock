@@ -11314,10 +11314,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swagger-typescript-codegen@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/swagger-typescript-codegen/-/swagger-typescript-codegen-3.0.1.tgz#0991b99acdf87764d178b41b946f0520a9ba1433"
-  integrity sha512-mg+5iB9ieM/WQGjjFRLhHxiRUNR427IUzsTnC5GsK5mBV3D4nwAO5EkhK11a75pVTPBtuGRlGViSoUIsmpUKxA==
+swagger-typescript-codegen@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/swagger-typescript-codegen/-/swagger-typescript-codegen-3.0.2.tgz#a1093d8a058aac57542dce1615c4d18b044b8ce8"
+  integrity sha512-kJsCPk43lb1Khqme0wYLGPo79s/PRx5xcpBRtyKSykvTdL7+a2yYeCLf6U8ILXtUIiwGRQI4XnYWW7/UdFtsMg==
   dependencies:
     commander "^2.19.0"
     js-beautify "^1.8.9"
