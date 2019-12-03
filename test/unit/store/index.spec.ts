@@ -47,19 +47,19 @@ describe('store/index', () => {
 
   test('mutations/authenticate', () => {
     expect(store.state.user).toEqual({})
-    expect(store.state.username).toEqual('')
+    expect(store.getters.username).toEqual('')
 
     store.commit('authenticate', dummyUser)
 
     expect(store.state.user).toEqual(dummyUser)
-    expect(store.state.username).toEqual(dummyUser.name!.displayName)
+    expect(store.getters.username).toEqual(dummyUser.name!.displayName)
   })
 
   test('mutations/authenticate without username', () => {
     store.commit('authenticate', namelessUser)
 
     expect(store.state.user).toEqual(namelessUser)
-    expect(store.state.username).toEqual('')
+    expect(store.getters.username).toEqual('')
   })
 
   test('mutations/addNetworkError', () => {
@@ -100,7 +100,7 @@ describe('store/index', () => {
 
     expect(store.state.authenticated).toBe(true)
     expect(store.state.user).toEqual(dummyUser)
-    expect(store.state.username).toEqual(dummyUser.name!.displayName)
+    expect(store.getters.username).toEqual(dummyUser.name!.displayName)
   })
 
   test('actions/clearNetworkErrors', async () => {

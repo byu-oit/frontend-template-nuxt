@@ -1,16 +1,19 @@
-import { ActionTree, MutationTree } from 'vuex'
+import { ActionTree, GetterTree, MutationTree } from 'vuex'
 import { get } from 'lodash'
 import { RootState, User } from '~/types'
 
 export const state = (): RootState => ({
   token: '',
-  username: '',
   manualRefreshRequired: false,
   refreshBecausePostFailed: false,
   authenticated: false,
   user: {},
   networkErrors: []
 })
+
+export const getters: GetterTree<RootState, RootState> = {
+  username: state => (state.user && state.user.name && (state.user.name.displayName || state.user.name.givenName)) || ''
+}
 
 export const mutations: MutationTree<RootState> = {
   setToken(state: RootState, token: string) {
@@ -23,9 +26,6 @@ export const mutations: MutationTree<RootState> = {
   authenticate(state, user: User) {
     state.authenticated = true
     state.user = user
-    if (user.name !== undefined) {
-      state.username = user.name.displayName
-    }
   },
   addNetworkError(state, error: any) {
     error = error || {}

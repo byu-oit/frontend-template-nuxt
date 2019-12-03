@@ -13,7 +13,7 @@ Vue.use(Vuetify)
 const state = indexState()
 const vuetify = new Vuetify({})
 state.authenticated = true
-const $store = new Store({ state })
+const $store = new Store({ state, getters: { username: 'Dummy User' } })
 const mocks = { $store, $nuxt: { $route: { path: '/' } } }
 
 // Need to test different initial conditions in some tests, so
@@ -67,10 +67,7 @@ describe('layouts/default', () => {
     expect(dialog.html()).not.toContain('display: none')
   })
 
-  test('username displayed', async () => {
-    $store.state.username = 'Dummy User'
-    await wrapper.vm.$nextTick()
-
+  test('username displayed', () => {
     expect(wrapper.html()).toContain('Dummy User')
   })
 })
