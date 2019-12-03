@@ -5,7 +5,10 @@
   <div v-else class="containing-element">
     <v-app>
       <byu-header home-url="https://vote.byu.edu">
-        <span slot="site-title">Frontend Template</span>
+        <span slot="site-title">
+          Frontend Template
+          <span v-if="isSandbox" class="sandbox-notification">DEV</span>
+        </span>
         <byu-user-info slot="user">
           <a slot="login" href="#login">Sign In</a>
           <a slot="logout" href="//api.byu.edu/logout">Sign Out</a>
@@ -88,6 +91,14 @@ import * as authn from '@byuweb/browser-oauth'
 export default class DefaultLayout extends Vue {
   @Mutation clearManualRefresh!: () => void
 
+  get isSandbox() {
+    return (
+      this.$store.state.user &&
+      this.$store.state.user.rawUserInfo &&
+      this.$store.state.user.rawUserInfo['http://wso2.org/claims/keytype'] === 'SANDBOX'
+    )
+  }
+
   get username() {
     return this.$store.state.username
   }
@@ -98,3 +109,13 @@ export default class DefaultLayout extends Vue {
   }
 }
 </script>
+
+<style lang="sass">
+.sandbox-notification
+  font-weight: bold
+  background-color: white
+  color: rgb(0, 46, 93)
+  padding: 5px 10px
+  margin-left: 0.5em
+  border-radius: 3px
+</style>
