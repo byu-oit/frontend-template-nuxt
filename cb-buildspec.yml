@@ -8,25 +8,27 @@ phases:
   install:
     runtime-versions:
       nodejs: 10
+    commands:
+      - npm i -g yarn
   pre_build:
     commands:
-      - echo Running npm install.
-      - npm install
+      - echo Running yarn install.
+      - yarn install
   build:
     commands:
       # Run tests
       - echo Running tests
-      - npm run test
+      - yarn test --coverage
       # Run codecov
       - curl -s https://codecov.io/bash > .codecov
       - chmod +x .codecov
       - ./.codecov
       # Run linter
       - echo Running linter
-      - npm run lint
+      - yarn lint
       # Attempt build
       - echo Attempting build
-      - npm run build
+      - yarn build
   post_build:
     commands:
       - echo Build completed
