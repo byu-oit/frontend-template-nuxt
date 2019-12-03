@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$store.state.authenticated">
+  <div v-if="!authenticated">
     Logging in...
   </div>
   <div v-else class="containing-element">
@@ -16,29 +16,29 @@
         </byu-user-info>
       </byu-header>
       <v-dialog
-        :value="$store.state.networkErrors.length"
+        :value="networkErrors.length"
         content-class="dialog-auto-width"
         class="network-errors-dialog"
-        @input="v => v || $store.dispatch('clearNetworkErrors')"
+        @input="v => v || clearNetworkErrors()"
       >
         <v-card>
           <v-card-title class="headline error white--text">
-            Error<span v-if="$store.state.networkErrors.length > 1">s</span>
+            Error<span v-if="networkErrors.length > 1">s</span>
           </v-card-title>
           <v-card-text>
-            <div v-if="$store.state.networkErrors.length == 1" id="single-network-error">
-              {{ $store.state.networkErrors[0] }}
+            <div v-if="networkErrors.length == 1" id="single-network-error">
+              {{ networkErrors[0] }}
             </div>
             <div v-else>
               <ul>
-                <li v-for="(msg, index) in $store.state.networkErrors" :key="index">
+                <li v-for="(msg, index) in networkErrors" :key="index">
                   {{ msg }}
                 </li>
               </ul>
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" @click.stop="$store.dispatch('clearNetworkErrors')">
+            <v-btn color="primary" @click.stop="clearNetworkErrors">
               Close
             </v-btn>
           </v-card-actions>
@@ -46,11 +46,11 @@
       </v-dialog>
 
       <v-dialog
-        :value="$store.state.manualRefreshRequired"
+        :value="manualRefreshRequired"
         content-class="dialog-auto-width"
         persistent
         class="authentication-dialog"
-        @input="v => v || $store.commit('clearManualRefresh')"
+        @input="v => v || clearManualRefresh()"
       >
         <v-card>
           <v-card-title class="headline warning white--text">
@@ -61,7 +61,7 @@
             <br />
             Click this "Re-authenticate" button. You will log in through a separate tab and then immediately return to
             this page.
-            <div v-if="$store.state.refreshBecausePostFailed">
+            <div v-if="refreshBecausePostFailed">
               <br />
               If you were in the middle of saving data, you may have to click "Save" again.
             </div>
@@ -84,23 +84,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mutation } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, State, Vue } from 'nuxt-property-decorator'
 import * as authn from '@byuweb/browser-oauth'
+import { User } from '~/types'
 
 @Component
 export default class DefaultLayout extends Vue {
+  @State authenticated!: boolean
+  @State manualRefreshRequired!: boolean
+  @State networkErrors!: string[]
+  @State refreshBecausePostFailed!: boolean
+  @State user!: User
+  @Action clearNetworkErrors!: () => void
   @Mutation clearManualRefresh!: () => void
+  @Getter username!: string
 
   get isSandbox() {
-    return (
-      this.$store.state.user &&
-      this.$store.state.user.rawUserInfo &&
-      this.$store.state.user.rawUserInfo['http://wso2.org/claims/keytype'] === 'SANDBOX'
-    )
-  }
-
-  get username() {
-    return this.$store.state.username
+    return this.user && this.user.rawUserInfo && this.user.rawUserInfo['http://wso2.org/claims/keytype'] === 'SANDBOX'
   }
 
   popupAuth() {
