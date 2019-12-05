@@ -1,6 +1,13 @@
 import * as authn from '@byuweb/browser-oauth'
 
 export default context => {
+  import(/* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js').then(
+    implicit =>
+      fetch(`${context.base}config.json`)
+        .then(response => response.json())
+        .then(config => implicit.configure(config))
+  )
+
   // External library, so we cannot avoid "new" constructor
   // eslint-disable-next-line no-new
   new authn.AuthenticationObserver(({ state, token, user }) => {
