@@ -7,6 +7,4 @@ variable "repo-name" {}
 variable "branch" {}
 variable "index-doc" {}
 variable "public-dir" {}
-variable "account-cert-arn" {}
-variable "account-r53-zone-id" {}
 variable "price-class" {}
