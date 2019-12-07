@@ -76,7 +76,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = var.url == "" ? var.account-cert-arn : aws_acm_certificate.cert[0].arn
+    acm_certificate_arn      = var.url == "" ? data.aws_acm_certificate.nva_account_cert.arn : aws_acm_certificate.cert[0].arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
@@ -87,7 +87,7 @@ resource "aws_route53_record" "alias-a" {
 
   name    = "${var.app-name}.${data.aws_iam_account_alias.current.account_alias}.amazon.byu.edu"
   type    = "A"
-  zone_id = var.account-r53-zone-id
+  zone_id = data.aws_route53_zone.account_hosted_zone.id
 
   alias {
     evaluate_target_health = false
@@ -101,7 +101,7 @@ resource "aws_route53_record" "alias-4a" {
 
   name    = "${var.app-name}.${data.aws_iam_account_alias.current.account_alias}.amazon.byu.edu"
   type    = "AAAA"
-  zone_id = var.account-r53-zone-id
+  zone_id = data.aws_route53_zone.account_hosted_zone.id
 
   alias {
     evaluate_target_health = false
