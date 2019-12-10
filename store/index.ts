@@ -12,7 +12,7 @@ export const state = (): RootState => ({
 })
 
 export const getters: GetterTree<RootState, RootState> = {
-  username: state => (state.user && state.user.name && (state.user.name.displayName || state.user.name.givenName)) || ''
+  username: state => state.user?.name?.displayName || state.user?.name?.givenName || ''
 }
 
 export const mutations: MutationTree<RootState> = {

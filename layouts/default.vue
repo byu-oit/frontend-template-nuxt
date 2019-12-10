@@ -100,7 +100,7 @@ export default class DefaultLayout extends Vue {
   @Getter username!: string
 
   get isSandbox() {
-    return this.user && this.user.rawUserInfo && this.user.rawUserInfo['http://wso2.org/claims/keytype'] === 'SANDBOX'
+    return this.user?.rawUserInfo?.['http://wso2.org/claims/keytype'] === 'SANDBOX'
   }
 
   popupAuth() {
