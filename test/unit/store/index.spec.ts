@@ -62,33 +62,6 @@ describe('store/index', () => {
     expect(store.getters.username).toEqual('')
   })
 
-  test('mutations/addNetworkError', () => {
-    expect(store.state.networkErrors).toEqual([])
-
-    store.commit('addNetworkError')
-
-    expect(store.state.networkErrors).toEqual(['Unknown Error'])
-
-    store.commit('addNetworkError', {
-      response: { data: { readable_message: 'Testing Message' } }
-    })
-
-    expect(store.state.networkErrors.length).toBe(2)
-    expect(store.state.networkErrors[1]).toEqual('Testing Message')
-
-    store.commit('addNetworkError')
-
-    // Do not duplicate existing "Unknown Error" message
-    expect(store.state.networkErrors.length).toBe(2)
-  })
-
-  test('mutations/clearNetworkErrors', () => {
-    store.commit('addNetworkError')
-    store.commit('clearNetworkErrors')
-
-    expect(store.state.networkErrors).toEqual([])
-  })
-
   test('mutations/clearManualRefresh', () => {
     store.commit('clearManualRefresh')
 
@@ -101,11 +74,5 @@ describe('store/index', () => {
     expect(store.state.authenticated).toBe(true)
     expect(store.state.user).toEqual(dummyUser)
     expect(store.getters.username).toEqual(dummyUser.name!.displayName)
-  })
-
-  test('actions/clearNetworkErrors', async () => {
-    await store.dispatch('clearNetworkErrors')
-
-    expect(store.state.networkErrors).toEqual([])
   })
 })

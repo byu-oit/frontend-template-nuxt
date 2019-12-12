@@ -61,7 +61,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'vuetify-dialog/nuxt'
   ],
   /*
    ** Axios module configuration

@@ -15,35 +15,6 @@
           <span slot="user-name">{{ username }}</span>
         </byu-user-info>
       </byu-header>
-      <v-dialog
-        :value="networkErrors.length"
-        content-class="dialog-auto-width"
-        class="network-errors-dialog"
-        @input="v => v || clearNetworkErrors()"
-      >
-        <v-card>
-          <v-card-title class="headline error white--text">
-            Error<span v-if="networkErrors.length > 1">s</span>
-          </v-card-title>
-          <v-card-text>
-            <div v-if="networkErrors.length == 1" id="single-network-error">
-              {{ networkErrors[0] }}
-            </div>
-            <div v-else>
-              <ul>
-                <li v-for="(msg, index) in networkErrors" :key="index">
-                  {{ msg }}
-                </li>
-              </ul>
-            </div>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" @click.stop="clearNetworkErrors">
-              Close
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
 
       <v-dialog
         :value="manualRefreshRequired"
@@ -84,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { Action, Component, Getter, Mutation, State, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, State, Vue } from 'nuxt-property-decorator'
 import * as authn from '@byuweb/browser-oauth'
 import { User } from '~/types'
 
@@ -92,10 +63,8 @@ import { User } from '~/types'
 export default class DefaultLayout extends Vue {
   @State authenticated!: boolean
   @State manualRefreshRequired!: boolean
-  @State networkErrors!: string[]
   @State refreshBecausePostFailed!: boolean
   @State user!: User
-  @Action clearNetworkErrors!: () => void
   @Mutation clearManualRefresh!: () => void
   @Getter username!: string
 
