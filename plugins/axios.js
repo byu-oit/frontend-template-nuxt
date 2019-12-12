@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { get } from 'lodash'
+import AuthRefreshRequired from '~/components/network/AuthRefreshRequired'
 
 export default function(context) {
+  context.$dialog.component('authRefreshRequired', AuthRefreshRequired)
+
   context.$axios.onResponseError(error => {
     if (axios.isCancel(error)) {
       // Explicit cancellation, so do not show "error" message
@@ -11,7 +14,8 @@ export default function(context) {
       // WSO2 token expired (or otherwise invalidated)
       // Auto-refresh should happen in iframe background in ./implicit-grant.js
       // If that fails, then we can't auto-refresh, so...
-      context.store.commit('needManualRefresh', error.config.method !== 'get')
+      const failDuringPost = error.config.method !== 'get'
+      context.$dialog.authRefreshRequired({ failDuringPost, persistent: true })
       return false
     }
 

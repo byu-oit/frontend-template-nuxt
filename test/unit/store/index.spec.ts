@@ -35,16 +35,6 @@ describe('store/index', () => {
     expect(store.state.token).toEqual('foo')
   })
 
-  test('mutations/needManualRefresh', () => {
-    expect(store.state.manualRefreshRequired).toBe(false)
-    expect(store.state.refreshBecausePostFailed).toBe(false)
-
-    store.commit('needManualRefresh', true)
-
-    expect(store.state.manualRefreshRequired).toBe(true)
-    expect(store.state.refreshBecausePostFailed).toBe(true)
-  })
-
   test('mutations/authenticate', () => {
     expect(store.state.user).toEqual({})
     expect(store.getters.username).toEqual('')
@@ -60,12 +50,6 @@ describe('store/index', () => {
 
     expect(store.state.user).toEqual(namelessUser)
     expect(store.getters.username).toEqual('')
-  })
-
-  test('mutations/clearManualRefresh', () => {
-    store.commit('clearManualRefresh')
-
-    expect(store.state.manualRefreshRequired).toBe(false)
   })
 
   test('actions/authenticate', async () => {
