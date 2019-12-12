@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { get } from 'lodash'
 
 export default function(context) {
   context.$axios.onResponseError(error => {
@@ -13,6 +14,14 @@ export default function(context) {
       context.store.commit('needManualRefresh', error.config.method !== 'get')
       return false
     }
-    context.store.commit('addNetworkError', error)
+
+    const text =
+      get(error, 'response.data.readable_message') ||
+      get(error, 'response.data.metadata.validation_response.message') ||
+      get(error, 'response.data.ResolveIdentityService.errors.0.message') ||
+      error.message ||
+      'Unknown Error'
+
+    context.$dialog.error({ title: 'Error', icon: false, text })
   })
 }

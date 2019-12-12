@@ -56,17 +56,6 @@ describe('layouts/default', () => {
     expect($store.commit).toHaveBeenCalledWith('clearManualRefresh')
   })
 
-  test('network error', async () => {
-    const dialog = wrapper.find('.network-errors-dialog')
-
-    expect(dialog.html()).toContain('display: none')
-
-    $store.state.networkErrors.push('Network error occurred!')
-    await wrapper.vm.$nextTick()
-
-    expect(dialog.html()).not.toContain('display: none')
-  })
-
   test('username displayed', () => {
     expect(wrapper.html()).toContain('Dummy User')
   })

@@ -42,6 +42,7 @@
           <v-btn color="primary" text nuxt to="/inspire">
             Continue
           </v-btn>
+          <v-btn @click.stop="breakIt">BAD API Call</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -59,5 +60,9 @@ import VuetifyLogo from '~/components/VuetifyLogo.vue'
     VuetifyLogo
   }
 })
-export default class IndexPage extends Vue {}
+export default class IndexPage extends Vue {
+  breakIt() {
+    this.$axios.$get('https://api.byu.edu/byuapi/identities/v2/123456789')
+  }
+}
 </script>
