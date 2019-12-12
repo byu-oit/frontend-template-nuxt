@@ -27,5 +27,5 @@ module.exports = {
       babelConfig: true
     }
   },
-  setupFiles: ['<rootDir>/test/setup.js']
+  setupFiles: ['<rootDir>/test/setup.ts']
 }

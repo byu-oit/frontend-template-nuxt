@@ -1,6 +1,7 @@
 import * as authn from '@byuweb/browser-oauth'
 
 export default context => {
+  // @ts-ignore: Typescript doesn't recognize external import files
   import(/* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js').then(
     implicit =>
       fetch(`${context.base}config.json`)

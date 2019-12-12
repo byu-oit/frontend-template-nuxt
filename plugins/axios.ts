@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { get } from 'lodash'
-import AuthRefreshRequired from '~/components/network/AuthRefreshRequired'
+import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
 export default function(context) {
   context.$dialog.component('authRefreshRequired', AuthRefreshRequired)
