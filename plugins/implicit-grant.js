@@ -17,7 +17,7 @@ export default context => {
         authn.login()
         break
       case authn.STATE_ERROR:
-        context.store.commit('needManualRefresh')
+        context.$dialog.authRefreshRequired({ persistent: true })
         break
       case authn.STATE_AUTHENTICATED: {
         context.$axios.setToken(token.authorizationHeader)

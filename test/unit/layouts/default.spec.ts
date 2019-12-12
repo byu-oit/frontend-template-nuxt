@@ -1,6 +1,5 @@
 import { createLocalVue, mount } from '@vue/test-utils'
 import { Store } from 'vuex-mock-store'
-import * as authn from '@byuweb/browser-oauth'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { state as indexState } from '~/store/index'
@@ -39,21 +38,6 @@ describe('layouts/default', () => {
 
   test('is logged in', () => {
     expect(wrapper.html()).not.toContain('Logging in...')
-  })
-
-  test('re-auth popup', async () => {
-    const dialog = wrapper.find('.authentication-dialog')
-
-    expect(dialog.html()).toContain('display: none')
-    $store.state.manualRefreshRequired = true
-    await dialog.vm.$nextTick()
-    expect(dialog.html()).not.toContain('display: none')
-
-    const vm: any = wrapper.vm
-    vm.popupAuth()
-
-    expect(authn.refresh).toHaveBeenCalledWith('popup')
-    expect($store.commit).toHaveBeenCalledWith('clearManualRefresh')
   })
 
   test('username displayed', () => {
