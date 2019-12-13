@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { get } from 'lodash'
+import { Context } from '@nuxt/types'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
-export default function(context) {
+export default (context: Context) => {
   context.$dialog.component('authRefreshRequired', AuthRefreshRequired)
 
   context.$axios.onResponseError(error => {
@@ -15,7 +16,7 @@ export default function(context) {
       // Auto-refresh should happen in iframe background in ./implicit-grant.js
       // If that fails, then we can't auto-refresh, so...
       const failDuringPost = error.config.method !== 'get'
-      context.$dialog.authRefreshRequired({ failDuringPost, persistent: true })
+      context.$dialog.show(AuthRefreshRequired, { failDuringPost, persistent: true })
       return false
     }
 
@@ -26,6 +27,7 @@ export default function(context) {
       error.message ||
       'Unknown Error'
 
+    // @ts-ignore: "icon" has wrong type definition in source file (should be "string | boolean" instead of just "string")
     context.$dialog.error({ title: 'Error', icon: false, text })
   })
 }

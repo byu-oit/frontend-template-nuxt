@@ -1,6 +1,8 @@
 import * as authn from '@byuweb/browser-oauth'
+import { Context } from '@nuxt/types'
+import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
-export default context => {
+export default (context: Context) => {
   // @ts-ignore: Typescript doesn't recognize external import files
   import(/* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js').then(
     implicit =>
@@ -18,7 +20,7 @@ export default context => {
         authn.login()
         break
       case authn.STATE_ERROR:
-        context.$dialog.authRefreshRequired({ persistent: true })
+        context.$dialog.show(AuthRefreshRequired, { persistent: true })
         break
       case authn.STATE_AUTHENTICATED: {
         context.$axios.setToken(token.authorizationHeader)
