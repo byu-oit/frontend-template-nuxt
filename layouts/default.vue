@@ -1,30 +1,30 @@
 <template>
-  <div v-if="!authenticated">
-    Logging in...
-  </div>
-  <div v-else class="containing-element">
-    <v-app>
-      <byu-header home-url="https://vote.byu.edu">
-        <span slot="site-title">
-          Frontend Template
-          <span v-if="isSandbox" class="sandbox-notification">DEV</span>
-        </span>
-        <byu-user-info slot="user">
-          <a slot="login" href="#login">Sign In</a>
-          <a slot="logout" href="//api.byu.edu/logout">Sign Out</a>
-          <span slot="user-name">{{ username }}</span>
-        </byu-user-info>
-      </byu-header>
+  <v-app>
+    <byu-header>
+      <span slot="site-title">
+        Frontend Template
+        <span v-if="isSandbox" class="sandbox-notification">DEV</span>
+      </span>
+      <byu-user-info v-if="authenticated" slot="user">
+        <a slot="logout" href="//api.byu.edu/logout">Sign Out</a>
+        <span slot="user-name">{{ username }}</span>
+      </byu-user-info>
+    </byu-header>
 
-      <v-content>
-        <v-container>
-          <nuxt />
-        </v-container>
-      </v-content>
+    <v-content>
+      <v-container>
+        <nuxt v-if="authenticated" />
+        <v-row v-else align="center" justify="center">
+          <h1>
+            Loading
+            <v-progress-circular indeterminate />
+          </h1>
+        </v-row>
+      </v-container>
+    </v-content>
 
-      <byu-footer />
-    </v-app>
-  </div>
+    <byu-footer />
+  </v-app>
 </template>
 
 <script lang="ts">
