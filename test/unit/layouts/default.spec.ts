@@ -33,7 +33,7 @@ describe('layouts/default', () => {
     $store.state.authenticated = false
     const wrapper = wrap()
     expect(wrapper.isVueInstance()).toBeTruthy()
-    expect(wrapper.html()).toContain('Logging in...')
+    expect(wrapper.html()).toContain('Loading')
   })
 
   test('is logged in', () => {
