@@ -15,7 +15,6 @@ describe('layouts/error', () => {
       propsData: { error: { message: 'An error occurred' } },
       stubs: ['nuxt-link']
     })
-
     expect(wrapper.isVueInstance()).toBeTruthy()
     expect(wrapper.html()).toContain('An error occurred')
   })
