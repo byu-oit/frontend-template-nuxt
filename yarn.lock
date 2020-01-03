@@ -11347,10 +11347,10 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
-vuetify-dialog@^2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/vuetify-dialog/-/vuetify-dialog-2.0.0-rc.1.tgz#a4f1d337a81034b7f94e410b7c3e30029af47933"
-  integrity sha512-sYEL5Xt4+ULqhEl0PpahtF1KRUd6MaQmm2/iuL7RYRRvuun8oqnumGSuNx1F2LEltjEeTKhUFaY6Uk3bdO90xA==
+vuetify-dialog@^2.0.0-rc.2:
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/vuetify-dialog/-/vuetify-dialog-2.0.0-rc.2.tgz#b27d6aa932a6d8d7862769a59e0e99e527e5f542"
+  integrity sha512-ltJPWqdb0cpKOdudiI6rTbfrC/vMRJ2rOuelgReUZiRoe1C3W0zTs45Mfgn3ZTKujrV4y5YqAGUUhiSjG+7/SA==
 
 vuetify-loader@^1.4.3:
   version "1.4.3"
