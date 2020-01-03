@@ -17,6 +17,14 @@ phases:
       - yarn install --unsafe-perm
   build:
     commands:
+      # Run tests
+      - echo Running tests
+      - yarn test
+      # Run linter
+      - echo Running linter
+      - yarn lint
+      # Build
+      - echo Building
       - 'echo "{\"autoRefreshOnTimeout\": true, \"clientId\": \"${OAUTH_CLIENT_ID}\", \"callbackUrl\": \"${OAUTH_CALLBACK_URL}\"}" > static/config.json'
       - yarn build
   post_build:
