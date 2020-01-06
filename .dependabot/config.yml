@@ -8,4 +8,4 @@ update_configs:
       - blakemorgan
     automerged_updates:
       - match:
-          update_type: "semver:patch"
+          update_type: "semver:minor"
