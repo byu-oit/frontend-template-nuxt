@@ -92,6 +92,9 @@ export default {
    ** Build configuration
    */
   build: {
+    babel: {
+      plugins: ['@babel/plugin-proposal-optional-chaining', '@babel/plugin-proposal-nullish-coalescing-operator']
+    },
     /*
      ** You can extend webpack config here
      */
