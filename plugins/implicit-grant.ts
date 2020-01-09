@@ -1,10 +1,14 @@
 import * as authn from '@byuweb/browser-oauth'
+import dynamicImportPolyfill from 'dynamic-import-polyfill'
 import { Context } from '@nuxt/types'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
+declare function __import__(url: string): Promise<any>
+
 export default (context: Context) => {
-  // @ts-ignore: Typescript doesn't recognize external import files
-  import(/* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js').then(
+  // TODO: If Edge ever natively supports dynamic imports (i.e. "import(xxx)" returns a Promise), then use native
+  dynamicImportPolyfill.initialize()
+  __import__(/* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js').then(
     implicit =>
       fetch(`${context.base}config.json`)
         .then(response => response.json())
