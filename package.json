@@ -17,7 +17,7 @@
   "dependencies": {
     "@byuweb/browser-oauth": "^1.0.2",
     "@nuxt/typescript-runtime": "^0.3.7",
-    "@nuxtjs/axios": "^5.9.2",
+    "@nuxtjs/axios": "^5.9.3",
     "@types/superagent": "^4.1.4",
     "babel-polyfill": "^6.26.0",
     "dynamic-import-polyfill": "^0.1.1",
