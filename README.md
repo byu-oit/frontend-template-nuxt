@@ -62,7 +62,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 
 ## Pipeline Setup
 
-This project includes Terraform files so you can have a CodePipeline triggered by a push to your GitHub repo which will build your projects and deploy it to a public S3 bucket with a URL in the format of `APP-NAME.AWS-ACCOUNT-NAME.amazon.byu.edu` so you can see it deployed right away. 
+This project includes Terraform files so you can create a site hosted in S3 and fronted with HTTPS by a CloudFront distribution with a custom URL. 
 
 Run the following steps in the `terraform/dev` or `terraform/prd` folder depending on the environment you want to deploy to.
 
@@ -72,7 +72,7 @@ Run the following steps in the `terraform/dev` or `terraform/prd` folder dependi
 4) Run `terraform init` so initialize Terraform (you only need ot do this once).
 5) Run `terraform apply` to create the resources in AWS.
 
-**Sometimes `terraform apply` fails. It gives good error messages, but before trying to fix the error, just try running `terraform apply` again. That usually fixes the problem.**
+**Note**: Because DNS has to be manually setup by the network team, you will have to run `terraform apply` twice. The first time it will create the Route 53 hosted zone, certificate in ACM, and S3 bucket for deployment. Then it will fail because AWS can't validate the certificate (you'll get an error message similar to the image below). You need to contact the network team to setup a record in QIP for your desired subdomain name pointing to the name servers of the hosted zone created by Terraform (you can find that information in the Route 53 console). After AWS has validated the certificate (you can find that information in the ACM console), run `terraform apply` again and it should succeed.
 
 ### Infinite CloudFront Distribution Deploy
 
