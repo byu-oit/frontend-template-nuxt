@@ -1,5 +1,5 @@
 repo_name = "REPO_NAME"
-url       = "APP_NAME.byu.edu"
+url       = "APP_NAME-dev.byu.edu"
 
 // Uncomment these to change the default value
 // region               = "us-west-2"
