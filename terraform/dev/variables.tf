@@ -1,10 +1,18 @@
-variable "region" {}
-variable "app-name" {}
-variable "url" {
-  default = ""
+variable "region" {
+  default = "us-west-2"
 }
-variable "repo-name" {}
-variable "branch" {}
-variable "index-doc" {}
-variable "public-dir" {}
-variable "price-class" {}
+
+variable "env" {
+  default = "dev"
+}
+
+variable "data_sensitivity_tag" {
+  default = "confidential"
+}
+
+variable "branch" {
+  default = "dev"
+}
+
+variable "repo_name" {}
+variable "url" {}

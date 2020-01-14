@@ -3,26 +3,33 @@ provider "aws" {
   region  = var.region
 }
 
-provider "aws" {
-  alias  = "aws_n_va"
-  region = "us-east-1"
+module "acs" {
+  source = "git@github.com:byu-oit/terraform-aws-acs-info.git?ref=v1.2.0"
+  env    = var.env
 }
 
-data "aws_caller_identity" "current" {}
-data "aws_iam_account_alias" "current" {}
-data "aws_ssm_parameter" "github-token" {
-  name = "byu-oit-bot-github-token"
+module "s3_site" {
+  source    = "git@github.com:byu-oit/terraform-aws-s3staticsite?ref=v1.0.0"
+  env_tag   = var.env
+  repo_name = var.repo_name
+  branch    = "dev"
+  site_url  = var.url
 }
-data "aws_ssm_parameter" "s3-cloudfront-connection" {
-  name = "/${var.app-name}/s3-cloudfront-connection"
-}
-data "aws_iam_role" "power-builder" {
-  name = "PowerBuilder"
-}
-data "aws_acm_certificate" "nva_account_cert" {
-  provider = aws.aws_n_va
-  domain = "${data.aws_iam_account_alias.current.account_alias}.amazon.byu.edu"
-}
-data "aws_route53_zone" "account_hosted_zone" {
-  name = "${data.aws_iam_account_alias.current.account_alias}.amazon.byu.edu."
+
+module "codepipeline" {
+  source          = "git@github.com:byu-oit/terraform-aws-codepipeline?ref=v1.2.0"
+  app_name        = var.repo_name
+  repo_name       = var.repo_name
+  branch          = var.branch
+  github_token    = module.acs.github_token
+  deploy_provider = "S3"
+  deploy_configuration = {
+    BucketName = module.s3_site.site_bucket.bucket
+    Extract    = true
+  }
+  account_env                   = var.env
+  env_tag                       = var.env
+  role_permissions_boundary_arn = module.acs.role_permissions_boundary.arn
+  power_builder_role_arn        = module.acs.power_builder_role.arn
+  data_sensitivity_tag          = var.data_sensitivity_tag
 }
