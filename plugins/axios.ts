@@ -3,6 +3,8 @@ import { get } from 'lodash'
 import { Context } from '@nuxt/types'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
+let refreshDialog: any = null
+
 export default (context: Context) => {
   context.$dialog.component('authRefreshRequired', AuthRefreshRequired)
 
@@ -16,8 +18,16 @@ export default (context: Context) => {
       // We don't bother parsing the full XML doc, just check if that chunk appears in the raw XML string
       // Auto-refresh should happen in iframe background in ./implicit-grant.js
       // If that fails, then we can't auto-refresh, so...
-      const failDuringPost = error.config.method !== 'get'
-      context.$dialog.show(AuthRefreshRequired, { failDuringPost, persistent: true })
+      if (!refreshDialog || !refreshDialog?.showed) {
+        // placeholder until actual Dialog appears
+        refreshDialog = { showed: true }
+
+        const failDuringPost = error.config.method !== 'get'
+        context.$dialog
+          .show(AuthRefreshRequired, { failDuringPost, persistent: true })
+          // @ts-ignore: Third-party Typescript definition file is not correct: "show" returns a Promise
+          .then(dialog => (refreshDialog = dialog))
+      }
       return false
     }
 
