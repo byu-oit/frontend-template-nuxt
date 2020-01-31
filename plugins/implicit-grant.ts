@@ -31,7 +31,7 @@ export default (context: Context) => {
         context.store.dispatch('authenticate', user)
         const prePath = window.sessionStorage.getItem('sitePreauthPath')
         window.sessionStorage.removeItem('sitePreauthPath')
-        if (prePath) {
+        if (prePath && prePath !== context.route.path) {
           context.redirect(prePath)
         }
       }
