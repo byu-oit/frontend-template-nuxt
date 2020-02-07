@@ -72,7 +72,8 @@ Run the following steps in the `terraform/dev` or `terraform/prd` folder dependi
 4) Run `terraform init` so initialize Terraform (you only need ot do this once).
 5) Run `terraform apply` to create the resources in AWS.
 
-**Note**: Because DNS has to be manually setup by the network team, you will have to run `terraform apply` twice. The first time it will create the Route 53 hosted zone, certificate in ACM, and S3 bucket for deployment. Then it will fail because AWS can't validate the certificate (you'll get an error message similar to the image below). You need to contact the network team to setup a record in QIP for your desired subdomain name pointing to the name servers of the hosted zone created by Terraform (you can find that information in the Route 53 console). After AWS has validated the certificate (you can find that information in the ACM console), run `terraform apply` again and it should succeed.
+**Note**: Because DNS has to be manually setup by the network team, you will have to run `terraform apply` twice. The first time it will create the Route 53 hosted zone, certificate in ACM, and S3 bucket for deployment. Then it will fail because AWS can't validate the certificate (you'll get an error message similar to the image below). You need to contact the network team to setup a record in QIP for your desired subdomain name pointing to the name servers of the hosted zone created by Terraform (you can find that information in the Route 53 console). After AWS has validated the certificate, run `terraform apply` again and it should succeed.
+The generated certificate in AWS can be found in Certificate Manager (ACM), but you must switch to the **us-east-1 "US East (N. Virginia)"** region to view it.
 
 ### Infinite CloudFront Distribution Deploy
 
