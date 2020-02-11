@@ -9,7 +9,7 @@ module "acs" {
 }
 
 module "s3_site" {
-  source               = "git@github.com:byu-oit/terraform-aws-s3staticsite?ref=v1.0.0"
+  source               = "git@github.com:byu-oit/terraform-aws-s3staticsite?ref=v1.2.0"
   env_tag              = var.env
   repo_name            = var.repo_name
   branch               = "dev"
