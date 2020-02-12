@@ -12,7 +12,7 @@ module "s3_site" {
   source               = "git@github.com:byu-oit/terraform-aws-s3staticsite?ref=v1.0.0"
   env_tag              = var.env
   repo_name            = var.repo_name
-  branch               = "dev"
+  branch               = var.branch
   site_url             = var.url
   data_sensitivity_tag = var.data_sensitivity_tag
 }
