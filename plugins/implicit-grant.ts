@@ -20,7 +20,7 @@ export default (context: Context) => {
   new authn.AuthenticationObserver(({ state, token, user }) => {
     switch (state) {
       case authn.STATE_UNAUTHENTICATED:
-        window.sessionStorage.setItem('sitePreauthPath', context.route.path)
+        window.sessionStorage.setItem('sitePreauthPath', context.route.fullPath)
         authn.login()
         break
       case authn.STATE_ERROR:
@@ -31,7 +31,7 @@ export default (context: Context) => {
         context.store.dispatch('authenticate', user)
         const prePath = window.sessionStorage.getItem('sitePreauthPath')
         window.sessionStorage.removeItem('sitePreauthPath')
-        if (prePath && prePath !== context.route.path) {
+        if (prePath && prePath !== context.route.fullPath) {
           context.redirect(prePath)
         }
       }
