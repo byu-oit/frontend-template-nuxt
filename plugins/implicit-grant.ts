@@ -1,6 +1,6 @@
+import { Context } from '@nuxt/types'
 import * as authn from '@byuweb/browser-oauth'
 import dynamicImportPolyfill from 'dynamic-import-polyfill'
-import { Context } from '@nuxt/types'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
 declare function __import__(url: string): Promise<any>

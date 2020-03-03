@@ -1,6 +1,6 @@
+import { Context } from '@nuxt/types'
 import axios from 'axios'
 import { get } from 'lodash'
-import { Context } from '@nuxt/types'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
 let refreshDialog: any = null
