@@ -6,6 +6,14 @@ update_configs:
     update_schedule: weekly
     default_reviewers:
       - blakemorgan
+    allowed_updates:
+      - match:
+          dependency_type: "production"
+          update_type: "security"
     automerged_updates:
       - match:
+          dependency_type: "production"
+          update_type: "security:patch"
+      - match:
+          dependency_type: "development"
           update_type: "semver:minor"
