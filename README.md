@@ -23,6 +23,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
 - Default `.repo-meta.yml` template
 - Integration with Codecov
+- Integration with AppDynamics Synthetic Monitoring
 
 ## WSO2/Codecov Setup (do this before the next section)
 
@@ -59,6 +60,16 @@ This template includes the initial setup and scaffolding you need to create a fr
 }
 
 ```
+
+## AppDynamics Setup
+
+This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
+
+1. Ask an AppDynamics admin (currently Tyler Johnson) to create an browser application in AppDynamics for synthetic monitoring.
+2. Once that application is created, login to AppDynamics and go to the User Experience tab, and select the application.
+3. In the left menu, click "Configuration" -> "Configure JavaScript Agent", and copy the app key and place it in the correct TODO in nuxt.config.ts
+
+If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics, copy that other application's app key into the commented out section in nuxt.config.ts, and uncomment that section.
 
 ## Pipeline Setup
 
