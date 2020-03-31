@@ -1,9 +1,15 @@
 const pkg = require('./package')
+require('dotenv').config()
 
 export default {
   mode: 'spa',
 
   env: {
+    oauth: {
+      autoRefreshOnTimeout: true,
+      clientId: process.env.OAUTH_CLIENT_ID,
+      callbackUrl: process.env.OAUTH_CALLBACK_URL
+    },
     appDynamicsKey: process.env.APP_DYNAMICS_KEY
   },
 
