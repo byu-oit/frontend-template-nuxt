@@ -2,6 +2,11 @@ const pkg = require('./package')
 
 export default {
   mode: 'spa',
+
+  env: {
+    appDynamicsKey: process.env.APP_DYNAMICS_KEY
+  },
+
   /*
    ** Headers of the page
    */
@@ -47,8 +52,7 @@ export default {
         rel: 'stylesheet',
         href: 'https://cdn.byu.edu/theme-fonts/1.x.x/public-sans/fonts.css'
       }
-    ],
-    __dangerouslyDisableSanitizers: ['script']
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -61,7 +65,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios', { src: '~/plugins/implicit-grant', ssr: false }, '~/plugins/byucomponents'],
+  plugins: ['~/plugins/axios', '~/plugins/implicit-grant', '~/plugins/appDynamics', '~/plugins/byucomponents'],
   /*
    ** Nuxt.js modules
    */
