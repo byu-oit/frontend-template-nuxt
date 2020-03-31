@@ -50,16 +50,12 @@ This template includes the initial setup and scaffolding you need to create a fr
 12) Update the `.repo-meta.yml` file.
 13) Add the repo key from Codecov into `cb-buildspec.yml` and then run `cbsetup` locally to create a CodeBuild project.
 14) Add the Codecov badge to the README.
-15) Create `static/config.json` with the following format:
-
-```json
-{
-  "autoRefreshOnTimeout": true,
-  "clientId": "CLIENT_ID_GOES_HERE",
-  "callbackUrl": "CALLBACK_URL_GOES_HERE"
-}
-
-```
+15) For running locally, create a file named `.env` in this project's root directory:
+    ```dotenv
+    OAUTH_CLIENT_ID=[WSO2 OAuth client ID goes here]
+    OAUTH_CALLBACK_URL=[WSO2 OAuth callback URL goes here]
+    ```
+    Alternatively, you can use your IDE to set these environment variables.
 
 ## AppDynamics Setup
 
