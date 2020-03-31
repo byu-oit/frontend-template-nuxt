@@ -5,6 +5,7 @@ env:
   parameter-store:
     OAUTH_CLIENT_ID: /APPLICATION-NAME/oauth_client_id
     OAUTH_CALLBACK_URL: /APPLICATION-NAME/callback_url
+#    APP_DYNAMICS_KEY: /APPLICATION-NAME/app_dynamics_key # Optional, uncomment this line if you have App Dynamics set up
 
 phases:
   install:
