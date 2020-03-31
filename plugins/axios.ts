@@ -3,7 +3,8 @@ import axios from 'axios'
 import { get } from 'lodash'
 import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 
-let refreshDialog: any = null
+let refreshDialogVisible = false
+const errorMessages: string[] = []
 
 export default (context: Context) => {
   context.$dialog.component('authRefreshRequired', AuthRefreshRequired)
@@ -18,15 +19,13 @@ export default (context: Context) => {
       // We don't bother parsing the full XML doc, just check if that chunk appears in the raw XML string
       // Auto-refresh should happen in iframe background in ./implicit-grant.js
       // If that fails, then we can't auto-refresh, so...
-      if (!refreshDialog || !refreshDialog?.showed) {
-        // placeholder until actual Dialog appears
-        refreshDialog = { showed: true }
-
+      if (!refreshDialogVisible) {
         const failDuringPost = error.config.method !== 'get'
+        refreshDialogVisible = true
         context.$dialog
-          .show(AuthRefreshRequired, { failDuringPost, persistent: true })
-          // @ts-ignore: Third-party Typescript definition file is not correct: "show" returns a Promise
-          .then(dialog => (refreshDialog = dialog))
+          .show(AuthRefreshRequired, { failDuringPost, persistent: true, waitForResult: true })
+          // @ts-ignore: Third-party Typescript definition file is not correct: "show" can return a Promise
+          .then(() => (refreshDialogVisible = false))
       }
       return false
     }
@@ -40,7 +39,15 @@ export default (context: Context) => {
       error.message ||
       'Unknown Error'
 
-    // @ts-ignore: "icon" has wrong type definition in source file (should be "string | boolean" instead of just "string")
-    context.$dialog.error({ title: 'Error', icon: false, text })
+    // Only pop up one copy of each error message at a time
+    if (!errorMessages.includes(text)) {
+      errorMessages.push(text)
+      context.$dialog.error({ title: 'Error', icon: false, text }).then(() => {
+        const index = errorMessages.indexOf(text)
+        if (index !== -1) {
+          errorMessages.splice(index, 1)
+        }
+      })
+    }
   })
 }
