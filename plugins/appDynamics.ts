@@ -15,7 +15,8 @@ export default (context: Context) => {
       beaconUrlHttp: 'http://pdx-col.eum-appdynamics.com',
       beaconUrlHttps: 'https://pdx-col.eum-appdynamics.com',
       useHTTPSAlways: true,
-      xd: { enable: false }
+      xd: { enable: false },
+      spa: { spa2: true }
     }
   })
 
