@@ -5,7 +5,7 @@ export default {
   mode: 'spa',
 
   env: {
-    oauth: {
+    oAuth: {
       autoRefreshOnTimeout: true,
       clientId: process.env.OAUTH_CLIENT_ID,
       callbackUrl: process.env.OAUTH_CALLBACK_URL

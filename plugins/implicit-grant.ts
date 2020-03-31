@@ -6,7 +6,7 @@ import AuthRefreshRequired from '~/components/network/AuthRefreshRequired.vue'
 declare function __import__(url: string): Promise<any>
 
 export default (context: Context) => {
-  if (!context.env.oauth?.clientId) {
+  if (!context.env.oAuth?.clientId) {
     // $dialog isn't fully configured when this code runs, so setTimeout bumps this call to the end of the event queue
     setTimeout(() =>
       context.$dialog.error({
@@ -23,7 +23,7 @@ export default (context: Context) => {
   dynamicImportPolyfill.initialize()
   __import__(
     /* webpackIgnore: true */ 'https://cdn.byu.edu/browser-oauth-implicit/latest/implicit-grant.min.js'
-  ).then(implicit => implicit.configure(context.env.oauth))
+  ).then(implicit => implicit.configure(context.env.oAuth))
 
   // External library, so we cannot avoid "new" constructor
   // eslint-disable-next-line no-new
