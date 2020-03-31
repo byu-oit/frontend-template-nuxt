@@ -18,37 +18,9 @@ export default {
     ],
     script: [
       {
-        // PRD App Dynamics Integration
         charset: 'UTF-8',
-        innerHTML:
-          'if(!window.location.hostname.includes("localhost") && !window.location.hostname.includes("-dev")) {' + // Use AppDynamics if not localhost and dev.
-          'window["adrum-start-time"] = new Date().getTime();\n' +
-          '(function(config){\n' +
-          '    config.appKey = "";\n' + // TODO: Put app key in double quotes
-          '    config.adrumExtUrlHttp = "http://cdn.appdynamics.com";\n' +
-          '    config.adrumExtUrlHttps = "https://cdn.appdynamics.com";\n' +
-          '    config.beaconUrlHttp = "http://pdx-col.eum-appdynamics.com";\n' +
-          '    config.beaconUrlHttps = "https://pdx-col.eum-appdynamics.com";\n' +
-          '    config.useHTTPSAlways = true;\n' +
-          '    config.xd = {enable : false};\n' +
-          '})(window["adrum-config"] || (window["adrum-config"] = {}));\n' +
-          '}'
+        src: './appdynamics.js'
       },
-      // { // DEV App Dynamics Integration
-      //   charset: 'UTF-8',
-      //   innerHTML: 'if(window.location.hostname.includes("-dev") && !window.location.hostname.includes("localhost")) {' +
-      //     'window["adrum-start-time"] = new Date().getTime();\n' +
-      //     '(function(config){\n' +
-      //     '    config.appKey = "";\n' + // TODO: Put app key in double quotes
-      //     '    config.adrumExtUrlHttp = "http://cdn.appdynamics.com";\n' +
-      //     '    config.adrumExtUrlHttps = "https://cdn.appdynamics.com";\n' +
-      //     '    config.beaconUrlHttp = "http://pdx-col.eum-appdynamics.com";\n' +
-      //     '    config.beaconUrlHttps = "https://pdx-col.eum-appdynamics.com";\n' +
-      //     '    config.useHTTPSAlways = true;\n' +
-      //     '    config.xd = {enable : false};\n' +
-      //     '})(window["adrum-config"] || (window["adrum-config"] = {}));\n' +
-      //     '}'
-      // },
       {
         src: '//cdn.appdynamics.com/adrum/adrum-4.5.16.2845.js'
       },
