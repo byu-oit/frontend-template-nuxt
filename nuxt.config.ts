@@ -2,6 +2,11 @@ const pkg = require('./package')
 
 export default {
   mode: 'spa',
+
+  env: {
+    appDynamicsKey: process.env.APP_DYNAMICS_KEY
+  },
+
   /*
    ** Headers of the page
    */
@@ -14,6 +19,12 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
+      }
+    ],
+    script: [
+      {
+        src: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js',
+        async: ''
       }
     ],
     link: [
@@ -34,12 +45,6 @@ export default {
         rel: 'stylesheet',
         href: 'https://cdn.byu.edu/theme-fonts/1.x.x/public-sans/fonts.css'
       }
-    ],
-    script: [
-      {
-        src: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js',
-        async: ''
-      }
     ]
   },
   /*
@@ -53,7 +58,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios', { src: '~/plugins/implicit-grant', ssr: false }, '~/plugins/byucomponents'],
+  plugins: ['~/plugins/axios', '~/plugins/implicit-grant', '~/plugins/appDynamics', '~/plugins/byucomponents'],
   /*
    ** Nuxt.js modules
    */

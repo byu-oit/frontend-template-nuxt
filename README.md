@@ -23,6 +23,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
 - Default `.repo-meta.yml` template
 - Integration with Codecov
+- Integration with AppDynamics Synthetic Monitoring
 
 ## WSO2/Codecov Setup (do this before the next section)
 
@@ -59,6 +60,22 @@ This template includes the initial setup and scaffolding you need to create a fr
 }
 
 ```
+
+## AppDynamics Setup
+
+This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
+
+1. Ask an AppDynamics admin (currently Tyler Johnson) to create a browser application in AppDynamics for synthetic monitoring.
+2. Once that application is created, login to AppDynamics, go to the User Experience tab, and select the application.
+3. In the left menu, click "Configuration" -> "Configure JavaScript Agent", and copy the app key
+4. In AWS, create the parameter store key `/APPLICATION-NAME/app_dynamics_key` with the value of the copied app key
+5. Uncomment the "APP_DYNAMICS_KEY" line in buildspec.yml
+   - NOTE: because our Dev and Prod builds use the same buildspec file and CodeBuild fails if you refer to a non-existent
+    parameter store key, you MUST create the parameter store key in BOTH environments.
+    if you're only monitoring one environment, then simply leave the value blank in the other environment.
+
+If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics.
+Use the second app key in the second environment's parameter store
 
 ## Pipeline Setup
 
