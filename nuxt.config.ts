@@ -23,13 +23,6 @@ export default {
     ],
     script: [
       {
-        charset: 'UTF-8',
-        src: './appdynamics.js'
-      },
-      {
-        src: '//cdn.appdynamics.com/adrum/adrum-4.5.16.2845.js'
-      },
-      {
         src: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.js',
         async: ''
       }
