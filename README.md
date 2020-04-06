@@ -88,6 +88,8 @@ Run the following steps in the `terraform/dev` or `terraform/prd` folder dependi
 **Note**: Because DNS has to be manually setup by the network team, you will have to run `terraform apply` twice. The first time it will create the Route 53 hosted zone, certificate in ACM, and S3 bucket for deployment. Then it will fail because AWS can't validate the certificate (you'll get an error message similar to the image below). You need to contact the network team to setup a record in QIP for your desired subdomain name pointing to the name servers of the hosted zone created by Terraform (you can find that information in the Route 53 console). After AWS has validated the certificate, run `terraform apply` again and it should succeed.
 The generated certificate in AWS can be found in Certificate Manager (ACM), but you must switch to the **us-east-1 "US East (N. Virginia)"** region to view it.
 
+Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your subdomain added. Add yourself as the technical contact, select Cname and list the NS records found in Route 53.
+
 ### Infinite CloudFront Distribution Deploy
 
 There is a known issue where Terraform may get stuck deploying CloudFront distributions for the first time (see [this issue](https://github.com/terraform-providers/terraform-provider-aws/issues/10039)). You will know this happened if you check the AWS Console and see the CloudFront distribution has status of "Deployed", but `terraform apply` is still trying to deploy the distribution. If this happens to you, stop the `terraform apply` command with Ctrl+C (if it doesn't stop, press Ctrl+C again). Then run the following command:
