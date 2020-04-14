@@ -64,17 +64,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios', '~/plugins/implicit-grant', '~/plugins/appDynamics', '~/plugins/byucomponents'],
+  plugins: [],
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources',
-    'vuetify-dialog/nuxt'
-  ],
+  modules: [],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -113,5 +107,5 @@ export default {
       }
     }
   },
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify']
+  buildModules: ['@byu-oit/nuxt-common']
 }
