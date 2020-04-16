@@ -52,8 +52,8 @@ This template includes the initial setup and scaffolding you need to create a fr
 14) Add the Codecov badge to the README.
 15) For running locally, create a file named `.env` in this project's root directory:
     ```dotenv
-    OAUTH_CLIENT_ID=[WSO2 OAuth client ID goes here]
-    OAUTH_CALLBACK_URL=[WSO2 OAuth callback URL goes here]
+    NUXT_ENV_OAUTH_CLIENT_ID=[WSO2 OAuth client ID goes here]
+    NUXT_ENV_OAUTH_CALLBACK_URL=[WSO2 OAuth callback URL goes here]
     ```
     Alternatively, you can use your IDE to set these environment variables.
 
@@ -65,7 +65,7 @@ This project includes the JavaScript Agent for AppDynamics synthetic monitoring 
 2. Once that application is created, login to AppDynamics, go to the User Experience tab, and select the application.
 3. In the left menu, click "Configuration" -> "Configure JavaScript Agent", and copy the app key
 4. In AWS, create the parameter store key `/APPLICATION-NAME/app_dynamics_key` with the value of the copied app key
-5. Uncomment the "APP_DYNAMICS_KEY" line in buildspec.yml
+5. Uncomment the "NUXT_ENV_APP_DYNAMICS_KEY" line in buildspec.yml
    - NOTE: because our Dev and Prod builds use the same buildspec file and CodeBuild fails if you refer to a non-existent
     parameter store key, you MUST create the parameter store key in BOTH environments.
     if you're only monitoring one environment, then simply leave the value blank in the other environment.
