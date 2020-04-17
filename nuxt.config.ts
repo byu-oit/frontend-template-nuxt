@@ -4,15 +4,6 @@ require('dotenv').config()
 export default {
   mode: 'spa',
 
-  env: {
-    oAuth: {
-      autoRefreshOnTimeout: true,
-      clientId: process.env.OAUTH_CLIENT_ID,
-      callbackUrl: process.env.OAUTH_CALLBACK_URL
-    },
-    appDynamicsKey: process.env.APP_DYNAMICS_KEY
-  },
-
   /*
    ** Headers of the page
    */

@@ -796,14 +796,15 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@byu-oit/nuxt-common@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-1.0.1.tgz#ae8f59178d36395e35f2f92c2e4a066ebeeadbed"
-  integrity sha512-JKAsRirSXVT0zv2HiQ8nb2vG4m/Xb14hhtq3mAh6rpXHUDYgNMefgrufj+buXU/dMbX43WEXVx5cSFcf+WYDbA==
+"@byu-oit/nuxt-common@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-1.2.0.tgz#44af5cb09a7d5f69918e11397894ec09ff264616"
+  integrity sha512-fTsnYOEoXV/vULD0G1FPp51SEGcW+swKQnfpTnWE7VzUvp+jAlQI2no1lmMTa9Uwrij1WGh8zWUyts5nz9i2wQ==
   dependencies:
     "@byuweb/browser-oauth" "^1.0.2"
     "@nuxtjs/axios" "^5.9.7"
     "@nuxtjs/vuetify" "^1.11.0"
+    dotenv "^8.2.0"
     dynamic-import-polyfill "^0.1.1"
     lodash "^4.17.11"
     vue-moment "^4.1.0"
