@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
+  extends: [
     'eslint:recommended',
     'plugin:vue/recommended',
     '@nuxtjs',
@@ -11,7 +11,7 @@ module.exports = {
     '@vue/typescript',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
-    'prettier/vue',
+    'prettier/vue'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -20,8 +20,8 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
     'no-trailing-spaces': 'warn',
-    'prettier/prettier': ['warn', { 'semi': false, 'singleQuote': true }],
-    'vuetify/no-deprecated-classes': 'warn',
+    'prettier/prettier': ['warn', { semi: false, singleQuote: true }],
+    'vuetify/no-deprecated-classes': 'warn'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'

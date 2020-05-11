@@ -17,6 +17,6 @@ const wrapper = mount(index, {
 
 describe('pages/index', () => {
   test('exists', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy()
+    expect(wrapper.vm).toBeTruthy()
   })
 })

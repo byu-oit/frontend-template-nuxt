@@ -32,7 +32,7 @@ describe('layouts/default', () => {
   test('exists', () => {
     $store.state.authenticated = false
     const wrapper = wrap()
-    expect(wrapper.isVueInstance()).toBeTruthy()
+    expect(wrapper.vm).toBeTruthy()
     expect(wrapper.html()).toContain('Loading')
   })
 
