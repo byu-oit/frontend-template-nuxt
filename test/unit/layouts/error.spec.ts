@@ -16,6 +16,8 @@ describe('layouts/error', () => {
       stubs: ['nuxt-link']
     })
     expect(wrapper.vm).toBeTruthy()
+    // @ts-ignore direct call to custom vm method
+    expect(wrapper.vm.head()).toEqual({ title: 'An error occurred' })
     expect(wrapper.html()).toContain('An error occurred')
   })
 })
