@@ -1,0 +1,142 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ master, dev ]
+env:
+  tf_version: '0.12.24'
+  template_id: <STD_CHANGE_TEMPLATE_ID> # TODO replace <STD_CHANGE_TEMPLATE_ID>
+
+jobs:
+  pipeline:
+    name: Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>, <APP_NAME>
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}"
+          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}"
+          echo "::set-env name=std_change_key::${{ secrets.standard_change_sandbox_client_key }}"
+          echo "::set-env name=std_change_secret::${{ secrets.standard_change_sandbox_client_secret }}"
+          echo "::set-env name=tf_working_dir::./terraform/dev/app"
+          echo "::set-env name=client_id_param::/<APP_NAME>-dev/oauth_client_id"
+          echo "::set-env name=callback_url_param::/<APP_NAME>-dev/callback_url"
+
+      - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}"
+          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}"
+          echo "::set-env name=std_change_key::${{ secrets.standard_change_production_client_key }}"
+          echo "::set-env name=std_change_secret::${{ secrets.standard_change_production_client_secret }}"
+          echo "::set-env name=tf_working_dir::./terraform/prd/app"
+          echo "::set-env name=client_id_param::/<APP_NAME>-prd/oauth_client_id"
+          echo "::set-env name=callback_url_param::/<APP_NAME>-prd/callback_url"
+
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.aws_key }}
+          aws-secret-access-key: ${{ env.aws_secret }}
+          aws-region: us-west-2
+
+      - name: Grab SSM Params
+        id: ssm
+        run: |
+          echo "::set-output name=client_id::$(aws ssm get-parameter --name $client_id_param | jq -r .Parameter.Value)"
+          echo "::set-output name=callback_url::$(aws ssm get-parameter --name $callback_url_param | jq -r .Parameter.Value)"
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install
+        run: yarn install --unsafe-perm
+
+      - name: Build
+        env:
+          NUXT_ENV_OAUTH_CLIENT_ID: ${{ steps.ssm.outputs.client_id }}
+          NUXT_ENV_OAUTH_CALLBACK_URL: ${{ steps.ssm.outputs.callback_url }}
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.tf_version }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform init
+
+      - name: Terraform Format
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        working-directory: ${{ env.tf_working_dir }}
+        id: plan
+        run: terraform plan -input=false -out=plan
+
+      - name: Start Standard Change
+        uses: ./.github/actions/start-standard-change
+        id: start-standard-change
+        with:
+          client-key: ${{ env.std_change_key }}
+          client-secret: ${{ env.std_change_secret }}
+          template-id: ${{ env.template_id }}
+
+      - name: Terraform Apply
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform apply plan
+
+      - name: Get Bucket name
+        id: tf_outputs
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform output s3_bucket
+
+      - name: Copy dist to S3 site bucket
+        run: aws s3 sync dist s3://${{ steps.tf_outputs.outputs.stdout }}
+
+      - name: End Standard Change
+        uses: ./.github/actions/end-standard-change
+        if: ${{ always() && steps.start-standard-change.outcome == 'success' }} # Run if RFC started, even if the deploy failed
+        with:
+          client-key: ${{ env.std_change_key }}
+          client-secret: ${{ env.std_change_secret }}
+          change-sys-id: ${{ steps.start-standard-change.outputs.change-sys-id }}
+          work-start: ${{ steps.start-standard-change.outputs.work-start }}
+          success: ${{ steps.deploy.outcome == 'success' }}
+
+      - name: Slack
+        uses: 8398a7/action-slack@v3
+        if: always() # Pick up events even if the job fails or is canceled.
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+          channel: C0AGQEZMF #slack-bot-testing
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }} # required
+

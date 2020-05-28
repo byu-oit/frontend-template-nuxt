@@ -1,0 +1,112 @@
+name: CI Checks
+
+on:
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build-test:
+    name: Build, Test, and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install
+        run: yarn install --unsafe-perm
+
+      - name: Test
+        run: yarn test --coverage
+
+      - name: Lint
+        run: yarn lint
+
+      - name: CodeCov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.codecov_token }}
+
+
+  terraform-plan:
+    name: Terraform fmt and plan
+    runs-on: ubuntu-latest
+    env:
+      tf_version: '0.12.24'
+      codecov_token: ${{ secrets.codecov_token }}
+
+    steps:
+      - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>
+        if: github.base_ref == 'dev'
+        run: |
+          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}"
+          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}"
+          echo "::set-env name=tf_working_dir::./terraform/dev/app"
+
+      - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>
+        if: github.base_ref == 'master'
+        run: |
+          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}"
+          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}"
+          echo "::set-env name=tf_working_dir::./terraform/prd/app"
+
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.aws_key }}
+          aws-secret-access-key: ${{ env.aws_secret }}
+          aws-region: us-west-2
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.tf_version }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform init
+
+      - name: Terraform Format
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        working-directory: ${{ env.tf_working_dir }}
+        id: plan
+        run: terraform plan -input=false -out=plan
+
+      #TODO: Consider figuring out if there are any terraform changes and conditionally adding comment
+      - uses: actions/github-script@0.9.0
+        if: github.event_name == 'pull_request'
+        env:
+          STDOUT: "```${{ steps.plan.outputs.stdout }}```"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.STDOUT
+            })
+      #Note: You can create an "issue" comment, that really goes on an PR
+      #TODO: Consider create a pull request review

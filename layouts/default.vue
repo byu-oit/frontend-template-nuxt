@@ -2,7 +2,7 @@
   <v-app>
     <byu-header>
       <span slot="site-title">
-        Frontend Template
+        Frontend Template <!-- TODO change site title -->
         <span v-if="isSandbox" class="sandbox-notification">DEV</span>
       </span>
       <byu-user-info v-if="authenticated" slot="user">

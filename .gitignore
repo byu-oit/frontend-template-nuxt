@@ -91,3 +91,6 @@ static/config.json
 
 # Terraform
 /terraform/**/.terraform/
+/terraform/**/*.tfvars
+
+.github/actions/**/dist
