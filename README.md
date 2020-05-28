@@ -35,7 +35,7 @@ This template includes the initial setup and scaffolding you need to create a fr
         1) Copy the codecov token and [upload it to your github repo's secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name of `codecov_token`
         2) (Optional) Add the Codecov badge (found under Settings->Badge in codecov for you repo) to this README.  
 3) Create 2 new applications in WSO2 (one for dev and one for prd).
-    The application name should be what you used in step #4 (with `-dev` and `-prd`) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable.
+    The application name should be something simple and unique (maybe the name of your repo) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable.
     It'll look something like (be sure to include the protocol and trailing slash):
     ```
     https://<APP_NAME>.<AWS_ACCOUNT_NAME>.amazon.byu.edu/
