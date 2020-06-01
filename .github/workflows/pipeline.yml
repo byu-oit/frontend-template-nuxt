@@ -101,7 +101,7 @@ jobs:
         run: terraform plan -input=false -out=plan
 
       - name: Start Standard Change
-        uses: ./.github/actions/start-standard-change
+        uses: byu-oit/github-action-start-standard-change@v1
         id: start-standard-change
         with:
           client-key: ${{ env.std_change_key }}
@@ -121,7 +121,7 @@ jobs:
         run: aws s3 sync dist s3://${{ steps.tf_outputs.outputs.stdout }}
 
       - name: End Standard Change
-        uses: ./.github/actions/end-standard-change
+        uses: byu-oit/github-action-end-standard-change@v1
         if: ${{ always() && steps.start-standard-change.outcome == 'success' }} # Run if RFC started, even if the deploy failed
         with:
           client-key: ${{ env.std_change_key }}
