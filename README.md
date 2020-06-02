@@ -48,7 +48,8 @@ This template includes the initial setup and scaffolding you need to create a fr
         client_id = "<WSO2_CLIENT_ID>"
         callback_url = "<WSO2_CALLBACK_URL>"
         ```
-    2) Run terraform to setup the DEV environment
+    2) Update the TODO items in `/terraform/dev/setup/setup-dev.tf` and `/terraform/dev/setup/setup-prd.tf`
+    3) Run terraform to setup the DEV environment
         1) Run `awslogin` and login to the dev account you want to deploy to.
         2) Run setup which uploads SSM parameters:
             ```bash
@@ -58,7 +59,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
            Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
-    3) Run terraform to setup the PRD environment
+    4) Run terraform to setup the PRD environment
         1) Run `awslogin` and login to the prd account you want to deploy to.
         2) Run setup which uploads SSM parameters:
             ```bash
