@@ -25,38 +25,72 @@ This template includes the initial setup and scaffolding you need to create a fr
 - Integration with Codecov
 - Integration with AppDynamics Synthetic Monitoring
 
-## WSO2/Codecov Setup (do this before the next section)
-
-1) Decide on an application name. You will use this in setting up the pipeline and project.
-2) Create a new application in WSO2. The application name should be what you decided and the callback URL should follow this format: *https://APPLICATION-NAME.AWS-ACCOUNT-NAME.amazon.byu.edu/* (be sure to include the protocol and trailing slash).
-3) Subscribe the application you just made to the OpenID-Userinfo - v1 API.
-4) Generate sandbox keys (you can generate production keys later).
-5) Create the following parameters in parameter store: `/APPLICATION-NAME/oauth_client_id`, `/APPLICATION-NAME/callback_url`, `/APPLICATION-NAME/codecov_token`, and `/APPLICATION-NAME/s3-cloudfront-connection`. The `oauth_client_id` is the client ID of the application you just made in WSO2, the `callback_url` is the callback URL you created with that WSO2 application, the the `codecov_token` is your Codecov repo token. The `s3-cloudfront-connection` should be a random string of alphanumeric characters. Make sure the values are type String, not StringList or SecureString.
-6) WHEN READY FOR PRODUCTION: In ServiceNow, create a new standard change template and be sure to give it an alias.
-
 ## Project Setup
 
-1) Click the Green *Use this template* button at the top of the repository.
-2) Customize the README.
-3) Change the Name, Description, and Author in package.json.
-4) Update the `homne-url` attribute in `layouts/default.vue`.
-5) Change the parameter store param names in `buildspec.yml`.
-6) Update the build badge URL in the README (when you have a CodeBuild project created).
-7) Update the page title in `nuxt.config.ts`
-8) Update the site title in `layouts/default.vue`
-9) Update the reviewer in the Dependabot config.
-10) Uncomment the target branch line in the Dependabot config.
-11) Create a branch named `dev` in your project.
-12) Update the `.repo-meta.yml` file.
-13) Add the repo key from Codecov into `cb-buildspec.yml` and then run `cbsetup` locally to create a CodeBuild project.
-14) Add the Codecov badge to the README.
-15) For running locally, create a file named `.env` in this project's root directory:
-    ```dotenv
-    NUXT_ENV_OAUTH_CLIENT_ID=[WSO2 OAuth client ID goes here]
-    NUXT_ENV_OAUTH_CALLBACK_URL=[WSO2 OAuth callback URL goes here]
+1) Click the Green *Use this template* button at the top of the template repository.
+2) Setup GitHub secrets
+    1) Ask on the #github-actions slack channel to get secrets assigned to your newly created repo; something like:
+        `I need the GitHub secrets for the AWS Accounts: <dev account> and <prd account> associated with my new GitHub repo: <my new repo>`
+    2) Go to [codecov.io](https://codecov.io), login with your GitHub account, find your repo and copy the token.
+        1) Copy the codecov token and [upload it to your github repo's secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name of `codecov_token`
+        2) (Optional) Add the Codecov badge (found under Settings->Badge in codecov for you repo) to this README.  
+3) Create 2 new applications in WSO2 (one for dev and one for prd).
+    The application name should be something simple and unique (maybe the name of your repo) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable.
+    It'll look something like (be sure to include the protocol and trailing slash):
     ```
-    Alternatively, you can use your IDE to set these environment variables.
+    https://<APP_NAME>.<AWS_ACCOUNT_NAME>.amazon.byu.edu/
+    ```
+    1) Subscribe both applications you just made to the OpenID-Userinfo - v1 API.
+    2) Generate sandbox keys for the dev application and production keys for the production application.
+4) AWS Setup *(this will create Route53 hosted zones in your aws accounts and upload SSM params)*
+    1) Create 2 terraform variable files (these files are gitignored) in `/terraform/dev/setup/dev.tfvars` (use the dev client_id and callback from step #6) and `/terraform/prd/setup/prd.tfvars` (use the prd client_id and callback from step #6):
+        ```hcl
+        client_id = "<WSO2_CLIENT_ID>"
+        callback_url = "<WSO2_CALLBACK_URL>"
+        ```
+    2) Run terraform to setup the DEV environment
+        1) Run `awslogin` and login to the dev account you want to deploy to.
+        2) Run setup which uploads SSM parameters:
+            ```bash
+            cd terraform/dev/setup
+            terraform init
+            terraform apply
+            ```
+        3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
+           Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
+    3) Run terraform to setup the PRD environment
+        1) Run `awslogin` and login to the prd account you want to deploy to.
+        2) Run setup which uploads SSM parameters:
+            ```bash
+            cd ../../prd/setup
+            terraform init
+            terraform apply
+            ```
+        3) **NOTE** if you're transfering an existing URL to a new Account see the [instructions below](#using-an-exisiting-domain-name) instead
+        3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
+           Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
+5) Now we have to wait for the order forms to be completed by the networking team. 
+While waiting you can update the code in the repo:
+    1) Customize this README.
+    2) Change the Name, Description, and Author in package.json.
+    3) Cycle through the **TODO**s to update
+        - `<APP_NAME>` - typically your repo name (keep it short if you can, there tends to be issues with longer names with some AWS resources)
+        - `<DEV_AWS_ACCT_NUM>` - the AWS account number for your dev account
+        - `<PRD_AWS_ACCT_NUM>` - the AWS account number for your prd account
+        - `<GITHUB_AWS_DEV_KEY_NAME>` - the name of the GitHub secret for dev AWS key (i.e. `byu_oit_customapps_dev_key`)
+        - `<GITHUB_AWS_DEV_SECRET_NAME>` - the name of the GitHub secret for dev AWS secret (i.e. `byu_oit_customapps_dev_secret`)
+        - `<GITHUB_AWS_PRD_KEY_NAME>` - the name of the GitHub secret for prd AWS key (i.e. `byu_oit_customapps_prd_key`)
+        - `<GITHUB_AWS_PRD_SECRET_NAME>` - the name of the GitHub secret for prd AWS secret (i.e. `byu_oit_customapps_prd_secret`)
+        - `<STD_CHANGE_TEMPLATE_ID>` - WHEN READY FOR PRODUCTION: In ServiceNow, create a new standard change template and be sure to give it an alias, put that alias here
+        - the page/site title
+        - the dependabot [config.yml](.dependabot/config.yml) file
+        - the [repo-meta.yml](.repo-meta.yml) file (you really only need the standard change template for creating standard RFCs for production deployments)
 
+6) **Wait** until the order forms are completed and DNS is routed to your AWS hosted zones. This could take a few hours to a day.
+7) Push your changes to your GitHub repo master branch (and dev branch)
+    * this should start the pipeline worklfows (dev and prd), which will each take 15-30 minutes to spin up the CloudFront distributions
+8) If all was successful, your site should be available at both dev and prd URLs 
+       
 ## AppDynamics Setup
 
 This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
@@ -73,34 +107,9 @@ This project includes the JavaScript Agent for AppDynamics synthetic monitoring 
 If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics.
 Use the second app key in the second environment's parameter store
 
-## Pipeline Setup
-
-This project includes Terraform files so you can create a site hosted in S3 and fronted with HTTPS by a CloudFront distribution with a custom URL. 
-
-Run the following steps in the `terraform/dev` or `terraform/prd` folder depending on the environment you want to deploy to.
-
-1) Run `awslogin` and login to the account you want to deploy to.
-2) Update the variables in the `terraform.tfvars` file.
-3) Update the AWS account ID and application name in each `tfstate.tf` file.
-4) Run `terraform init` so initialize Terraform (you only need ot do this once).
-5) Run `terraform apply` to create the resources in AWS.
-
-**Note**: Because DNS has to be manually setup by the network team, you will have to run `terraform apply` twice. The first time it will create the Route 53 hosted zone, certificate in ACM, and S3 bucket for deployment. Then it will fail because AWS can't validate the certificate (you'll get an error message similar to the image below). You need to contact the network team to setup a record in QIP for your desired subdomain name pointing to the name servers of the hosted zone created by Terraform (you can find that information in the Route 53 console). After AWS has validated the certificate, run `terraform apply` again and it should succeed.
-The generated certificate in AWS can be found in Certificate Manager (ACM), but you must switch to the **us-east-1 "US East (N. Virginia)"** region to view it.
-
-Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your subdomain added. Add yourself as the technical contact, select Cname and list the NS records found in Route 53.
-
-### Infinite CloudFront Distribution Deploy
-
-There is a known issue where Terraform may get stuck deploying CloudFront distributions for the first time (see [this issue](https://github.com/terraform-providers/terraform-provider-aws/issues/10039)). You will know this happened if you check the AWS Console and see the CloudFront distribution has status of "Deployed", but `terraform apply` is still trying to deploy the distribution. If this happens to you, stop the `terraform apply` command with Ctrl+C (if it doesn't stop, press Ctrl+C again). Then run the following command:
-
-```bash
-terrafrom import aws_cloudfront_distribution.cdn DISTRIBUTOIN_ID
-```
-
-Once you have done that, run `terraform apply` again and it will finish creating the resources for your application.
-
 ## Build Setup
+
+To run and build locally
 
 ``` bash
 # install dependencies
@@ -119,31 +128,24 @@ $ yarn run generate
 
 ## Using a Custom URL
 
-Using a custom URL will require a bit of one-time configuration in the AWS console.
+Using a custom URL will require a bit of one-time configuration.
+This is due to the fact that BYU's DNS servers need to be updated manually to point new subdomains to AWS's Route53 Hosted Zones.
 
-**Note**: If you get WSO2 errors after following either set of steps below, be sure to invalidate your CloudFront distribution's cache.
+You can use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) or create an Engineering task using the "Route53 Domain Redirect" template to request having your dev subdomain added to BYU's DNS servers.
+
 
 ### Using an exisiting domain name.
-
 **Transfering an old, existing URL to our new accounts and pipelines will cause ~20 minutes of downtime.** The total amount of downtime will depend on how long it takes you to complete steps 5-7.
 
-1) Set the `url` variable in the `terraform.tfvars` file.
-2) Run `terraform apply`. This will create the Route 53 hosted zone, a certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
-3) Create a new Engineering Task in ServiceNow using the "Route 53 Domain Redirect" template. Go to your newly created Route 53 hosted zone in the AWS Console, copy the name servers, and paste them in the request.
-4) In the AWS Console, go to ACM and copy the validation CNAME record for the certificate. Put that in the old Route 53 hosted zone so the certificate can be validated (it can take 30 minutes for more for ACM to validate your certificate).
-5) Once that new certificate is validated, go to the old CloudFront distribution and remove the CNAME associated with it.
-6) Work with the network team to complete the ENG task you created.
-7) Run `terraform apply` again. This will finish setting up CloudFront and your other resources.
-8) Trigger your CodePipeline so it builds your project, then you should be good to go.
+1) Go ahead and finish the steps in the setup without waiting for the Network team to finish changing the DNS.
+2) Your GitHub action pipeline workflow will create the certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
+3) If you're still waiting for the network team at this time then
+    * In the AWS Console, go to ACM and copy the validation CNAME record for the certificate. Put that in the old Route 53 hosted zone so the certificate can be validated (it can take 30 minutes for more for ACM to validate your certificate).
+4) Once that new certificate is validated, go to the old CloudFront distribution and remove the CNAME associated with it.
+5) Work with the network team to complete the ENG task you created.
+6) Trigger your pipeline again (in the pipeline workflow you should be able to rerun the pipeline job) so it builds your project, then you should be good to go.
 
-### Using a new domain name.
-
-1) Set the `url` variable in the `terraform.tfvars` file.
-2) Run `terraform apply`. This will create the Route 53 hosted zone, a certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
-3) *If using an existing domain name, see note above before doing this step.* Create a new Engineering Task in ServiceNow using the "Route 53 Domain Redirect" template. Go to your newly created Route 53 hosted zone in the AWS Console, copy the name servers, and paste them in the request.
-4) Wait for the Network Team to complete that task. Once that task is completed, ACM will be able to validate your certificate (it can take 30 minutes for more for ACM to validate your certificate).
-5) Run `terraform apply` again once the certificate is validated. This will finish setting up CloudFront and your other resources.
-6) Trigger your CodePipeline so it builds your project, then you should be good to go.
+**Note**: If you get WSO2 errors after these steps, be sure to invalidate your CloudFront distribution's cache.
 
 ## Linting
 
