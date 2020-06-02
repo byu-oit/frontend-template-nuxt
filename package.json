@@ -15,6 +15,6 @@
     "generate": "nuxt-ts generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^1.5.2"
+    "@byu-oit/nuxt-common": "^1.6.0"
   }
 }
