@@ -79,7 +79,7 @@ jobs:
         env:
           NUXT_ENV_OAUTH_CLIENT_ID: ${{ steps.ssm.outputs.client_id }}
           NUXT_ENV_OAUTH_CALLBACK_URL: ${{ steps.ssm.outputs.callback_url }}
-          # NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
+          NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
         run: yarn build
 
       - name: Test

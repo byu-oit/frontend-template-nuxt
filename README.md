@@ -106,9 +106,7 @@ This project includes the JavaScript Agent for AppDynamics synthetic monitoring 
 1. Ask an AppDynamics admin (currently Tyler Johnson) to create a browser application in AppDynamics for synthetic monitoring.
 2. Once that application is created, login to AppDynamics, go to the User Experience tab, and select the application.
 3. In the left menu, click "Configuration" -> "Configure JavaScript Agent", and copy the app key
-4. Be sure the AppDynamics key is in AWS SMM Parameter Store. If you still have the original `dev.tfvars` and `prd.tfvars` files from when the project was setup, uncomment the `app_dynamics_key` line and set the key from AppDynamics as the value. Then run `terraform apply -var-file=ENV.tfvars` with the appropriate var file and logged in to the appropriate AWS account. If you're missing that file, then go do step four in the [Project Setup](#project-setup) section of this README.
-5. Uncomment the "NUXT_ENV_APP_DYNAMICS_KEY" line in `.github/workflows/pipeline.yml`.
-   - NOTE: because our Dev and Prod builds use the same pipeline workflow, you MUST create the parameter store key in BOTH environments. If you're only monitoring one environment, then simply leave the value blank in the other environment.
+4. Be sure the AppDynamics key is set in AWS SMM Parameter Store. The parameter is initially create with an empty string value. If you still have the original `dev.tfvars` and `prd.tfvars` files from when the project was setup, uncomment the `app_dynamics_key` line and set the key from AppDynamics as the value. Then run `terraform apply -var-file=ENV.tfvars` with the appropriate var file and logged in to the appropriate AWS account. If you're missing that file, then go do step four in the [Project Setup](#project-setup) section of this README.
 
 If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics. Use the second app key in the second environment's parameter store.
 
