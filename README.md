@@ -26,7 +26,6 @@ This template includes the initial setup and scaffolding you need to create a fr
 - CI/CD files.
 - Browser support.
 - Tools to auto-generate TypeScript definitions from swagger files (see the README in the `swagger` folder).
-- Default `.repo-meta.yml` template
 - Integration with Codecov
 - Integration with AppDynamics Synthetic Monitoring
 
@@ -92,7 +91,6 @@ While waiting you can update the code in the repo:
         - `<STD_CHANGE_TEMPLATE_ID>` - WHEN READY FOR PRODUCTION: In ServiceNow, create a new standard change template and be sure to give it an alias, put that alias here
         - the page/site title
         - the dependabot [config.yml](.dependabot/config.yml) file
-        - the [repo-meta.yml](.repo-meta.yml) file (you really only need the standard change template for creating standard RFCs for production deployments)
 
 6) **Wait** until the order forms are completed and DNS is routed to your AWS hosted zones. This could take a few hours to a day.
 7) Push your changes to your GitHub repo master branch (and dev branch)

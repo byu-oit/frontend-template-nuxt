@@ -18,8 +18,8 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class IndexPage extends Vue {
-  head(this: IndexPage): object {
+export default class InspirePage extends Vue {
+  head(this: InspirePage): object {
     return {
       title: 'Inspire'
     }
