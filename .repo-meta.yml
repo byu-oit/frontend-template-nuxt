@@ -16,18 +16,15 @@ software:
       - NuxtJS
       - Vuetify
       - CSS
-      - Handel
-      - Handel-Codepipeline
-      - AWS CodeBuild
-      - AWS CodePipeline
-      - AWS CloudFormation
+      - Terraform
+      - GitHub Actions
     stages:
       development:
         urls:
           physical_url: # TODO: Update with *.dev-oit-byu.amazon.byu.edu URL
         hosting_location: AWS
-        aws_account: dev-oit-byu
+        aws_account: byu-oit-*-dev # TODO: Update with account name
       production:
         urls:
           physical_url: # TODO: Update with production URL
-        aws_account: # TODO: Update with account name
+        aws_account: byu-oit-*-prd # TODO: Update with account name

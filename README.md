@@ -1,4 +1,9 @@
-![Build Status](https://codebuild.us-west-2.amazon.com/badges?uuid=...&branch=master)
+| Master Branch | Dev Branch |
+| ---- | ---- |
+| ![CI Checks](https://github.com/byu-oit/REPO_NAME/workflows/CI%20Checks/badge.svg?branch=master) | ![CI Checks](https://github.com/byu-oit/REPO_NAME/workflows/CI%20Checks/badge.svg?branch=dev) |
+| ![CD Pipeline](https://github.com/byu-oit/REPO_NAME/workflows/CD%20Pipeline/badge.svg?branch=master) | ![CD Pipeline](https://github.com/byu-oit/REPO_NAME/workflows/CD%20Pipeline/badge.svg?branch=dev) |
+| <MASTER_CODECOV_BADGE> | <DEV_CODECOV_BADGE> |
+
 
 # Frontend Nuxt Project Template
 
@@ -27,13 +32,13 @@ This template includes the initial setup and scaffolding you need to create a fr
 
 ## Project Setup
 
-1) Click the Green *Use this template* button at the top of the template repository.
+1) Click the Green *Use this template* button at the top of the template repository. Then clone the repository and checkout a new branch called `dev`.
 2) Setup GitHub secrets
     1) Ask on the #github-actions slack channel to get secrets assigned to your newly created repo; something like:
         `I need the GitHub secrets for the AWS Accounts: <dev account> and <prd account> associated with my new GitHub repo: <my new repo>`
     2) Go to [codecov.io](https://codecov.io), login with your GitHub account, find your repo and copy the token.
         1) Copy the codecov token and [upload it to your github repo's secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name of `codecov_token`
-        2) (Optional) Add the Codecov badge (found under Settings->Badge in codecov for you repo) to this README.  
+        2) __(Optional)__ Add the Codecov badge (found under Settings->Badge in codecov for you repo) to the badge table at the top of this README. The badge copied from Codecov is only for master, but you can use the same code for the dev branch by replacing `master` with `dev`.  
 3) Create 2 new applications in WSO2 (one for dev and one for prd).
     The application name should be something simple and unique (maybe the name of your repo) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable.
     It'll look something like (be sure to include the protocol and trailing slash):
@@ -47,6 +52,7 @@ This template includes the initial setup and scaffolding you need to create a fr
         ```hcl
         client_id = "<WSO2_CLIENT_ID>"
         callback_url = "<WSO2_CALLBACK_URL>"
+        // custom_domain = "custom-domain.byu.edu" // OPTIONAL. Only required if you want a custom domain name.
         ```
     2) Update the TODO items in `/terraform/dev/setup/setup-dev.tf` and `/terraform/dev/setup/setup-prd.tf`
     3) Run terraform to setup the DEV environment
@@ -55,7 +61,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```bash
             cd terraform/dev/setup
             terraform init
-            terraform apply
+            terraform apply -var-file=dev.tfvars
             ```
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
            Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
@@ -65,16 +71,16 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```bash
             cd ../../prd/setup
             terraform init
-            terraform apply
+            terraform apply -var-file=prd.tfvars
             ```
-        3) **NOTE** if you're transfering an existing URL to a new Account see the [instructions below](#using-an-exisiting-domain-name) instead
+        3) **NOTE** if you're transferring an existing URL to a new Account see the [instructions below](#using-an-exisiting-domain-name) instead
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
            Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
 5) Now we have to wait for the order forms to be completed by the networking team. 
 While waiting you can update the code in the repo:
     1) Customize this README.
     2) Change the Name, Description, and Author in package.json.
-    3) Cycle through the **TODO**s to update
+    3) Cycle through the **TODO**s to update (any TODOs that don't talk about replacing can be deleted. They are TODOs for this template only.)
         - `<APP_NAME>` - typically your repo name (keep it short if you can, there tends to be issues with longer names with some AWS resources)
         - `<DEV_AWS_ACCT_NUM>` - the AWS account number for your dev account
         - `<PRD_AWS_ACCT_NUM>` - the AWS account number for your prd account

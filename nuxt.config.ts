@@ -1,4 +1,3 @@
-const pkg = require('./package')
 require('dotenv').config()
 
 export default {
@@ -8,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: pkg.name, // TODO change page title
+    title: '%s - PROJECT_NAME', // TODO change page title
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

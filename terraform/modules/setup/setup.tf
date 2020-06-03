@@ -11,9 +11,6 @@ variable "client_id" {
 variable "callback_url" {
   type = string
 }
-variable "codecov_token" {
-  type = string
-}
 
 resource "random_string" "cloudfront_connection" {
   length  = 16
@@ -32,11 +29,6 @@ resource "aws_ssm_parameter" "callback_url" {
   name  = "/${var.app_name}/callback_url"
   type  = "String"
   value = var.callback_url
-}
-resource "aws_ssm_parameter" "codecov_token" {
-  name  = "/${var.app_name}/codecov_token"
-  type  = "String"
-  value = var.codecov_token
 }
 resource "aws_ssm_parameter" "cloudfront_connection" {
   name  = "/${var.app_name}/s3-cloudfront-connection"
