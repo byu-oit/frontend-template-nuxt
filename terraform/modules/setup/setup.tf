@@ -13,7 +13,7 @@ variable "callback_url" {
 }
 variable "app_dynamics_key" {
   type = string
-  default = ""
+  default = null
 }
 
 resource "random_string" "cloudfront_connection" {
@@ -40,6 +40,7 @@ resource "aws_ssm_parameter" "cloudfront_connection" {
   value = random_string.cloudfront_connection.result
 }
 resource "aws_ssm_parameter" "app_dynamics_key" {
+  count = var.app_dynamics_key == null ? 0 : 1
   name  = "/${var.app_name}/app_dynamics_key"
   type  = "String"
   value = var.app_dynamics_key

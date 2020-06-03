@@ -24,7 +24,7 @@ variable "custom_domain" {
 }
 variable "app_dynamics_key" {
   type    = string
-  default = ""
+  default = null
 }
 
 module "setup" {

@@ -53,7 +53,7 @@ jobs:
         run: |
           echo "::set-output name=client_id::$(aws ssm get-parameter --name $client_id_param | jq -r .Parameter.Value)"
           echo "::set-output name=callback_url::$(aws ssm get-parameter --name $callback_url_param | jq -r .Parameter.Value)"
-          echo "::set-output name=callback_url::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
+          # echo "::set-output name=callback_url::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -79,7 +79,7 @@ jobs:
         env:
           NUXT_ENV_OAUTH_CLIENT_ID: ${{ steps.ssm.outputs.client_id }}
           NUXT_ENV_OAUTH_CALLBACK_URL: ${{ steps.ssm.outputs.callback_url }}
-          NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
+          # NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
         run: yarn build
 
       - name: Test
