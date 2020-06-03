@@ -59,5 +59,11 @@ import VuetifyLogo from '~/components/VuetifyLogo.vue'
     VuetifyLogo
   }
 })
-export default class IndexPage extends Vue {}
+export default class IndexPage extends Vue {
+  head(this: IndexPage): object {
+    return {
+      title: 'Home'
+    }
+  }
+}
 </script>

@@ -11,8 +11,9 @@ variable "client_id" {
 variable "callback_url" {
   type = string
 }
-variable "codecov_token" {
+variable "app_dynamics_key" {
   type = string
+  default = null
 }
 
 resource "random_string" "cloudfront_connection" {
@@ -33,15 +34,16 @@ resource "aws_ssm_parameter" "callback_url" {
   type  = "String"
   value = var.callback_url
 }
-resource "aws_ssm_parameter" "codecov_token" {
-  name  = "/${var.app_name}/codecov_token"
-  type  = "String"
-  value = var.codecov_token
-}
 resource "aws_ssm_parameter" "cloudfront_connection" {
   name  = "/${var.app_name}/s3-cloudfront-connection"
   type  = "String"
   value = random_string.cloudfront_connection.result
+}
+resource "aws_ssm_parameter" "app_dynamics_key" {
+  count = var.app_dynamics_key == null ? 0 : 1
+  name  = "/${var.app_name}/app_dynamics_key"
+  type  = "String"
+  value = var.app_dynamics_key
 }
 
 resource "aws_route53_zone" "custom_zone" {

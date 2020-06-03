@@ -13,3 +13,16 @@
     </v-flex>
   </v-layout>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class InspirePage extends Vue {
+  head(this: InspirePage): object {
+    return {
+      title: 'Inspire'
+    }
+  }
+}
+</script>

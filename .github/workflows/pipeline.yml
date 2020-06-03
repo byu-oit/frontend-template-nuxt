@@ -5,7 +5,6 @@ on:
     branches: [ master, dev ]
 env:
   tf_version: '0.12.24'
-  template_id: <STD_CHANGE_TEMPLATE_ID> # TODO replace <STD_CHANGE_TEMPLATE_ID>
 
 jobs:
   pipeline:
@@ -22,8 +21,10 @@ jobs:
           echo "::set-env name=tf_working_dir::./terraform/dev/app"
           echo "::set-env name=client_id_param::/<APP_NAME>-dev/oauth_client_id"
           echo "::set-env name=callback_url_param::/<APP_NAME>-dev/callback_url"
+          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-dev/app_dynamics_key"
+          echo "::set-env name=template_id::sn"
 
-      - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>
+      - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>, <STD_CHANGE_TEMPLATE_ID>
         if: github.ref == 'refs/heads/master'
         run: |
           echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}"
@@ -33,6 +34,8 @@ jobs:
           echo "::set-env name=tf_working_dir::./terraform/prd/app"
           echo "::set-env name=client_id_param::/<APP_NAME>-prd/oauth_client_id"
           echo "::set-env name=callback_url_param::/<APP_NAME>-prd/callback_url"
+          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-prd/app_dynamics_key"
+          echo "::set-env name=template_id::<STD_CHANGE_TEMPLATE_ID>"
 
       - name: Check out
         uses: actions/checkout@v2
@@ -44,11 +47,13 @@ jobs:
           aws-secret-access-key: ${{ env.aws_secret }}
           aws-region: us-west-2
 
+      # TODO: Cause workflow to fail if parameter is not found.
       - name: Grab SSM Params
         id: ssm
         run: |
           echo "::set-output name=client_id::$(aws ssm get-parameter --name $client_id_param | jq -r .Parameter.Value)"
           echo "::set-output name=callback_url::$(aws ssm get-parameter --name $callback_url_param | jq -r .Parameter.Value)"
+          # echo "::set-output name=callback_url::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -74,6 +79,7 @@ jobs:
         env:
           NUXT_ENV_OAUTH_CLIENT_ID: ${{ steps.ssm.outputs.client_id }}
           NUXT_ENV_OAUTH_CALLBACK_URL: ${{ steps.ssm.outputs.callback_url }}
+          # NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
         run: yarn build
 
       - name: Test
@@ -120,6 +126,10 @@ jobs:
       - name: Copy dist to S3 site bucket
         run: aws s3 sync dist s3://${{ steps.tf_outputs.outputs.stdout }}
 
+      # TODO: Add step to invalidate CloudFront cache.
+
+      # TODO: Tag release in GitHub.
+
       - name: End Standard Change
         uses: byu-oit/github-action-end-standard-change@v1
         if: ${{ always() && steps.start-standard-change.outcome == 'success' }} # Run if RFC started, even if the deploy failed
@@ -136,7 +146,7 @@ jobs:
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
-          channel: C0AGQEZMF #slack-bot-testing
+          channel: CEXRQ7VG9 #custom-code-bots
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }} # required
 

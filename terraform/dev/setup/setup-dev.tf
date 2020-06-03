@@ -6,8 +6,8 @@ terraform {
   backend "s3" {
     encrypt        = true
     bucket         = "terraform-state-storage-<DEV_AWS_ACCT_NUM>" // TODO replace <DEV_AWS_ACCT_NUM>
-    dynamodb_table = "terraform-state-lock-<DEV_AWS_ACCT_NUM>" // TODO replace <DEV_AWS_ACCT_NUM>
-    key            = "<APP_NAME>/dev/setup.tfstate" // TODO replace <APP_NAME>
+    dynamodb_table = "terraform-state-lock-<DEV_AWS_ACCT_NUM>"    // TODO replace <DEV_AWS_ACCT_NUM>
+    key            = "<APP_NAME>/dev/setup.tfstate"               // TODO replace <APP_NAME>
     region         = "us-west-2"
   }
 }
@@ -18,17 +18,23 @@ variable "client_id" {
 variable "callback_url" {
   type = string
 }
-variable "codecov_token" {
-  type = string
+variable "custom_domain" {
+  type    = string
+  default = null
+}
+variable "app_dynamics_key" {
+  type    = string
+  default = null
 }
 
 module "setup" {
   source = "../../modules/setup"
 
-  app_name      = "<APP_NAME>-dev" // TODO replace <APP_NAME>
-  callback_url  = var.callback_url
-  client_id     = var.client_id
-  codecov_token = var.codecov_token
+  app_name         = "<APP_NAME>-dev" // TODO replace <APP_NAME>
+  callback_url     = var.callback_url
+  client_id        = var.client_id
+  custom_domain    = var.custom_domain
+  app_dynamics_key = var.app_dynamics_key
 }
 
 output "hosted_zone_id" {
