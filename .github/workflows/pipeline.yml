@@ -45,6 +45,7 @@ jobs:
           aws-secret-access-key: ${{ env.aws_secret }}
           aws-region: us-west-2
 
+      # TODO: Cause workflow to fail if parameter is not found.
       - name: Grab SSM Params
         id: ssm
         run: |
