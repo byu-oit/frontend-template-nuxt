@@ -11,6 +11,10 @@ variable "client_id" {
 variable "callback_url" {
   type = string
 }
+variable "app_dynamics_key" {
+  type = string
+  default = ""
+}
 
 resource "random_string" "cloudfront_connection" {
   length  = 16
@@ -34,6 +38,11 @@ resource "aws_ssm_parameter" "cloudfront_connection" {
   name  = "/${var.app_name}/s3-cloudfront-connection"
   type  = "String"
   value = random_string.cloudfront_connection.result
+}
+resource "aws_ssm_parameter" "app_dynamics_key" {
+  name  = "/${var.app_name}/app_dynamics_key"
+  type  = "String"
+  value = var.app_dynamics_key
 }
 
 resource "aws_route53_zone" "custom_zone" {

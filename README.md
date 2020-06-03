@@ -53,6 +53,7 @@ This template includes the initial setup and scaffolding you need to create a fr
         client_id = "<WSO2_CLIENT_ID>"
         callback_url = "<WSO2_CALLBACK_URL>"
         // custom_domain = "custom-domain.byu.edu" // OPTIONAL. Only required if you want a custom domain name.
+        // app_dynamics_key = "<APP_DYNAMICS_KEY>" // OPTIONAL. See the "AppDynamics Setup" for instructions how to get the key.
         ```
     2) Update the TODO items in `/terraform/dev/setup/setup-dev.tf` and `/terraform/dev/setup/setup-prd.tf`
     3) Run terraform to setup the DEV environment
@@ -98,23 +99,18 @@ While waiting you can update the code in the repo:
     * this should start the pipeline worklfows (dev and prd), which will each take 15-30 minutes to spin up the CloudFront distributions
 8) If all was successful, your site should be available at both dev and prd URLs 
        
-## AppDynamics Setup - OUT OF DATE
-
-__This section needs to be updated to work with GitHub Actions__
+## AppDynamics Setup
 
 This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
 
 1. Ask an AppDynamics admin (currently Tyler Johnson) to create a browser application in AppDynamics for synthetic monitoring.
 2. Once that application is created, login to AppDynamics, go to the User Experience tab, and select the application.
 3. In the left menu, click "Configuration" -> "Configure JavaScript Agent", and copy the app key
-4. In AWS, create the parameter store key `/APPLICATION-NAME/app_dynamics_key` with the value of the copied app key
-5. Uncomment the "NUXT_ENV_APP_DYNAMICS_KEY" line in buildspec.yml
-   - NOTE: because our Dev and Prod builds use the same buildspec file and CodeBuild fails if you refer to a non-existent
-    parameter store key, you MUST create the parameter store key in BOTH environments.
-    if you're only monitoring one environment, then simply leave the value blank in the other environment.
+4. Be sure the AppDynamics key is in AWS SMM Parameter Store. If you still have the original `dev.tfvars` and `prd.tfvars` files from when the project was setup, uncomment the `app_dynamics_key` line and set the key from AppDynamics as the value. Then run `terraform apply -var-file=ENV.tfvars` with the appropriate var file and logged in to the appropriate AWS account. If you're missing that file, then go do step four in the [Project Setup](#project-setup) section of this README.
+5. Uncomment the "NUXT_ENV_APP_DYNAMICS_KEY" line in `.github/workflows/pipeline.yml`.
+   - NOTE: because our Dev and Prod builds use the same pipeline workflow, you MUST create the parameter store key in BOTH environments. If you're only monitoring one environment, then simply leave the value blank in the other environment.
 
-If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics.
-Use the second app key in the second environment's parameter store
+If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics. Use the second app key in the second environment's parameter store.
 
 # Configuring Implicit Grant Locally
 

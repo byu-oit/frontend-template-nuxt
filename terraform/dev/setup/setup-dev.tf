@@ -22,6 +22,10 @@ variable "custom_domain" {
   type    = string
   default = null
 }
+variable "app_dynamics_key" {
+  type    = string
+  default = ""
+}
 
 module "setup" {
   source = "../../modules/setup"
@@ -30,6 +34,7 @@ module "setup" {
   callback_url  = var.callback_url
   client_id     = var.client_id
   custom_domain = var.custom_domain
+  app_dynamics_key = var.app_dynamics_key
 }
 
 output "hosted_zone_id" {
