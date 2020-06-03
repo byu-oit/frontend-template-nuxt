@@ -98,7 +98,9 @@ While waiting you can update the code in the repo:
     * this should start the pipeline worklfows (dev and prd), which will each take 15-30 minutes to spin up the CloudFront distributions
 8) If all was successful, your site should be available at both dev and prd URLs 
        
-## AppDynamics Setup
+## AppDynamics Setup - OUT OF DATE
+
+__This section needs to be updated to work with GitHub Actions__
 
 This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
 
@@ -113,6 +115,15 @@ This project includes the JavaScript Agent for AppDynamics synthetic monitoring 
 
 If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics.
 Use the second app key in the second environment's parameter store
+
+# Configuring Implicit Grant Locally
+
+Create an `.env` file in the project root with the following contents:
+
+```.env
+NUXT_ENV_OAUTH_CALLBACK_URL=http://localhost:3000/
+NUXT_ENV_OAUTH_CLIENT_ID={your client id here}
+```
 
 ## Build Setup
 
