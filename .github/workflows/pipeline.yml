@@ -21,7 +21,7 @@ jobs:
           echo "::set-env name=tf_working_dir::./terraform/dev/app"
           echo "::set-env name=client_id_param::/<APP_NAME>-dev/oauth_client_id"
           echo "::set-env name=callback_url_param::/<APP_NAME>-dev/callback_url"
-          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-prd/app_dynamics_key"
+          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-dev/app_dynamics_key"
           echo "::set-env name=template_id::sn"
 
       - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>, <STD_CHANGE_TEMPLATE_ID>
