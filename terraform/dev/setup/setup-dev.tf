@@ -39,10 +39,10 @@ module "setup" {
   client_id        = var.client_id
   custom_domain    = var.custom_domain
   app_dynamics_key = var.app_dynamics_key
-  tags             = {
+  tags = {
     env              = "dev"
     team             = "OIT-BYU-APPS-CUSTOM"
-    data-sensitivity = "confidential" // TODO update data-sensitivity (if needed)
+    data-sensitivity = "confidential"                         // TODO update data-sensitivity (if needed)
     repo             = "https://github.com/byu-oit/REPO_NAME" // TODO Update REPO_NAME
     app              = local.app_name
   }

@@ -2,7 +2,7 @@ variable "app_name" {
   type = string
 }
 variable "custom_domain" {
-  type = string
+  type    = string
   default = null
 }
 variable "client_id" {
@@ -12,7 +12,7 @@ variable "callback_url" {
   type = string
 }
 variable "app_dynamics_key" {
-  type = string
+  type    = string
   default = null
 }
 variable "tags" {
