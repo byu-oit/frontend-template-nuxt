@@ -21,7 +21,8 @@ locals {
     repo             = "https://github.com/byu-oit/<REPO_NAME>" # TODO fix to match your GitHub repo
     app              = local.app_name
     team             = "OIT-BYU-APPS-CUSTOM"
-    data-sensitivity = "confidential"
+    data-sensitivity = "confidential" // TODO Update if needed
+    env              = "prd"
   }
 }
 

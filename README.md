@@ -82,6 +82,7 @@ While waiting you can update the code in the repo:
     2) Change the Name, Description, and Author in package.json.
     3) Cycle through the **TODO**s to update (any TODOs that don't talk about replacing can be deleted. They are TODOs for this template only.)
         - `<APP_NAME>` - typically your repo name (keep it short if you can, there tends to be issues with longer names with some AWS resources)
+        - `<REPO_NAME>` - The full URL of the project's repository.
         - `<DEV_AWS_ACCT_NUM>` - the AWS account number for your dev account
         - `<PRD_AWS_ACCT_NUM>` - the AWS account number for your prd account
         - `<GITHUB_AWS_DEV_KEY_NAME>` - the name of the GitHub secret for dev AWS key (i.e. `byu_oit_customapps_dev_key`)
