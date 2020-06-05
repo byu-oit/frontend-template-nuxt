@@ -10,6 +10,8 @@ jobs:
   pipeline:
     name: Pipeline
     runs-on: ubuntu-latest
+    env:
+      TF_IN_AUTOMATION: 'true'
     steps:
       - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>, <APP_NAME>
         if: github.ref == 'refs/heads/dev'
@@ -106,6 +108,22 @@ jobs:
         id: plan
         run: terraform plan -input=false -out=plan
 
+      - name: Create new GitHub tag
+        if: github.ref == 'refs/heads/master'
+        id: new_tag
+        uses: butlerlogic/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          strategy: package
+          tag_prefix: "v"
+
+      - name: Check if tag was created
+        if: github.ref == 'refs/heads/master'
+        run: |
+          if [ "${{ steps.new_tag.outputs.tagcreated }}" != "yes" ]; then
+            exit 1
+          fi
+
       - name: Start Standard Change
         uses: byu-oit/github-action-start-standard-change@v1
         id: start-standard-change
@@ -119,16 +137,32 @@ jobs:
         run: terraform apply plan
 
       - name: Get Bucket name
-        id: tf_outputs
+        id: s3_tf_outputs
         working-directory: ${{ env.tf_working_dir }}
         run: terraform output s3_bucket
 
       - name: Copy dist to S3 site bucket
-        run: aws s3 sync dist s3://${{ steps.tf_outputs.outputs.stdout }}
+        run: aws s3 sync dist s3://${{ steps.s3_tf_outputs.outputs.stdout }}
 
-      # TODO: Add step to invalidate CloudFront cache.
+      - name: Get CloudFront distribution ID
+        id: cf_tf_outputs
+        working-directory: ${{ env.tf_working_dir }}
+        run: terraform output cf_distribution_id
 
-      # TODO: Tag release in GitHub.
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --path /* --distribution-id ${{ steps.cf_tf_outputs.outputs.stdout }}
+
+      - name: Create GitHub release
+        if: github.ref == 'refs/heads/master'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.new_tag.outputs.tagname }}
+          release_name: Release ${{ steps.new_tag.outputs.tagname }}
+          draft: false
+          prerelease: true # TODO: Change when ready to release
 
       - name: End Standard Change
         uses: byu-oit/github-action-end-standard-change@v1
@@ -149,4 +183,3 @@ jobs:
           channel: CEXRQ7VG9 #custom-code-bots
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }} # required
-

@@ -49,6 +49,7 @@ jobs:
     env:
       tf_version: '0.12.26'
       codecov_token: ${{ secrets.codecov_token }}
+      TF_IN_AUTOMATION: 'true'
 
     steps:
       - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>
