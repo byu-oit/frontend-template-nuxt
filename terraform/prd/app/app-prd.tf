@@ -35,7 +35,7 @@ data "aws_route53_zone" "hosted_zone" {
 }
 
 module "s3_site" {
-  source         = "github.com/byu-oit/terraform-aws-s3staticsite?ref=v2.0.0"
+  source         = "github.com/byu-oit/terraform-aws-s3staticsite?ref=v2.0.1"
   site_url       = local.url
   hosted_zone_id = data.aws_route53_zone.hosted_zone.zone_id
   s3_bucket_name = "${local.app_name}.byu.edu"
@@ -47,3 +47,6 @@ output "s3_bucket" {
   value = module.s3_site.site_bucket.bucket
 }
 
+output "cf_distribution_id" {
+  value = module.s3_site.cf_distribution.id
+}

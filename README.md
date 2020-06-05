@@ -145,6 +145,8 @@ environment and merging to `master` will automatically deploy to the production 
 - An RFC will automatically be opened and closed for the change.
 - The release will automatically be tagged in git and a release will be created for that tag in GitHub.
 - If you do not bump the version number before merging to `master`, the RFC will not start and the deployment will fail
+- You may see warnings on the workflow after a seemingly successful deployment. If they are from the 
+`butlerlogic/action-autotag@stable` action, they can be safely ignored. The maintainer has a bug in their logging.
 
 ## Configuring Implicit Grant Locally
 
