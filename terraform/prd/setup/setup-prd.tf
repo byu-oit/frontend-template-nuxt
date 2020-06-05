@@ -27,14 +27,25 @@ variable "app_dynamics_key" {
   default = null
 }
 
+locals {
+  app_name = "<APP_NAME>-dev" // TODO replace <APP_NAME>
+}
+
 module "setup" {
   source = "../../modules/setup"
 
-  app_name         = "<APP_NAME>-prd" // TODO replace <APP_NAME>
+  app_name         = local.app_name
   callback_url     = var.callback_url
   client_id        = var.client_id
   custom_domain    = var.custom_domain
   app_dynamics_key = var.app_dynamics_key
+  tags = {
+    env              = "prd"
+    team             = "OIT-BYU-APPS-CUSTOM"
+    data-sensitivity = "confidential"                         // TODO update data-sensitivity (if needed)
+    repo             = "https://github.com/byu-oit/REPO_NAME" // TODO Update REPO_NAME
+    app              = local.app_name
+  }
 }
 
 output "hosted_zone_id" {

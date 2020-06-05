@@ -43,13 +43,13 @@ jobs:
         with:
           token: ${{ secrets.codecov_token }}
 
-
   terraform-plan:
     name: Terraform fmt and plan
     runs-on: ubuntu-latest
     env:
-      tf_version: '0.12.24'
+      tf_version: '0.12.26'
       codecov_token: ${{ secrets.codecov_token }}
+      TF_IN_AUTOMATION: 'true'
 
     steps:
       - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>
@@ -92,7 +92,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ${{ env.tf_working_dir }}
         id: plan
-        run: terraform plan -input=false -out=plan
+        run: terraform plan -input=false -out=plan -no-color
 
       #TODO: Consider figuring out if there are any terraform changes and conditionally adding comment
       - uses: actions/github-script@0.9.0

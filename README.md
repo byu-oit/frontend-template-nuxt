@@ -31,6 +31,8 @@ This template includes the initial setup and scaffolding you need to create a fr
 
 ## Project Setup
 
+### Initial Setup
+
 1) Click the Green *Use this template* button at the top of the template repository. Then clone the repository and checkout a new branch called `dev`.
 2) Setup GitHub secrets
     1) Ask on the #github-actions slack channel to get secrets assigned to your newly created repo; something like:
@@ -82,6 +84,7 @@ While waiting you can update the code in the repo:
     2) Change the Name, Description, and Author in package.json.
     3) Cycle through the **TODO**s to update (any TODOs that don't talk about replacing can be deleted. They are TODOs for this template only.)
         - `<APP_NAME>` - typically your repo name (keep it short if you can, there tends to be issues with longer names with some AWS resources)
+        - `<REPO_NAME>` - The full URL of the project's repository.
         - `<DEV_AWS_ACCT_NUM>` - the AWS account number for your dev account
         - `<PRD_AWS_ACCT_NUM>` - the AWS account number for your prd account
         - `<GITHUB_AWS_DEV_KEY_NAME>` - the name of the GitHub secret for dev AWS key (i.e. `byu_oit_customapps_dev_key`)
@@ -97,7 +100,7 @@ While waiting you can update the code in the repo:
     * this should start the pipeline worklfows (dev and prd), which will each take 15-30 minutes to spin up the CloudFront distributions
 8) If all was successful, your site should be available at both dev and prd URLs 
        
-## AppDynamics Setup
+### AppDynamics Setup
 
 This project includes the JavaScript Agent for AppDynamics synthetic monitoring configured. To enable it:
 
@@ -109,7 +112,43 @@ This project includes the JavaScript Agent for AppDynamics synthetic monitoring 
 
 If you want dev and prd monitoring, you will have to have a second browser application made in AppDynamics. Use the second app key in the second environment's parameter store.
 
-# Configuring Implicit Grant Locally
+### Using a Custom URL
+
+Using a custom URL will require a bit of one-time configuration.
+This is due to the fact that BYU's DNS servers need to be updated manually to point new subdomains to AWS's Route53 Hosted Zones.
+
+You can use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) or create an Engineering task using the "Route53 Domain Redirect" template to request having your dev subdomain added to BYU's DNS servers.
+
+#### Using an exisiting domain name.
+**Transfering an old, existing URL to our new accounts and pipelines will cause ~20 minutes of downtime.** The total amount of downtime will depend on how long it takes you to complete steps 5-7.
+
+1) Go ahead and finish the steps in the setup without waiting for the Network team to finish changing the DNS.
+2) Your GitHub action pipeline workflow will create the certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
+3) If you're still waiting for the network team at this time then
+    * In the AWS Console, go to ACM and copy the validation CNAME record for the certificate. Put that in the old Route 53 hosted zone so the certificate can be validated (it can take 30 minutes for more for ACM to validate your certificate).
+4) Once that new certificate is validated, go to the old CloudFront distribution and remove the CNAME associated with it.
+5) Work with the network team to complete the ENG task you created.
+6) Trigger your pipeline again (in the pipeline workflow you should be able to rerun the pipeline job) so it builds your project, then you should be good to go.
+
+**Note**: If you get WSO2 errors after these steps, be sure to invalidate your CloudFront distribution's cache.
+
+## End Project Setup
+
+---------- Keep the sections below this line ----------
+
+## Deployment
+
+This project contains two branches: `dev` and `master`. Merging into `dev` will automatically deploy to the development 
+environment and merging to `master` will automatically deploy to the production environments. Notes about merging to 
+`master`:
+
+- An RFC will automatically be opened and closed for the change.
+- The release will automatically be tagged in git and a release will be created for that tag in GitHub.
+- If you do not bump the version number before merging to `master`, the RFC will not start and the deployment will fail
+- You may see warnings on the workflow after a seemingly successful deployment. If they are from the 
+`butlerlogic/action-autotag@stable` action, they can be safely ignored. The maintainer has a bug in their logging.
+
+## Configuring Implicit Grant Locally
 
 Create an `.env` file in the project root with the following contents:
 
@@ -136,27 +175,6 @@ $ yarn start
 # generate static project
 $ yarn run generate
 ```
-
-## Using a Custom URL
-
-Using a custom URL will require a bit of one-time configuration.
-This is due to the fact that BYU's DNS servers need to be updated manually to point new subdomains to AWS's Route53 Hosted Zones.
-
-You can use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) or create an Engineering task using the "Route53 Domain Redirect" template to request having your dev subdomain added to BYU's DNS servers.
-
-
-### Using an exisiting domain name.
-**Transfering an old, existing URL to our new accounts and pipelines will cause ~20 minutes of downtime.** The total amount of downtime will depend on how long it takes you to complete steps 5-7.
-
-1) Go ahead and finish the steps in the setup without waiting for the Network team to finish changing the DNS.
-2) Your GitHub action pipeline workflow will create the certificate in ACM, and add the validation CNAME's to that hosted zone. **You will get an error about the CloudFront distribution.** That is expected.
-3) If you're still waiting for the network team at this time then
-    * In the AWS Console, go to ACM and copy the validation CNAME record for the certificate. Put that in the old Route 53 hosted zone so the certificate can be validated (it can take 30 minutes for more for ACM to validate your certificate).
-4) Once that new certificate is validated, go to the old CloudFront distribution and remove the CNAME associated with it.
-5) Work with the network team to complete the ENG task you created.
-6) Trigger your pipeline again (in the pipeline workflow you should be able to rerun the pipeline job) so it builds your project, then you should be good to go.
-
-**Note**: If you get WSO2 errors after these steps, be sure to invalidate your CloudFront distribution's cache.
 
 ## Linting
 
