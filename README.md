@@ -132,9 +132,21 @@ You can use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a5
 
 **Note**: If you get WSO2 errors after these steps, be sure to invalidate your CloudFront distribution's cache.
 
-## Normal README (keep these sections)
+## End Project Setup
 
-### Configuring Implicit Grant Locally
+---------- Keep the sections below this line ----------
+
+## Deployment
+
+This project contains two branches: `dev` and `master`. Merging into `dev` will automatically deploy to the development 
+environment and merging to `master` will automatically deploy to the production environments. Notes about merging to 
+`master`:
+
+- An RFC will automatically be opened and closed for the change.
+- The release will automatically be tagged in git and a release will be created for that tag in GitHub.
+- If you do not bump the version number before merging to `master`, the RFC will not start and the deployment will fail
+
+## Configuring Implicit Grant Locally
 
 Create an `.env` file in the project root with the following contents:
 
@@ -143,7 +155,7 @@ NUXT_ENV_OAUTH_CALLBACK_URL=http://localhost:3000/
 NUXT_ENV_OAUTH_CLIENT_ID={your client id here}
 ```
 
-### Build Setup
+## Build Setup
 
 To run and build locally
 
@@ -162,6 +174,6 @@ $ yarn start
 $ yarn run generate
 ```
 
-### Linting
+## Linting
 
 This template include some pretty intense linting. It will be in your favor to be sure your IDE is set to use the JavaScript Standard Style as well as be sure children of the `<script>` tag are not indented.
