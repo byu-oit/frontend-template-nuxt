@@ -150,7 +150,7 @@ jobs:
         run: terraform output cf_distribution_id
 
       - name: Invalidate CloudFront cache
-        run: aws cloudfront create-invalidation --path /* --distribution-id ${{ steps.cf_tf_outputs.outputs.stdout }}
+        run: aws cloudfront create-invalidation --path '/*' --distribution-id ${{ steps.cf_tf_outputs.outputs.stdout }}
 
       - name: Create GitHub release
         if: github.ref == 'refs/heads/master'
