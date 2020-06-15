@@ -2,7 +2,8 @@
   <v-app>
     <byu-header>
       <span slot="site-title">
-        Frontend Template <!-- TODO change site title -->
+        Frontend Template
+        <!-- TODO change site title -->
         <span v-if="isSandbox" class="sandbox-notification">DEV</span>
       </span>
       <byu-user-info v-if="authenticated" slot="user">
@@ -12,7 +13,7 @@
       </byu-user-info>
     </byu-header>
 
-    <v-content>
+    <v-main>
       <v-container>
         <nuxt v-if="authenticated" />
         <v-row v-else align="center" justify="center">
@@ -22,7 +23,7 @@
           </h1>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
 
     <byu-footer />
   </v-app>
