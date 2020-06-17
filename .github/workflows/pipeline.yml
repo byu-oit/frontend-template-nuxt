@@ -142,6 +142,7 @@ jobs:
         run: terraform output s3_bucket
 
       - name: Copy dist to S3 site bucket
+        id: deploy
         run: aws s3 sync dist s3://${{ steps.s3_tf_outputs.outputs.stdout }}
 
       - name: Get CloudFront distribution ID
