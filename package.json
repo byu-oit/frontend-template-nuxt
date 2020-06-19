@@ -16,5 +16,10 @@
   },
   "dependencies": {
     "@byu-oit/nuxt-common": "^1.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn lint"
+    }
   }
 }
