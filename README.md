@@ -35,8 +35,7 @@ This template includes the initial setup and scaffolding you need to create a fr
 
 1) Click the Green *Use this template* button at the top of the template repository. Then clone the repository and checkout a new branch called `dev`.
 2) Setup GitHub secrets
-    1) Ask on the #github-actions slack channel to get secrets assigned to your newly created repo; something like:
-        `I need the GitHub secrets for the AWS Accounts: <dev account> and <prd account> associated with my new GitHub repo: <my new repo>`
+    1) Use this [order form](https://it.byu.edu/it?id=sc_cat_item&sys_id=d20809201b2d141069fbbaecdc4bcb84) to give your repo access to the secrets that will let it deploy into your AWS accounts. Fill out the form twice to give access to both your `dev` and `prd` accounts.
     2) Go to [codecov.io](https://codecov.io), login with your GitHub account, find your repo and copy the token.
         1) Copy the codecov token and [upload it to your github repo's secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name of `codecov_token`
         2) __(Optional)__ Add the Codecov badge (found under Settings->Badge in codecov for you repo) to the badge table at the top of this README. The badge copied from Codecov is only for master, but you can use the same code for the dev branch by replacing `master` with `dev`.  
