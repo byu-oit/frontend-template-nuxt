@@ -65,7 +65,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             terraform apply -var-file=dev.tfvars
             ```
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
-           Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
+           Add yourself as the technical contact, select Cname, and list the NS records found in Route 53 (from above step) in the "Aliases" field.
     4) Run terraform to setup the PRD environment
         1) Run `awslogin` and login to the prd account you want to deploy to.
         2) Run setup which uploads SSM parameters:
@@ -76,7 +76,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```
         3) **NOTE** if you're transferring an existing URL to a new Account see the [instructions below](#using-an-exisiting-domain-name) instead
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
-           Add yourself as the technical contact, select Cname and list the NS records found in Route 53 (from above step).
+           Add yourself as the technical contact, select Cname, and list the NS records found in Route 53 (from above step) in the "Aliases" field.
 5) Now we have to wait for the order forms to be completed by the networking team. 
 While waiting you can update the code in the repo:
     1) Customize this README.
