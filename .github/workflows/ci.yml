@@ -98,21 +98,11 @@ jobs:
       - name: Terraform Plan
         working-directory: ${{ env.tf_working_dir }}
         id: plan
-        run: terraform plan -input=false -out=plan -no-color
+        run: terraform plan -input=false -out=plan.tfplan -no-color
 
-      #TODO: Consider figuring out if there are any terraform changes and conditionally adding comment
-      - uses: actions/github-script@0.9.0
-        if: github.event_name == 'pull_request'
-        env:
-          STDOUT: "```${{ steps.plan.outputs.stdout }}```"
+      - name: Comment Terraform Plan
+        uses: byu-oit/github-action-tf-plan-comment@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: process.env.STDOUT
-            })
-      #Note: You can create an "issue" comment, that really goes on an PR
-      #TODO: Consider create a pull request review
+          working-directory: ${{ env.tf_working_dir }} # where your terraform files are
+          terraform-plan-file: plan.tfplan # relative to working directory
