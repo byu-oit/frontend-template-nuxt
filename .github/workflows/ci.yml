@@ -39,6 +39,11 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      # Even though we won't use the output of this build, there have been cases where `yarn test` ran fine
+      # but `yarn generate` failed. So we do an actual build here in CI
+      - name: Test Build
+        run: yarn generate
+
       - name: CodeCov
         uses: codecov/codecov-action@v1
         with:
