@@ -98,7 +98,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ${{ env.tf_working_dir }}
         id: plan
-        run: terraform plan -input=false -out=plan.tfplan -no-color
+        run: terraform plan -input=false -out=plan.tfplan
 
       - name: Comment Terraform Plan
         uses: byu-oit/github-action-tf-plan-comment@v1
