@@ -109,21 +109,7 @@ jobs:
         id: plan
         run: terraform plan -input=false -out=plan
 
-      - name: Create new GitHub tag
-        if: github.ref == 'refs/heads/master'
-        id: new_tag
-        uses: butlerlogic/action-autotag@stable
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          strategy: package
-          tag_prefix: "v"
 
-      - name: Check if tag was created
-        if: github.ref == 'refs/heads/master'
-        run: |
-          if [ "${{ steps.new_tag.outputs.tagcreated }}" != "yes" ]; then
-            exit 1
-          fi
 
       - name: Start Standard Change
         uses: byu-oit/github-action-start-standard-change@v1
@@ -154,18 +140,6 @@ jobs:
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation --path '/*' --distribution-id ${{ steps.cf_tf_outputs.outputs.stdout }}
 
-      - name: Create GitHub release
-        if: github.ref == 'refs/heads/master'
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.new_tag.outputs.tagname }}
-          release_name: Release ${{ steps.new_tag.outputs.tagname }}
-          draft: false
-          prerelease: true # TODO: Change when ready to release
-
       - name: End Standard Change
         uses: byu-oit/github-action-end-standard-change@v1
         if: ${{ always() && steps.start-standard-change.outcome == 'success' }} # Run if RFC started, even if the deploy failed
@@ -175,6 +149,22 @@ jobs:
           change-sys-id: ${{ steps.start-standard-change.outputs.change-sys-id }}
           work-start: ${{ steps.start-standard-change.outputs.work-start }}
           success: ${{ steps.deploy.outcome == 'success' }}
+
+      - name: Get Current Timestamp
+        id: date
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d_%H-%M-%S')"
+
+      - name: Create GitHub release
+        if: github.ref == 'refs/heads/master'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.date.outputs.timestamp }}
+          release_name: Release ${{ steps.new_tag.outputs.tagname }}
+          draft: false
+          prerelease: true # TODO: Change when ready to release
 
       - name: Send Slack Notification
         uses: byu-oit/github-action-slack@v1
