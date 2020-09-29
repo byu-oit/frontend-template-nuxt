@@ -162,7 +162,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.date.outputs.timestamp }}
-          release_name: Release ${{ steps.new_tag.outputs.tagname }}
+          release_name: Release ${{ steps.date.outputs.timestamp }}
           draft: false
           prerelease: true # TODO: Change when ready to release
 
