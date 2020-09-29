@@ -86,7 +86,7 @@ jobs:
       - name: Install
         if: |
           steps.yarn-cache.outputs.cache-hit != 'true' ||
-          steps.node-module-cache.outputs.cache-hit != 'true'
+          steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --unsafe-perm --prefer-offline
 
       - name: Build
