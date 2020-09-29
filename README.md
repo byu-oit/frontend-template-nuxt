@@ -40,11 +40,7 @@ This template includes the initial setup and scaffolding you need to create a fr
         1) Copy the codecov token and [upload it to your github repo's secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) with the name of `codecov_token`
         2) __(Optional)__ Add the Codecov badge (found under Settings->Badge in codecov for you repo) to the badge table at the top of this README. The badge copied from Codecov is only for master, but you can use the same code for the dev branch by replacing `master` with `dev`.  
 3) Create 2 new applications in WSO2 (one for dev and one for prd).
-    The application name should be something simple and unique (maybe the name of your repo) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable.
-    It'll look something like (be sure to include the protocol and trailing slash):
-    ```
-    https://<APP_NAME>.<AWS_ACCOUNT_NAME>.amazon.byu.edu/
-    ```
+    The application name should be something simple and unique (maybe the name of your repo) and the callback URL should be what you put inside your [app-dev.tf](terraform/dev/app/app-dev.tf) and [app-prd.tf](terraform/prd/app/app-prd.tf) files for `local.url` variable (be sure to include the protocol and trailing slash).
     1) Subscribe both applications you just made to the OpenID-Userinfo - v1 API.
     2) Generate sandbox keys for the dev application and production keys for the production application.
 4) AWS Setup *(this will create Route53 hosted zones in your aws accounts and upload SSM params)*
@@ -143,9 +139,6 @@ environment and merging to `master` will automatically deploy to the production 
 
 - An RFC will automatically be opened and closed for the change.
 - The release will automatically be tagged in git and a release will be created for that tag in GitHub.
-- If you do not bump the version number before merging to `master`, the RFC will not start and the deployment will fail
-- You may see warnings on the workflow after a seemingly successful deployment. If they are from the 
-`butlerlogic/action-autotag@stable` action, they can be safely ignored. The maintainer has a bug in their logging.
 
 ## Configuring Implicit Grant Locally
 

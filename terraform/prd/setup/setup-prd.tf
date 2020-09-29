@@ -1,6 +1,5 @@
 provider "aws" {
   region = "us-west-2"
-  version = "~> 3.0"
 }
 
 terraform {
@@ -11,6 +10,17 @@ terraform {
     key            = "<APP_NAME>/prd/setup.tfstate"               // TODO replace <APP_NAME>
     region         = "us-west-2"
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 2.3"
+    }
+  }
+  required_version = ">= 0.13.3"
 }
 
 variable "client_id" {
@@ -29,7 +39,7 @@ variable "app_dynamics_key" {
 }
 
 locals {
-  app_name = "<APP_NAME>-dev" // TODO replace <APP_NAME>
+  app_name = "<APP_NAME>-prd" // TODO replace <APP_NAME>
 }
 
 module "setup" {

@@ -1,6 +1,5 @@
 provider "aws" {
   region = "us-west-2"
-  version = "~> 3.0"
 }
 
 terraform {
@@ -11,6 +10,13 @@ terraform {
     key            = "<APP_NAME>/dev/app.tfstate"                 // TODO replace <APP_NAME>
     region         = "us-west-2"
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
+  required_version = ">= 0.13.3"
 }
 
 locals {
