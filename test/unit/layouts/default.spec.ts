@@ -26,9 +26,9 @@ const wrap = () =>
   })
 const wrapper = wrap()
 
-afterEach(() => $store.reset())
-
 describe('layouts/default', () => {
+  afterEach(() => $store.reset())
+
   test('exists', () => {
     $store.state.authenticated = false
     const wrapper = wrap()

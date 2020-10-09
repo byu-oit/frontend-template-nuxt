@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 export default {
-  mode: 'spa',
+  ssr: false,
   target: 'static',
 
   /*
@@ -26,10 +26,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: 'https://cdn.byu.edu/shared-icons/latest/favicons/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-      },
       {
         rel: 'stylesheet',
         href: 'https://cdn.byu.edu/byu-theme-components/2.x.x/byu-theme-components.min.css'
@@ -70,6 +66,14 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    treeShake: true,
+    customVariables: ['~/assets/variables.sass'],
+    defaultAssets: {
+      font: {
+        family: 'Roboto'
+      },
+      icons: 'mdi'
+    },
     theme: {
       themes: {
         light: {

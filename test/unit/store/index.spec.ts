@@ -22,11 +22,11 @@ localVue.use(Vuex)
 
 let store: Store<RootState>
 
-beforeEach(() => {
-  store = new Vuex.Store(cloneDeep(index))
-})
-
 describe('store/index', () => {
+  beforeEach(() => {
+    store = new Vuex.Store(cloneDeep(index))
+  })
+
   test('mutations/setToken', () => {
     expect(store.state.token).toEqual('')
 
