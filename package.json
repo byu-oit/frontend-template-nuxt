@@ -15,7 +15,14 @@
     "generate": "nuxt-ts generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^2.4.0"
+    "@byu-oit/nuxt-common": "^2.6.0"
+  },
+  "peerDependencies": {
+    "@nuxtjs/axios": "*",
+    "@vue/test-utils": "*",
+    "nuxt-property-decorator": "*",
+    "vuex": "*",
+    "vuex-mock-store": "*"
   },
   "husky": {
     "hooks": {
