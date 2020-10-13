@@ -22,8 +22,6 @@ terraform {
 locals {
   app_name = "<APP_NAME>"                // TODO replace <APP_NAME>
   url      = "${local.app_name}.byu.edu" // TODO double check if <APP_NAME>.byu.edu is what you want for your public URL
-  env      = "dev"
-  branch   = "dev"
   default_tags = {
     repo             = "https://github.com/byu-oit/<REPO_NAME>" # TODO fix to match your GitHub repo
     app              = local.app_name

@@ -72,16 +72,16 @@ jobs:
       - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>
         if: github.base_ref == 'dev'
         run: |
-          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}"
-          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}"
-          echo "::set-env name=tf_working_dir::./terraform/dev/app"
+          echo "aws_key=${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}" >> $GITHUB_ENV
+          echo "aws_secret=${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}" >> $GITHUB_ENV
+          echo "tf_working_dir=./terraform/dev/app" >> $GITHUB_ENV
 
       - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>
         if: github.base_ref == 'master'
         run: |
-          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}"
-          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}"
-          echo "::set-env name=tf_working_dir::./terraform/prd/app"
+          echo "aws_key=${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}" >> $GITHUB_ENV
+          echo "aws_secret=${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}" >> $GITHUB_ENV
+          echo "tf_working_dir=./terraform/prd/app" >> $GITHUB_ENV
 
       - name: Check out
         uses: actions/checkout@v2
