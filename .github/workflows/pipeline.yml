@@ -16,28 +16,28 @@ jobs:
       - name: Setup DEV Environment Variables # TODO replace <GITHUB_AWS_DEV_KEY_NAME>, <GITHUB_AWS_DEV_SECRET_NAME>, <APP_NAME>
         if: github.ref == 'refs/heads/dev'
         run: |
-          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}"
-          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}"
-          echo "::set-env name=std_change_key::${{ secrets.standard_change_sandbox_client_key }}"
-          echo "::set-env name=std_change_secret::${{ secrets.standard_change_sandbox_client_secret }}"
-          echo "::set-env name=tf_working_dir::./terraform/dev/app"
-          echo "::set-env name=client_id_param::/<APP_NAME>-dev/oauth_client_id"
-          echo "::set-env name=callback_url_param::/<APP_NAME>-dev/callback_url"
-          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-dev/app_dynamics_key"
-          echo "::set-env name=template_id::sn"
+          echo "aws_key=${{ secrets.<GITHUB_AWS_DEV_KEY_NAME> }}" >> $GITHUB_ENV
+          echo "aws_secret=${{ secrets.<GITHUB_AWS_DEV_SECRET_NAME> }}" >> $GITHUB_ENV
+          echo "std_change_key=${{ secrets.standard_change_sandbox_client_key }}" >> $GITHUB_ENV
+          echo "std_change_secret=${{ secrets.standard_change_sandbox_client_secret }}" >> $GITHUB_ENV
+          echo "tf_working_dir=./terraform/dev/app" >> $GITHUB_ENV
+          echo "client_id_param=/<APP_NAME>-dev/oauth_client_id" >> $GITHUB_ENV
+          echo "callback_url_param=/<APP_NAME>-dev/callback_url" >> $GITHUB_ENV
+          echo "app_dynamics_key_param=/<APP_NAME>-dev/app_dynamics_key" >> $GITHUB_ENV
+          echo "template_id=sn" >> $GITHUB_ENV
 
       - name: Setup PRD Environment Variables # TODO replace <GITHUB_AWS_PRD_KEY_NAME>, <GITHUB_AWS_PRD_SECRET_NAME>, <APP_NAME>, <STD_CHANGE_TEMPLATE_ID>
         if: github.ref == 'refs/heads/master'
         run: |
-          echo "::set-env name=aws_key::${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}"
-          echo "::set-env name=aws_secret::${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}"
-          echo "::set-env name=std_change_key::${{ secrets.standard_change_production_client_key }}"
-          echo "::set-env name=std_change_secret::${{ secrets.standard_change_production_client_secret }}"
-          echo "::set-env name=tf_working_dir::./terraform/prd/app"
-          echo "::set-env name=client_id_param::/<APP_NAME>-prd/oauth_client_id"
-          echo "::set-env name=callback_url_param::/<APP_NAME>-prd/callback_url"
-          echo "::set-env name=app_dynamics_key_param::/<APP_NAME>-prd/app_dynamics_key"
-          echo "::set-env name=template_id::<STD_CHANGE_TEMPLATE_ID>"
+          echo "aws_key=${{ secrets.<GITHUB_AWS_PRD_KEY_NAME> }}" >> $GITHUB_ENV
+          echo "aws_secret=${{ secrets.<GITHUB_AWS_PRD_SECRET_NAME> }}" >> $GITHUB_ENV
+          echo "std_change_key=${{ secrets.standard_change_production_client_key }}" >> $GITHUB_ENV
+          echo "std_change_secret=${{ secrets.standard_change_production_client_secret }}" >> $GITHUB_ENV
+          echo "tf_working_dir=./terraform/prd/app" >> $GITHUB_ENV
+          echo "client_id_param=/<APP_NAME>-prd/oauth_client_id" >> $GITHUB_ENV
+          echo "callback_url_param=/<APP_NAME>-prd/callback_url" >> $GITHUB_ENV
+          echo "app_dynamics_key_param=/<APP_NAME>-prd/app_dynamics_key" >> $GITHUB_ENV
+          echo "template_id=<STD_CHANGE_TEMPLATE_ID>" >> $GITHUB_ENV
 
       - name: Check out
         uses: actions/checkout@v2
