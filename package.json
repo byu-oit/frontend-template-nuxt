@@ -15,7 +15,7 @@
     "generate": "nuxt-ts generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^2.6.0"
+    "@byu-oit/nuxt-common": "^2.7.1"
   },
   "peerDependencies": {
     "@nuxtjs/axios": "*",
