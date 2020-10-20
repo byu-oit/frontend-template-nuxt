@@ -869,10 +869,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@byu-oit/nuxt-common@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-2.7.1.tgz#95839722556982cdbb9e43736e40ee6757b6d2c5"
-  integrity sha512-UVQtWruVfB5BoUIZafyvIc555o5tP2504iPzwB6/NzyTbtrW/dJnEydExyN5rgpnRFbmyxOFVCHcnVXj9F3nTA==
+"@byu-oit/nuxt-common@^2.7.3":
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-2.7.3.tgz#19605a23b0e6d2a933de121a5a2d9e1810413d66"
+  integrity sha512-NVNbUw05H4Q3oieW7xHykmO9CQ8I+cKj4GMeS/dNjSOuayQO1twPkqKPB5qxw8ZgBMwQb3ug1BKGPmLLxmeoHg==
   dependencies:
     "@babel/core" "^7.11.6"
     "@byuweb/browser-oauth" "^1.0.3"
