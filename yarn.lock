@@ -1010,10 +1010,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@byu-oit/nuxt-common@^2.7.5":
-  version "2.7.5"
-  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-2.7.5.tgz#12105f4d853d3695b24caa6b0806fcb0b1753122"
-  integrity sha512-HuTOq18vYYJYAmjNtlww1o65XsKnw5onCmUNoeZkLxVL0V1ty0aY7SUsikzATDO3npmaS39wKq72Es9JXt4UPQ==
+"@byu-oit/nuxt-common@^2.7.6":
+  version "2.7.6"
+  resolved "https://registry.yarnpkg.com/@byu-oit/nuxt-common/-/nuxt-common-2.7.6.tgz#9630be1588fc0ee90b36c0da03b50a57b0e86a45"
+  integrity sha512-sxmlAqGRfKpx1hX2uoA+BAcCVj9gqB2gPSoB9DdoPAsgKfiOeWhy5qDpjGdChaS9xuhNx1J6xzv3xC5xHxjx3g==
   dependencies:
     "@babel/core" "^7.12.3"
     "@byuweb/browser-oauth" "^1.0.3"
@@ -1027,7 +1027,7 @@
     "@nuxtjs/vuetify" "^1.11.2"
     "@testing-library/jest-dom" "^5.11.5"
     "@types/js-beautify" "^1.11.0"
-    "@types/lodash" "^4.14.162"
+    "@types/lodash" "^4.14.164"
     "@types/lru-cache" "^5.1.0"
     "@types/superagent" "^4.1.10"
     "@types/vue-moment" "^4.0.1"
@@ -1036,14 +1036,14 @@
     "@vue/cli-plugin-unit-jest" "^4.5.8"
     "@vue/eslint-config-standard" "^5.1.2"
     "@vue/eslint-config-typescript" "^7.0.0"
-    "@vue/server-test-utils" "^1.1.0"
-    "@vue/test-utils" "^1.1.0"
+    "@vue/server-test-utils" "^1.1.1"
+    "@vue/test-utils" "^1.1.1"
     babel-polyfill "^6.26.0"
     dotenv "^8.2.0"
     dynamic-import-polyfill "^0.1.1"
     eslint "^7.12.1"
-    eslint-config-prettier "^6.14.0"
-    eslint-config-standard "^15.0.0"
+    eslint-config-prettier "^6.15.0"
+    eslint-config-standard "^16.0.1"
     eslint-plugin-import "^2.22.1"
     eslint-plugin-jest "^24.1.0"
     eslint-plugin-node "^11.1.0"
@@ -1991,10 +1991,10 @@
   resolved "https://registry.yarnpkg.com/@types/less/-/less-3.0.1.tgz#625694093c72f8356c4042754e222407e50d6b08"
   integrity sha512-dBp05MtWN/w1fGVjj5LVrDw6VrdYllpWczbUkCsrzBj08IHsSyRLOFvUrCFqZFVR+nsqkrRLNg6oOlvqMLPaSA==
 
-"@types/lodash@^4.14.162":
-  version "4.14.162"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.162.tgz#65d78c397e0d883f44afbf1f7ba9867022411470"
-  integrity sha512-alvcho1kRUnnD1Gcl4J+hK0eencvzq9rmzvFPRmP5rPHx9VVsJj6bKLTATPVf9ktgv4ujzh7T+XWKp+jhuODig==
+"@types/lodash@^4.14.164":
+  version "4.14.165"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.165.tgz#74d55d947452e2de0742bad65270433b63a8c30f"
+  integrity sha512-tjSSOTHhI5mCHTy/OOXYIhi2Wt1qcbHmuXD1Ha7q70CgI/I71afO4XtLb/cVexki1oVYchpul/TOuu3Arcdxrg==
 
 "@types/lru-cache@^5.1.0":
   version "5.1.0"
@@ -2483,18 +2483,18 @@
   dependencies:
     vue-eslint-parser "^7.0.0"
 
-"@vue/server-test-utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@vue/server-test-utils/-/server-test-utils-1.1.0.tgz#90d67ebe71c2e1e3715fb3fc0c7c999d94bf26ee"
-  integrity sha512-LhkNnKhxOOH2lsTppaa7UC2XMqJmwgg/bpdyBevvX85w/y41LIR1q1tuEJaQOtqPaVbaQQYDDf0b+wHoTUUQZg==
+"@vue/server-test-utils@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@vue/server-test-utils/-/server-test-utils-1.1.1.tgz#f01332688b8c65f62a723450ff8b393eb04ac378"
+  integrity sha512-WD1n7lCWftqWAcNUq5PDd1wHVpEtyxr3Wf9DeNePvzv3/USHjg3NR3d2eP6o7tgjobOVHP+wn14XuUyyyT2UYg==
   dependencies:
     "@types/cheerio" "^0.22.10"
     cheerio "^1.0.0-rc.2"
 
-"@vue/test-utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.1.0.tgz#76305e73a786c921ede1352849614e26c7113f94"
-  integrity sha512-M+3jtVqNYIrvzO5gaxogre5a5+96h0hN/dXw+5Lj0t+dp6fAhYcUjpLrC9j9cEEkl2Rcuh/gKYRUmR5N4vcqPw==
+"@vue/test-utils@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.1.1.tgz#01c3e4b22ed2b85d2e276b34d32c8ac4b726e452"
+  integrity sha512-/32538ilZ9qSiu1gui7zfBn+IFy+zoTaQTZ1qiLfQXzZtaeAD23kJMrnqaoe2w8JzJoXuqHUl2ruuStG8rwFYQ==
   dependencies:
     dom-event-types "^1.0.0"
     lodash "^4.17.15"
@@ -5132,7 +5132,7 @@ eslint-ast-utils@^1.1.0:
     lodash.get "^4.4.2"
     lodash.zip "^4.2.0"
 
-eslint-config-prettier@^6.14.0:
+eslint-config-prettier@^6.15.0:
   version "6.15.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.15.0.tgz#7f93f6cb7d45a92f1537a70ecc06366e1ac6fed9"
   integrity sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw==
@@ -5144,10 +5144,10 @@ eslint-config-standard@^14.1.0, eslint-config-standard@^14.1.1:
   resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-14.1.1.tgz#830a8e44e7aef7de67464979ad06b406026c56ea"
   integrity sha512-Z9B+VR+JIXRxz21udPTL9HpFMyoMUEeX1G251EQ6e05WD9aPVtVBn09XUmZ259wCMlCDmYDSZG62Hhm+ZTJcUg==
 
-eslint-config-standard@^15.0.0:
-  version "15.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-15.0.1.tgz#1262eafaba66f4f03fdf3cf655a28aa8b40868b7"
-  integrity sha512-UGorkix49kBium7Y124o2U9Qy7Lpa+nO0FsaqQSIPeno5hGNxZtSBJbqJX6gtpYfDFWCtqCAN9wyK+oDd9jT7Q==
+eslint-config-standard@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-16.0.1.tgz#9a385eea27f96b7918cb53f07e01e9d10cc56401"
+  integrity sha512-WBBiQQZdaPyL+4sPkGWhWrHCDtvJoU195B9j8yXE9uFQnX34gMXI5CeBRm95gx3PMEZPM5OpwET10hH4F4SxCA==
 
 eslint-import-resolver-node@^0.3.3, eslint-import-resolver-node@^0.3.4:
   version "0.3.4"
