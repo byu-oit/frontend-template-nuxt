@@ -8,7 +8,7 @@
       </span>
       <byu-user-info v-if="authenticated" slot="user">
         <a slot="login" href="#">Sign In</a>
-        <a slot="logout" href="//api.byu.edu/logout">Sign Out</a>
+        <a slot="logout" href="#" @click.stop.prevent="logout">Sign Out</a>
         <span slot="user-name">{{ username }}</span>
       </byu-user-info>
     </byu-header>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { Component, Getter, State, Vue } from 'nuxt-property-decorator'
+import * as authn from '@byuweb/browser-oauth'
 import { User } from '~/types'
 
 @Component
@@ -41,6 +42,10 @@ export default class DefaultLayout extends Vue {
 
   get isSandbox() {
     return this.user?.rawUserInfo?.['http://wso2.org/claims/keytype'] === 'SANDBOX'
+  }
+
+  logout() {
+    authn.logout()
   }
 }
 </script>
