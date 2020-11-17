@@ -16,6 +16,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-trailing-spaces': 'warn',
     'prettier/prettier': ['warn', { semi: false, singleQuote: true }],
+    'vue/valid-v-slot': ['error', { allowModifiers: true }], // Vuetify uses slot modifiers
     'vuetify/no-deprecated-classes': 'warn'
   },
   plugins: ['vuetify', 'prettier']
