@@ -3,6 +3,15 @@ name: CD Pipeline
 on:
   push:
     branches: [ master, dev ]
+    paths-ignore:
+      - '.dependabot/config.yml'
+      - '__mocks__/**'
+      - 'qaTest/**'
+      - 'test/**'
+      - 'README.md'
+      - '.editorconfig'
+      - '.gitignore'
+      - 'jest.config.js'
 env:
   tf_version: '0.13.3'
 
@@ -98,7 +107,12 @@ jobs:
         run: yarn generate
 
       - name: Test
-        run: yarn test
+        run: yarn test --coverage
+
+      - name: CodeCov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.codecov_token }}
 
       - name: Lint
         run: yarn lint

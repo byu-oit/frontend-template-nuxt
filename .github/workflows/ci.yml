@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize, edited, reopened]
     branches: [ master, dev ]
+    paths-ignore:
+      - '.dependabot/config.yml'
+      - 'README.md'
+      - '.editorconfig'
 
 jobs:
   build-test:
