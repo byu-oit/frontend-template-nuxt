@@ -84,7 +84,6 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install
-        if: |
         run: yarn install --unsafe-perm --prefer-offline --frozen-lockfile
 
       - name: Build
