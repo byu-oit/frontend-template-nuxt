@@ -1,0 +1,47 @@
+repository:
+  topics: byu-apps-custom, frontend
+  private: true
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  default_branch: master
+
+teams:
+  - name: byu-apps-custom-code
+    permission: push
+  - name: byu-apps-custom-code-fte
+    permission: admin
+
+branches:
+  - name: master
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: false
+        require_code_owner_reviews: true
+        dismissal_restrictions:
+          users: [ ]
+          teams: [ ]
+      required_status_checks:
+        strict: true
+      enforce_admins: true
+      restrictions:
+        apps: [ ]
+        users: [ ]
+        teams: [ ]
+  - name: dev
+      protection:
+        required_pull_request_reviews:
+          required_approving_review_count: 1
+          dismiss_stale_reviews: false
+          require_code_owner_reviews: true
+          dismissal_restrictions:
+            users: [ ]
+            teams: [ ]
+        required_status_checks:
+          strict: true
+        enforce_admins: true
+        restrictions:
+          apps: [ ]
+          users: [ ]
+          teams: [ ]
