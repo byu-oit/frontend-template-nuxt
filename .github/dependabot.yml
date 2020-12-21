@@ -1,0 +1,20 @@
+version: 2
+
+updates:
+  # UI
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "blakemorgan" # TODO replace
+    # target-branch: "dev" # TODO uncomment
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/" # For GitHub Actions, set the directory to / to check for workflow files in .github/workflows. (GitHub Docs)
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "blakemorgan" # TODO replace
+    # target-branch: "dev" # TODO uncomment
