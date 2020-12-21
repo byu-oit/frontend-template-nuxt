@@ -123,7 +123,13 @@ jobs:
         id: plan
         run: terraform plan -input=false -out=plan
 
-
+      - name: Analyze Terraform Plan
+        uses: byu-oit/github-action-tf-plan-analyzer@v2.0.2
+        with:
+          divvycloud-username: ${{ secrets.DIVVYCLOUD_USERNAME }}
+          divvycloud-password: ${{ secrets.DIVVYCLOUD_PASSWORD }}
+          working-directory: ${{ env.tf_working_dir }}
+          terraform-plan-file: plan
 
       - name: Start Standard Change
         uses: byu-oit/github-action-start-standard-change@v1
