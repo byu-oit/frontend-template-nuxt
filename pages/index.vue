@@ -6,7 +6,7 @@
         <vuetify-logo />
       </div>
       <v-card>
-        <v-card-title class="headline">
+        <v-card-title class="text-h5">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
         <v-card-text>
