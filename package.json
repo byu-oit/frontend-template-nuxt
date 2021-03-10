@@ -9,13 +9,13 @@
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "test": "jest",
-    "dev": "nuxt-ts",
-    "build": "nuxt-ts build",
-    "start": "nuxt-ts start",
-    "generate": "nuxt-ts generate"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^2.9.12"
+    "@byu-oit/nuxt-common": "^2.10.1"
   },
   "//peerDependenciesComment": "The 'peerDependencies' section is only to help IDE autocompletion. It should only list a few necessary sub-dependencies from @byu-oit/nuxt-common",
   "peerDependencies": {
