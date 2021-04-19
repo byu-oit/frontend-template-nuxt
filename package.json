@@ -15,7 +15,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@byu-oit/nuxt-common": "^2.10.5"
+    "@byu-oit/nuxt-common": "^2.10.6"
   },
   "//peerDependenciesComment": "The 'peerDependencies' section is only to help IDE autocompletion. It should only list a few necessary sub-dependencies from @byu-oit/nuxt-common",
   "peerDependencies": {
