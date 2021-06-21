@@ -67,7 +67,7 @@ jobs:
           # echo "::set-output name=app_dynamics_key::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
           node-version: '12'
 
@@ -75,7 +75,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v2
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -124,7 +124,7 @@ jobs:
         run: terraform plan -input=false -out=plan
 
       - name: Analyze Terraform Plan
-        uses: byu-oit/github-action-tf-plan-analyzer@v2.0.3
+        uses: byu-oit/github-action-tf-plan-analyzer@v2
         with:
           divvycloud-username: ${{ secrets.DIVVYCLOUD_USERNAME }}
           divvycloud-password: ${{ secrets.DIVVYCLOUD_PASSWORD }}
