@@ -49,7 +49,7 @@ jobs:
         run: yarn generate
 
       - name: CodeCov
-        uses: codecov/codecov-action@v2.0.1
+        uses: codecov/codecov-action@v2.0.2
         with:
           token: ${{ secrets.codecov_token }}
 
