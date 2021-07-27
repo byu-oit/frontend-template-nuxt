@@ -1,21 +1,9 @@
 import { createLocalVue } from '@vue/test-utils'
-import Vuex, { Store } from 'vuex'
 import { cloneDeep } from 'lodash'
-import { RootState, User } from '~/types'
+import Vuex, { Store } from 'vuex'
 import * as index from '~/store/index'
-
-const dummyUser: User = {
-  email: 'test@test.com',
-  byuId: '123-456-7890',
-  name: {
-    displayName: 'Dummy User'
-  }
-}
-
-const namelessUser: User = {
-  email: 'noname@test.com',
-  byuId: '999-999-9999'
-}
+import { objects } from '~/test/helpers'
+import { RootState } from '~/types'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -39,24 +27,24 @@ describe('store/index', () => {
     expect(store.state.user).toEqual({})
     expect(store.getters.username).toEqual('')
 
-    store.commit('authenticate', dummyUser)
+    store.commit('authenticate', objects.user)
 
-    expect(store.state.user).toEqual(dummyUser)
-    expect(store.getters.username).toEqual(dummyUser.name!.displayName)
+    expect(store.state.user).toEqual(objects.user)
+    expect(store.getters.username).toEqual(objects.user.name?.displayName)
   })
 
   test('mutations/authenticate without username', () => {
-    store.commit('authenticate', namelessUser)
+    store.commit('authenticate', objects.namelessUser)
 
-    expect(store.state.user).toEqual(namelessUser)
+    expect(store.state.user).toEqual(objects.namelessUser)
     expect(store.getters.username).toEqual('')
   })
 
   test('actions/authenticate', async () => {
-    await store.dispatch('authenticate', dummyUser)
+    await store.dispatch('authenticate', objects.user)
 
     expect(store.state.authenticated).toBe(true)
-    expect(store.state.user).toEqual(dummyUser)
-    expect(store.getters.username).toEqual(dummyUser.name!.displayName)
+    expect(store.state.user).toEqual(objects.user)
+    expect(store.getters.username).toEqual(objects.user.name?.displayName)
   })
 })

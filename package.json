@@ -4,10 +4,9 @@
   "description": "BYU Apps Custom frontend Nuxt project template.",
   "author": "BYU Apps Custom",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
-    "generate:ts": "node ts-gen.js",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint",
+    "lint": "eslint --cache --ext .ts,.js,.vue --ignore-path .gitignore .",
     "test": "jest",
     "dev": "nuxt",
     "build": "nuxt build",
@@ -24,10 +23,5 @@
     "nuxt-property-decorator": "*",
     "vuex": "*",
     "vuex-mock-store": "*"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn lint"
-    }
   }
 }

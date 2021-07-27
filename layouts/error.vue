@@ -22,7 +22,7 @@ export default class ErrorLayout extends Vue {
   pageNotFound: string = '404 Not Found'
   otherError: string = 'An error occurred'
 
-  head() {
+  head () {
     const title =
       // @ts-ignore using generic object type
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError

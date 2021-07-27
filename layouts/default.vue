@@ -40,11 +40,11 @@ export default class DefaultLayout extends Vue {
   @State user!: User
   @Getter username!: string
 
-  get isSandbox() {
+  get isSandbox () {
     return this.user?.rawUserInfo?.['http://wso2.org/claims/keytype'] === 'SANDBOX'
   }
 
-  logout() {
+  logout () {
     authn.logout()
   }
 }

@@ -14,6 +14,9 @@ on:
       - 'jest.config.js'
 env:
   tf_version: '0.13.3'
+  app_working_dir: '.'
+  FORCE_COLOR: 3
+  node_version: '14.x'
 
 jobs:
   pipeline:
@@ -69,22 +72,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '12'
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+          node-version: ${{ env.node_version }}
 
       - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node-
 
       - name: Install
-        run: yarn install --unsafe-perm --prefer-offline --frozen-lockfile
+        working-directory: ${{ env.app_working_dir }}
+        run: npm ci --prefer-offline
 
       - name: Build
         env:
@@ -92,18 +91,19 @@ jobs:
           NUXT_ENV_OAUTH_CLIENT_ID: ${{ steps.ssm.outputs.client_id }}
           NUXT_ENV_OAUTH_CALLBACK_URL: ${{ steps.ssm.outputs.callback_url }}
           # NUXT_ENV_APP_DYNAMICS_KEY: ${{ steps.ssm.outputs.app_dynamics_key }}
-        run: yarn generate
+        run: npm run build
 
       - name: Test
-        run: yarn test --coverage
+        run: npm run test --coverage
 
       - name: CodeCov
         uses: codecov/codecov-action@v2.0.1
+        if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           token: ${{ secrets.codecov_token }}
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Terraform Setup
         uses: hashicorp/setup-terraform@v1

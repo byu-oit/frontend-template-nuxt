@@ -32,9 +32,9 @@
           <div class="text-right">
             <em><small>&mdash; John Leider</small></em>
           </div>
-          <hr class="my-3" />
+          <hr class="my-3">
           <a href="https://nuxtjs.org/" target="_blank">Nuxt Documentation</a>
-          <br />
+          <br>
           <a href="https://github.com/nuxt/nuxt.js" target="_blank">Nuxt GitHub</a>
         </v-card-text>
         <v-card-actions>
@@ -60,7 +60,7 @@ import VuetifyLogo from '~/components/VuetifyLogo.vue'
   }
 })
 export default class IndexPage extends Vue {
-  head(this: IndexPage): object {
+  head (this: IndexPage): object {
     return {
       title: 'Home'
     }

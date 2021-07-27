@@ -2,20 +2,19 @@ require('dotenv').config()
 
 export default {
   ssr: false,
-  target: 'static',
 
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: pageTitle => (pageTitle ? `${pageTitle} - ` : '') + 'PROJECT NAME', // TODO change PROJECT_NAME
+    titleTemplate: (pageTitle: string): string => (pageTitle ? `${pageTitle} - ` : '') + 'PROJECT NAME', // TODO change PROJECT_NAME
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: process.env.npm_package_description ?? ''
       }
     ],
     script: [
@@ -56,7 +55,10 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: 'https://api.byu.edu/MAIN_API_BASE', // TODO: If most of your API endpoints start from a common base, then set it here
+    https: true
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -91,12 +93,15 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    // eslint-disable-next-line
-    extend (config, { isDev, isClient }) {
+    extend (config: { devtool?: string }, { isDev, isClient }: { isDev: boolean, isClient: boolean }): void {
       if (isDev) {
         config.devtool = isClient ? 'source-map' : 'inline-source-map'
       }
     }
   },
-  buildModules: ['@byu-oit/nuxt-common']
+  buildModules: ['@byu-oit/nuxt-common'],
+  ignore: [
+    '**/*.spec.*',
+    './__mocks__/**'
+  ]
 }

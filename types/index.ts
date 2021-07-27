@@ -9,5 +9,6 @@ export interface User {
   email?: string
   byuId?: string
   name?: UserNameObject
-  rawUserInfo?: any
+  netId?: string
+  rawUserInfo?: Record<string, unknown>
 }

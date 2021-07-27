@@ -8,21 +8,21 @@ export const state = (): RootState => ({
 })
 
 export const getters: GetterTree<RootState, RootState> = {
-  username: state => state.user?.name?.displayName || state.user?.name?.givenName || ''
+  username: state => (state.user?.name?.displayName ?? state.user?.name?.givenName) ?? ''
 }
 
 export const mutations: MutationTree<RootState> = {
-  setToken(state: RootState, token: string) {
+  setToken (state: RootState, token: string) {
     state.token = token
   },
-  authenticate(state, user: User) {
+  authenticate (state, user: User) {
     state.authenticated = true
     state.user = user
   }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  authenticate({ commit }, user: User) {
+  authenticate ({ commit }, user: User) {
     commit('authenticate', user)
   }
 }

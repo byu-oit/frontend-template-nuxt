@@ -1,9 +1,9 @@
-import { createLocalVue, mount } from '@vue/test-utils'
-import { Store } from 'vuex-mock-store'
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import { state as indexState } from '~/store/index'
+import { Store } from 'vuex-mock-store'
 import layout from '~/layouts/default.vue'
+import { state as indexState } from '~/store/index'
 
 const stubs = ['byu-header', 'byu-user-info', 'byu-menu', 'nuxt-link', 'nuxt', 'byu-footer']
 
@@ -17,7 +17,7 @@ const mocks = { $store, $nuxt: { $route: { path: '/' } } }
 
 // Need to test different initial conditions in some tests, so
 // expose "wrap" as its own function
-const wrap = () =>
+const wrap = (): Wrapper<Vue> =>
   mount(layout, {
     mocks,
     stubs,

@@ -7,7 +7,7 @@ const tsSourceCode = CodeGen.getTypescriptCode({
   className: 'Test',
   swagger
 })
-fs.writeFile('types/client.ts', tsSourceCode, err => {
-  if (err) throw err
+fs.writeFile('types/client.ts', tsSourceCode, (err) => {
+  if (err) { throw err }
   console.log('Typescript client written')
 })
