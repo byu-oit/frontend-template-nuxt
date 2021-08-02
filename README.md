@@ -142,7 +142,7 @@ environment and merging to `master` will automatically deploy to the production 
 
 ## Configuring Implicit Grant Locally
 
-Create an `.env` file in the project root with the following contents:
+Create an `.env` file in the `src` folder with the following contents:
 
 ```.env
 NUXT_ENV_OAUTH_CALLBACK_URL=http://localhost:3000/
@@ -151,7 +151,7 @@ NUXT_ENV_OAUTH_CLIENT_ID={your client id here}
 
 ## Build Setup
 
-To run and build locally
+To run and build locally from the `src` directory
 
 ``` bash
 # install dependencies

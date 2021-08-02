@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened, synchronize, edited, reopened]
     branches: [ master, dev ]
-    paths-ignore:
-      - '.dependabot/config.yml'
-      - 'README.md'
-      - '.editorconfig'
+    paths:
+      - 'src/**'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/pipeline.yml'
 env:
-  app_working_dir: '.'
+  app_working_dir: './src'
   FORCE_COLOR: 3
   node_version: '14.x'
 

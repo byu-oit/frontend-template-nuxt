@@ -4,18 +4,19 @@ on:
   push:
     branches: [ master, dev ]
     paths-ignore:
-      - '.dependabot/config.yml'
-      - '__mocks__/**'
-      - 'qaTest/**'
-      - 'test/**'
-      - 'README.md'
       - '.editorconfig'
+      - '.github/dependabot.yml'
       - '.gitignore'
-      - 'jest.config.js'
+      - 'README.md'
+      - 'src/__mocks__/**'
+      - 'src/jest.config.js'
+      - 'src/qaTest/**'
+      - 'src/test/**'
 env:
-  tf_version: '0.13.3'
-  app_working_dir: '.'
+  app_working_dir: './src'
   FORCE_COLOR: 3
+  TF_IN_AUTOMATION: 'true'
+  tf_version: '1.0.2'
   node_version: '14.x'
 
 jobs:
