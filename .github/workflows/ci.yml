@@ -56,7 +56,7 @@ jobs:
         run: npm run test --coverage
 
       - name: CodeCov
-        uses: codecov/codecov-action@v2.0.1
+        uses: codecov/codecov-action@v2.0.2
         if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           token: ${{ secrets.codecov_token }}
