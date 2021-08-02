@@ -86,9 +86,6 @@ sw.*
 # Mac OSX
 .DS_Store
 
-# OAuth creds
-static/config.json
-
 # Terraform
 /terraform/**/.terraform/
 /terraform/**/*.tfvars

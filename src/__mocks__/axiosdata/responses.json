@@ -1,0 +1,15 @@
+{
+  "get": {
+    "https://api.byu.edu/byuapi/identities/v2/?net_ids=exists": {
+      "values": ["Net ID exists"]
+    },
+    "https://api.byu.edu/byuapi/identities/v2/?net_ids=doesnotexist": {
+      "values": []
+    }
+  },
+  "post": {
+    "/?param1=test&param2=other": {
+      "response": ["foo"]
+    }
+  }
+}

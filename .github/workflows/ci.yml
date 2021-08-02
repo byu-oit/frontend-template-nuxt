@@ -4,54 +4,114 @@ on:
   pull_request:
     types: [opened, synchronize, edited, reopened]
     branches: [ master, dev ]
-    paths-ignore:
-      - '.dependabot/config.yml'
-      - 'README.md'
-      - '.editorconfig'
+    paths:
+      - 'src/**'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/pipeline.yml'
+env:
+  app_working_dir: './src'
+  FORCE_COLOR: 3
+  node_version: '14.x'
 
 jobs:
-  build-test:
-    name: Build, Test, and Lint
+  app-audit:
+    name: Audit App
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node_version }}
+
+      - name: npm audit
+        working-directory: ${{ env.app_working_dir }}
+        run: npm audit --audit-level=critical
+
+  app-test:
+    name: Test App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '12'
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+          node-version: ${{ env.node_version }}
 
       - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-node-
 
       - name: Install
-        run: yarn install --unsafe-perm --prefer-offline --frozen-lockfile
+        working-directory: ${{ env.app_working_dir }}
+        run: npm ci --prefer-offline
 
       - name: Test
-        run: yarn test --coverage
-
-      - name: Lint
-        run: yarn lint
-
-      # Even though we won't use the output of this build, there have been cases where `yarn test` ran fine
-      # but `yarn generate` failed. So we do an actual build here in CI
-      - name: Test Build
-        run: yarn generate
+        working-directory: ${{ env.app_working_dir }}
+        run: npm run test --coverage
 
       - name: CodeCov
         uses: codecov/codecov-action@v2.0.2
+        if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           token: ${{ secrets.codecov_token }}
+
+  app-lint:
+    name: Lint App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node_version }}
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install
+        working-directory: ${{ env.app_working_dir }}
+        run: npm ci --prefer-offline
+
+      - name: Lint
+        working-directory: ${{ env.app_working_dir }}
+        run: npm run lint
+
+  app-build:
+    name: Build App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node_version }}
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install App
+        working-directory: ${{ env.app_working_dir }}
+        run: npm ci --prefer-offline
+
+      - name: Build App
+        working-directory: ${{ env.app_working_dir }}
+        run: npm run build
 
   terraform-plan:
     name: Terraform fmt and plan
