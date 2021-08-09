@@ -7,7 +7,7 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "blakemorgan" # TODO replace
+      - "snelg" # TODO replace
     # target-branch: "dev" # TODO uncomment
 
   # GitHub Actions
@@ -16,5 +16,5 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "blakemorgan" # TODO replace
+      - "snelg" # TODO replace
     # target-branch: "dev" # TODO uncomment
