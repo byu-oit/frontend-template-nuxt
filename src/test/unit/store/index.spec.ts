@@ -12,7 +12,7 @@ let store: Store<RootState>
 
 describe('store/index', () => {
   beforeEach(() => {
-    store = new Vuex.Store(cloneDeep(index))
+    store = new Store(cloneDeep(index))
   })
 
   test('mutations/setToken', () => {

@@ -8,6 +8,9 @@ module.exports = {
   plugins: [
     'vuetify'
   ],
+  settings: {
+    'import/ignore': ['vuex'] // "import/named" rule doesn't play nice with vuex 3
+  },
   rules: {
     camelcase: 'off',
     'no-console': process.env.GITHUB_ACTIONS === true ? 'error' : 'off',
