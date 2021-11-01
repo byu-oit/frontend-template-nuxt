@@ -154,7 +154,7 @@ jobs:
 
       - name: Copy dist to S3 site bucket
         id: deploy
-        run: aws s3 sync dist s3://${{ steps.s3_tf_outputs.outputs.stdout }}
+        run: aws s3 sync ${{ env.app_working_dir }}/dist s3://${{ steps.s3_tf_outputs.outputs.stdout }}
 
       - name: Get CloudFront distribution ID
         id: cf_tf_outputs
