@@ -2,7 +2,7 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <div class="text-center">
-        <logo />
+        <vue-logo />
         <vuetify-logo />
       </div>
       <v-card>
@@ -50,12 +50,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Logo from '~/components/Logo.vue'
+import VueLogo from '~/components/VueLogo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 @Component({
   components: {
-    Logo,
+    VueLogo,
     VuetifyLogo
   }
 })

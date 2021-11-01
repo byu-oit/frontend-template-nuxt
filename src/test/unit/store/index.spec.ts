@@ -1,5 +1,5 @@
 import { createLocalVue } from '@vue/test-utils'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 import Vuex, { Store } from 'vuex'
 import * as index from '~/store/index'
 import { objects } from '~/test/helpers'
