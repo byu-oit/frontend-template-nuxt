@@ -53,7 +53,7 @@ jobs:
 
       - name: Test
         working-directory: ${{ env.app_working_dir }}
-        run: npm run test --coverage
+        run: npm run test -- --coverage
 
       - name: CodeCov
         uses: codecov/codecov-action@v2.0.2
