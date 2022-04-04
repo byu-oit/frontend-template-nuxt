@@ -71,7 +71,7 @@ jobs:
           # echo "::set-output name=app_dynamics_key::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3.1.0
         with:
           node-version: ${{ env.node_version }}
 
