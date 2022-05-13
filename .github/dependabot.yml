@@ -7,7 +7,8 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "snelg" # TODO replace
+      - byu-oit/byu-apps-full-stack
+      - byu-oit/devx
     # target-branch: "dev" # TODO uncomment
 
   # GitHub Actions
@@ -16,5 +17,6 @@ updates:
     schedule:
       interval: "weekly"
     reviewers:
-      - "snelg" # TODO replace
+      - byu-oit/byu-apps-full-stack
+      - byu-oit/devx
     # target-branch: "dev" # TODO uncomment
