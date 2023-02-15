@@ -58,7 +58,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```bash
             cd terraform/dev/setup
             terraform init
-            terraform apply -var-file=dev.tfvars
+            terraform apply -var-file="dev.tfvars"
             ```
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
            Add yourself as the technical contact, select Cname, and list the NS records found in Route 53 (from above step) in the "Aliases" field.
@@ -68,7 +68,7 @@ This template includes the initial setup and scaffolding you need to create a fr
             ```bash
             cd ../../prd/setup
             terraform init
-            terraform apply -var-file=prd.tfvars
+            terraform apply -var-file="prd.tfvars"
             ```
         3) **NOTE** if you're transferring an existing URL to a new Account see the [instructions below](#using-an-exisiting-domain-name) instead
         3) Use [this order form](https://it.byu.edu/it/?id=sc_cat_item&sys_id=2f7a54251d635d005c130b6c83f2390a) to request having your dev subdomain added to BYU's DNS servers.
