@@ -8,6 +8,7 @@ updates:
       interval: "weekly"
     reviewers:
       - byu-oit/byu-apps-full-stack
+      - byu-oit/devx
     # target-branch: "dev" # TODO uncomment
 
   # GitHub Actions
@@ -17,4 +18,5 @@ updates:
       interval: "weekly"
     reviewers:
       - byu-oit/byu-apps-full-stack
+      - byu-oit/devx
     # target-branch: "dev" # TODO uncomment
