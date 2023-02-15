@@ -17,7 +17,7 @@ env:
   FORCE_COLOR: 3
   TF_IN_AUTOMATION: 'true'
   tf_version: '1.0.2'
-  node_version: '14.x'
+  node_version: '18.x'
 
 jobs:
   pipeline:
@@ -53,7 +53,7 @@ jobs:
           echo "template_id=<STD_CHANGE_TEMPLATE_ID>" >> $GITHUB_ENV
 
       - name: Check out
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.3.0
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -71,11 +71,11 @@ jobs:
           # echo "::set-output name=app_dynamics_key::$(aws ssm get-parameter --name $app_dynamics_key_param | jq -r .Parameter.Value)"
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3.6.0
         with:
           node-version: ${{ env.node_version }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3.2.5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -100,7 +100,7 @@ jobs:
         run: npm run test -- --coverage
 
       - name: CodeCov
-        uses: codecov/codecov-action@v2.0.2
+        uses: codecov/codecov-action@v3.1.1
         if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           token: ${{ secrets.codecov_token }}
@@ -110,7 +110,7 @@ jobs:
         run: npm run lint
 
       - name: Terraform Setup
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2.0.3
         with:
           terraform_version: ${{ env.tf_version }}
 
