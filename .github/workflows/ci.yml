@@ -18,10 +18,10 @@ jobs:
     name: Audit App
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node_version }}
 
@@ -33,14 +33,14 @@ jobs:
     name: Test App
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node_version }}
 
-      - uses: actions/cache@v3.2.5
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -56,7 +56,7 @@ jobs:
         run: npm run test -- --coverage
 
       - name: CodeCov
-        uses: codecov/codecov-action@v3.1.1
+        uses: codecov/codecov-action@v3
         if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           token: ${{ secrets.codecov_token }}
@@ -65,14 +65,14 @@ jobs:
     name: Lint App
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node_version }}
 
-      - uses: actions/cache@v3.2.5
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -91,14 +91,14 @@ jobs:
     name: Build App
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node_version }}
 
-      - uses: actions/cache@v3.2.5
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -136,7 +136,7 @@ jobs:
           echo "tf_working_dir=./terraform/prd/app" >> $GITHUB_ENV
 
       - name: Check out
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -146,7 +146,7 @@ jobs:
           aws-region: us-west-2
 
       - name: Terraform Setup
-        uses: hashicorp/setup-terraform@v2.0.3
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.tf_version }}
 
