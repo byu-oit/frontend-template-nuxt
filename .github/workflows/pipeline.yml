@@ -189,11 +189,3 @@ jobs:
           release_name: Release ${{ env.release_timestamp }}
           draft: false
           prerelease: true # TODO: Change when ready to release
-
-      - name: Send Slack Notification
-        uses: byu-oit/github-action-slack@v1
-        if: always()
-        with:
-          status: ${{ job.status }}
-          channel: '#custom-code-bots'
-          webhook-url: ${{ secrets.slack_webhook_url }}
