@@ -110,7 +110,7 @@ jobs:
         run: npm run lint
 
       - name: Terraform Setup
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.tf_version }}
 
