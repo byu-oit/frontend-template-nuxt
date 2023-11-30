@@ -20,7 +20,7 @@ terraform {
       version = "~> 2.3"
     }
   }
-  required_version = ">= 0.13.3"
+  required_version = ">= 1.3.0"
 }
 
 variable "client_id" {

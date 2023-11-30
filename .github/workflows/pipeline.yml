@@ -16,7 +16,7 @@ env:
   app_working_dir: './src'
   FORCE_COLOR: 3
   TF_IN_AUTOMATION: 'true'
-  tf_version: '1.0.2'
+  tf_version: '1.3.0'
   node_version: '18.x'
 
 jobs:
