@@ -16,7 +16,7 @@ terraform {
       version = "~> 3.0"
     }
   }
-  required_version = ">= 0.13.3"
+  required_version = ">= 1.3.0"
 }
 
 locals {
@@ -32,7 +32,7 @@ locals {
 }
 
 module "acs" {
-  source = "github.com/byu-oit/terraform-aws-acs-info?ref=v3.1.0"
+  source = "github.com/byu-oit/terraform-aws-acs-info?ref=v4.0.0"
 }
 
 data "aws_route53_zone" "hosted_zone" {
@@ -40,7 +40,7 @@ data "aws_route53_zone" "hosted_zone" {
 }
 
 module "s3_site" {
-  source         = "github.com/byu-oit/terraform-aws-s3staticsite?ref=v6.0.0"
+  source         = "github.com/byu-oit/terraform-aws-s3staticsite?ref=v7.0.3"
   site_url       = local.url
   hosted_zone_id = data.aws_route53_zone.hosted_zone.zone_id
   s3_bucket_name = "${local.app_name}.byu.edu"
